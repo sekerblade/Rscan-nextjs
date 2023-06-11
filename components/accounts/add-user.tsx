@@ -14,18 +14,18 @@ export const AddUser = () => {
    return (
       <div>
          <Button auto onClick={handler}>
-            Add User
+            เพิ่มพนักงาน
          </Button>
          <Modal
             closeButton
             aria-labelledby="modal-title"
-            width="600px"
+            width="800px"
             open={visible}
             onClose={closeHandler}
          >
             <Modal.Header css={{justifyContent: 'start'}}>
                <Text id="modal-title" h4>
-                  Add new user
+                  เพิ่ม พนักงานใหม่
                </Text>
             </Modal.Header>
             <Divider css={{my: '$5'}} />
@@ -46,20 +46,20 @@ export const AddUser = () => {
                      }}
                   >
                      <Input
-                        label="First Name"
+                        label="ชื่อ"
                         bordered
                         clearable
                         fullWidth
                         size="lg"
-                        placeholder="First Name"
+                        placeholder="กรอกชื่อ"
                      />
                      <Input
-                        label="Last Name"
+                        label="นามสกุล"
                         clearable
                         bordered
                         fullWidth
                         size="lg"
-                        placeholder="Last Name"
+                        placeholder="กรอกนามสกุล"
                      />
                   </Flex>
 
@@ -76,10 +76,10 @@ export const AddUser = () => {
                         bordered
                         fullWidth
                         size="lg"
-                        placeholder="Email"
+                        placeholder="กรุณาEmail"
                      />
                      <Input
-                        label="Phone Number"
+                        label="เบอร์มือถือ"
                         clearable
                         bordered
                         fullWidth
@@ -116,7 +116,7 @@ export const AddUser = () => {
             <Divider css={{my: '$5'}} />
             <Modal.Footer>
                <Button auto onClick={closeHandler}>
-                  Add User
+                  เพิ่ม
                </Button>
             </Modal.Footer>
          </Modal>
