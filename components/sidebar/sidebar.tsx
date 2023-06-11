@@ -48,43 +48,31 @@ export const SidebarWrapper = () => {
                css={{height: '100%'}}
             >
                <Sidebar.Body className="body sidebar">
-                  <SidebarItem
+                  <SidebarItem 
                      title="Home"
                      icon={<HomeIcon />}
                      isActive={router.pathname === '/'}
                      href="/"
                   />
-                  <SidebarMenu title="Main Menu">
+                  <SidebarMenu title="ตั้งค่าพื้นฐาน">
                      <SidebarItem
-                        isActive={router.pathname === '/accounts'}
-                        title="sdlfkj"
-                        icon={<AccountsIcon />}
-                        href="accounts"
+                        isActive={router.pathname === '/customers'}
+                        title="รายงานตามวัน"
+                        icon={<CustomersIcon />}
                      />
                      <SidebarItem
                         isActive={router.pathname === '/payments'}
-                        title="Payments"
+                        title="รายงานตามช่วงเวลา"
                         icon={<PaymentsIcon />}
                      />
                      <CollapseItems
                         icon={<BalanceIcon />}
                         items={['Banks Accounts', 'Credit Cards', 'Loans']}
-                        title="Balances"
-                     />
-
-                     <SidebarItem
-                        isActive={router.pathname === '/customers'}
-                        title="Customers"
-                        icon={<CustomersIcon />}
-                     />
-                     <SidebarItem
-                        isActive={router.pathname === '/products'}
-                        title="Products"
-                        icon={<ProductsIcon />}
+                        title="รายงานตามช่วงเวลา(OT)"
                      />
                      <SidebarItem
                         isActive={router.pathname === '/reports'}
-                        title="Reports"
+                        title="รายงานลางาน"
                         icon={<ReportsIcon />}
                      />
                   </SidebarMenu>
@@ -92,21 +80,36 @@ export const SidebarWrapper = () => {
                   <SidebarMenu title="General">
                      <SidebarItem
                         isActive={router.pathname === '/developers'}
-                        title="Developers"
+                        title="องค์กร / สาขา / แผนก"
                         icon={<DevIcon />}
                      />
                      <SidebarItem
                         isActive={router.pathname === '/view'}
-                        title="View Test Data"
+                        title="เงือนไขการลา"
                         icon={<ViewIcon />}
                      />
                      <SidebarItem
                         isActive={router.pathname === '/settings'}
-                        title="Settings"
+                        title="ตารางเวลา"
                         icon={<SettingsIcon />}
                      />
+                     <SidebarItem
+                        isActive={router.pathname === '/accounts'}
+                        title="พนักงาน"
+                        icon={<AccountsIcon />}
+                        href="accounts"
+                     />
+                    <SidebarItem
+                        isActive={router.pathname === '/customers'}
+                        title="วันหยุดประจำปี"
+                        icon={<CustomersIcon />}
+                     />
+                     <SidebarItem
+                        isActive={router.pathname === '/products'}
+                        title="ประกาศข่าวสาร"
+                        icon={<ProductsIcon />}
+                     />
                   </SidebarMenu>
-
                   <SidebarMenu title="Updates">
                      <SidebarItem
                         isActive={router.pathname === '/changelog'}
