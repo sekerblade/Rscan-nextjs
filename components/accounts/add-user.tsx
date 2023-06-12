@@ -110,7 +110,7 @@ export const AddUser = () => {
                 bordered
                 fullWidth
                 size="lg"
-                placeholder="กรุณาEmail"
+                placeholder="กรอกEmail"
               />
               <Input
                 label="เบอร์มือถือ"
