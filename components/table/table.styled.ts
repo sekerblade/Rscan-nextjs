@@ -37,7 +37,7 @@ export const StyledBadge = styled('span', {
             bg: '$successLight',
             color: '$successLightContrast',
          },
-         ลาพัก: {
+         พักงาน: {
             bg: '$errorLight',
             color: '$errorLightContrast',
          },
