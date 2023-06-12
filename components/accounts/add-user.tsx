@@ -62,7 +62,7 @@ export const AddUser = () => {
               <Dropdown>
               <Text>
                   คำนำหน้า 
-                <Dropdown.Button light color="default" css={{ tt: "capitalize" }}>
+                <Dropdown.Button flat color="default" css={{ tt: "capitalize" }}>
                   {selectedValue}
                 </Dropdown.Button>
                 </Text>

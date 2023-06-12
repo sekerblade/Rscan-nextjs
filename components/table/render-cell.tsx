@@ -25,7 +25,7 @@ export const RenderCell = ({user, columnKey}: Props) => {
          return (
             <Col>
                <Row>
-                  <Text b size={14} css={{tt: 'capitalize'}}>
+                  <Text b size={15} css={{tt: 'capitalize'}}>
                      {cellValue}
                   </Text>
                </Row>
