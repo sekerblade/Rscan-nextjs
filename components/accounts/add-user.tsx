@@ -13,9 +13,7 @@ import { Flex } from "../styles/flex";
 export const AddUser = () => {
   const [visible, setVisible] = React.useState(false);
   const handler = () => setVisible(true);
-  const [selected, setSelected] = React.useState(
-    new Set(["คำนำหน้า"])
-  );
+  const [selected, setSelected] = React.useState(new Set(["คำนำหน้า"]));
   const selectedValue = React.useMemo(
     () => Array.from(selected).join(", ").replaceAll("_", " "),
     [selected]
@@ -60,22 +58,21 @@ export const AddUser = () => {
                 "@lg": { flexWrap: "nowrap" },
               }}
             >
+              
               <Dropdown>
-                <Dropdown.Button
-                  flat
-                  color="default"
-                  css={{ tt: "capitalize" }}
-                >
+              <Text>
+                  คำนำหน้า 
+                <Dropdown.Button light color="default" css={{ tt: "capitalize" }}>
                   {selectedValue}
                 </Dropdown.Button>
+                </Text>
                 <Dropdown.Menu
+                  variant="light"
                   aria-label="Single selection actions"
-                  color="default"
                   disallowEmptySelection
                   selectionMode="single"
                   selectedKeys={selected}
                   onSelectionChange={setSelected}
-                  label="ชื่อ"
                 >
                   <Dropdown.Item key="นาย">นาย</Dropdown.Item>
                   <Dropdown.Item key="นาง">นาง</Dropdown.Item>
@@ -83,7 +80,7 @@ export const AddUser = () => {
                 </Dropdown.Menu>
               </Dropdown>
               <Input
-                label="ชื่อ"
+                label="ชื่อจริง"
                 bordered
                 clearable
                 fullWidth
@@ -113,7 +110,7 @@ export const AddUser = () => {
                 bordered
                 fullWidth
                 size="lg"
-                placeholder="กรุณาEmail"
+                placeholder="กรอกEmail"
               />
               <Input
                 label="เบอร์มือถือ"
