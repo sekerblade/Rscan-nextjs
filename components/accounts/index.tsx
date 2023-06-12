@@ -13,7 +13,7 @@ import {Flex} from '../styles/flex';
 import {TableWrapper} from '../table/table';
 import {AddUser} from './add-user';
 
-export const Accounts = () => {
+export const  Accounts = () => {
    return (
       <Flex
          css={{
@@ -38,15 +38,15 @@ export const Accounts = () => {
 
             <Crumb>
                <UsersIcon />
-               <CrumbLink href="#">Users</CrumbLink>
+               <CrumbLink href="#">ข้อมูลพนักงาน</CrumbLink>
                <Text>/</Text>
             </Crumb>
             <Crumb>
-               <CrumbLink href="#">List</CrumbLink>
+               <CrumbLink href="#">รายชื่อ</CrumbLink>
             </Crumb>
          </Breadcrumbs>
 
-         <Text h3>All Accounts</Text>
+         <Text h3>ข้อมูลพนักงาน</Text>
          <Flex
             css={{gap: '$8'}}
             align={'center'}
@@ -73,7 +73,7 @@ export const Accounts = () => {
             <Flex direction={'row'} css={{gap: '$6'}} wrap={'wrap'}>
                <AddUser />
                <Button auto iconRight={<ExportIcon />}>
-                  Export to CSV
+                  Export CSV
                </Button>
             </Flex>
          </Flex>
