@@ -61,7 +61,6 @@ export const AddUser = () => {
               }}
             >
               <Dropdown>
-           
                 <Dropdown.Button
                   flat
                   color="default"
@@ -76,6 +75,7 @@ export const AddUser = () => {
                   selectionMode="single"
                   selectedKeys={selected}
                   onSelectionChange={setSelected}
+                  label="ชื่อ"
                 >
                   <Dropdown.Item key="นาย">นาย</Dropdown.Item>
                   <Dropdown.Item key="นาง">นาง</Dropdown.Item>
