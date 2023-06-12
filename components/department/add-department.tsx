@@ -10,11 +10,11 @@ import {
 import React from "react";
 import { Flex } from "../styles/flex";
 
-export const AddUser = () => {
+export const AddDepartment = () => {
   const [visible, setVisible] = React.useState(false);
   const handler = () => setVisible(true);
   const [selected, setSelected] = React.useState(
-    new Set(["คำนำหน้า"])
+    new Set(["สาขา / หน่วยงาน"])
   );
   const selectedValue = React.useMemo(
     () => Array.from(selected).join(", ").replaceAll("_", " "),
@@ -27,7 +27,7 @@ export const AddUser = () => {
   };
 
   return (
-    <div>
+    <>
       <Button auto onClick={handler}>
         เพิ่มแผนก
       </Button>
@@ -40,7 +40,7 @@ export const AddUser = () => {
       >
         <Modal.Header css={{ justifyContent: "start" }}>
           <Text id="modal-title" h4>
-            เพิ่ม พนักงานใหม่
+            เพิ่มแผนกใหม่
           </Text>
         </Modal.Header>
         <Divider css={{ my: "$5" }} />
@@ -77,86 +77,32 @@ export const AddUser = () => {
                   onSelectionChange={setSelected}
                   label="ชื่อ"
                 >
-                  <Dropdown.Item key="นาย">นาย</Dropdown.Item>
-                  <Dropdown.Item key="นาง">นาง</Dropdown.Item>
-                  <Dropdown.Item key="นางสาว">นางสาว</Dropdown.Item>
+                  <Dropdown.Item key="สาขาไมด้า แอร์พอร์ต">สาขาไมด้า แอร์พอร์ต</Dropdown.Item>
+                  <Dropdown.Item key="สาขาหลัก">สาขาหลัก</Dropdown.Item>
+
                 </Dropdown.Menu>
               </Dropdown>
               <Input
-                label="ชื่อ"
+                label="ชื่อแผนก"
                 bordered
                 clearable
                 fullWidth
                 size="lg"
-                placeholder="กรอกชื่อ"
+                placeholder="กรอกชื่อแผนก"
               />
-              <Input
-                label="นามสกุล"
-                clearable
-                bordered
-                fullWidth
-                size="lg"
-                placeholder="กรอกนามสกุล"
-              />
+
             </Flex>
 
-            <Flex
-              css={{
-                gap: "$10",
-                flexWrap: "wrap",
-                "@lg": { flexWrap: "nowrap" },
-              }}
-            >
-              <Input
-                label="Email"
-                clearable
-                bordered
-                fullWidth
-                size="lg"
-                placeholder="กรุณาEmail"
-              />
-              <Input
-                label="เบอร์มือถือ"
-                clearable
-                bordered
-                fullWidth
-                size="lg"
-                placeholder="Phone Number"
-              />
-            </Flex>
-            <Flex
-              css={{
-                gap: "$10",
-                flexWrap: "wrap",
-                "@lg": { flexWrap: "nowrap" },
-              }}
-            >
-              <Input
-                label="แผนก"
-                clearable
-                bordered
-                fullWidth
-                size="lg"
-                placeholder="กรุณากรอกแผนก"
-              />
-              <Input
-                label="Company"
-                clearable
-                bordered
-                fullWidth
-                size="lg"
-                placeholder="Company"
-              />
-            </Flex>
           </Flex>
+
         </Modal.Body>
         <Divider css={{ my: "$5" }} />
         <Modal.Footer>
           <Button auto onClick={closeHandler}>
-            เพิ่ม
+            เพิ่มแผนก
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </>
   );
 };
