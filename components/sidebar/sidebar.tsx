@@ -79,9 +79,10 @@ export const SidebarWrapper = () => {
 
                   <SidebarMenu title="General">
                      <SidebarItem
-                        isActive={router.pathname === '/developers'}
+                        isActive={router.pathname === '/department'}
                         title="องค์กร / สาขา / แผนก"
                         icon={<DevIcon />}
+                        href="department"
                      />
                      <SidebarItem
                         isActive={router.pathname === '/view'}
