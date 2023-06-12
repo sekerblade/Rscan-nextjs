@@ -77,7 +77,6 @@ export const  Accounts = () => {
                </Button>
             </Flex>
          </Flex>
-
          <TableWrapper/> 
       </Flex>
    );
