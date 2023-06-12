@@ -63,7 +63,7 @@ export const  Accounts = () => {
             >
                <Input
                   css={{width: '100%', maxW: '410px'}}
-                  placeholder="Search users"
+                  placeholder="ค้นหาพนักงาน"
                />
                <SettingsIcon />
                <TrashIcon />
@@ -78,7 +78,7 @@ export const  Accounts = () => {
             </Flex>
          </Flex>
 
-         <TableWrapper />
+         <TableWrapper/> 
       </Flex>
    );
 };
