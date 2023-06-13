@@ -33,15 +33,15 @@ export const StyledBadge = styled('span', {
    color: '$white',
    variants: {
       type: {
-         active: {
+         ทำงานอยู่: {
             bg: '$successLight',
             color: '$successLightContrast',
          },
-         paused: {
+         พักงาน: {
             bg: '$errorLight',
             color: '$errorLightContrast',
          },
-         vacation: {
+         ลาพักร้อน: {
             bg: '$warningLight',
             color: '$warningLightContrast',
          },

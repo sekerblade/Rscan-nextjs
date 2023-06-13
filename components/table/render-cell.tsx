@@ -15,37 +15,6 @@ export const RenderCell = ({user, columnKey}: Props) => {
    // @ts-ignore
    const cellValue = user[columnKey];
    switch (columnKey) {
-      case 'name':
-         return (
-            <User squared src={user.avatar} name={cellValue} css={{p: 0}}>
-               {user.email}
-            </User>
-         );
-      case 'role':
-         return (
-            <Col>
-               <Row>
-                  <Text b size={14} css={{tt: 'capitalize'}}>
-                     {cellValue}
-                  </Text>
-               </Row>
-               <Row>
-                  <Text
-                     b
-                     size={13}
-                     css={{tt: 'capitalize', color: '$accents7'}}
-                  >
-                     {user.team}
-                  </Text>
-               </Row>
-            </Col>
-         );
-      case 'status':
-         return (
-            // @ts-ignore
-            <StyledBadge type={String(user.status)}>{cellValue}</StyledBadge>
-         );
-
       case 'actions':
          return (
             <Row
@@ -84,6 +53,38 @@ export const RenderCell = ({user, columnKey}: Props) => {
                </Col>
             </Row>
          );
+      case 'name':
+         return (
+            
+            <User squared src={user.avatar} name={cellValue} css={{p: 0}}>
+               {user.email}
+            </User>
+         );
+      case 'role':
+         return (
+            <Col>
+               <Row>
+                  <Text b size={15} css={{tt: 'capitalize'}}>
+                     {cellValue}
+                  </Text>
+               </Row>
+               <Row>
+                  <Text
+                     b
+                     size={13}
+                     css={{tt: 'capitalize', color: '$accents7'}}
+                  >
+                     {user.team}
+                  </Text>
+               </Row>
+            </Col>
+         );
+      case 'status':
+         return (
+            // @ts-ignore
+            <StyledBadge type={String(user.status)}>{cellValue}</StyledBadge>
+         );
+
       default:
          return cellValue;
    }
