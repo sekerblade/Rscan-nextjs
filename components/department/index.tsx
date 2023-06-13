@@ -13,10 +13,15 @@ import { Flex } from '../styles/flex';
 import { AddDepartment } from './add-department';
 import { AddBranch } from './add-branch';
 import { Adion } from './Adion';
+import Head from 'next/head'
 
 export const Department = () => {
    return (
       <>
+         <Head>
+            <title>ข้อมูลองค์กร / แผนกงาน</title>
+         </Head>
+
          <Flex
             css={{
                'mt': '$5',
