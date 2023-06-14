@@ -1,10 +1,11 @@
 export const columns = [
-   {name: 'ID', uid:'id'},
-   {name: 'ชื่อ', uid: 'name'},
-   {name: 'ตำแหน่ง', uid: 'role'},
-   {name: 'สถานะ', uid: 'status'},
-   {name: 'ACTIONS', uid: 'actions'},
+   { name: 'ID', uid: 'id' },
+   { name: 'ชื่อ', uid: 'name' },
+   { name: 'ตำแหน่ง', uid: 'role' },
+   { name: 'สถานะ', uid: 'status' },
+   { name: 'ACTIONS', uid: 'actions' },
 ];
+
 export const users = [
    {
       id: 1,
