@@ -1,4 +1,4 @@
-import { query } from '../../lib/db.ts';
+import { query } from '../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function employeesHandler(req: NextApiRequest, res: NextApiResponse) {
