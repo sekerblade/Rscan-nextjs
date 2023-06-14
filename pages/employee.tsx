@@ -22,7 +22,7 @@ const Employees = () => {
 
     return (
         <>
-            <h1>Employee List</h1>
+            <h1>ข้อมูลพนักงาน</h1>
             <ul>
                 {employeeData.map((employee) => (
                     <li key={employee.ID}>
