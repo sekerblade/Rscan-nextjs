@@ -58,13 +58,13 @@ export const AddUser = () => {
                 "@lg": { flexWrap: "nowrap" },
               }}
             >
-              
+
               <Dropdown>
-              <Text>
-                  คำนำหน้า 
-                <Dropdown.Button flat color="default" css={{ tt: "capitalize" }}>
-                  {selectedValue}
-                </Dropdown.Button>
+                <Text>
+                  คำนำหน้า
+                  <Dropdown.Button flat color="default" css={{ tt: "capitalize" }}>
+                    {selectedValue}
+                  </Dropdown.Button>
                 </Text>
                 <Dropdown.Menu
                   variant="light"
