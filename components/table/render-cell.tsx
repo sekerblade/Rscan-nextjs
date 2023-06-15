@@ -36,11 +36,16 @@ export const RenderCell = ({ user, columnKey }: Props) => {
                   <Edit />
 
                </Col>
-
-               <Col css={{ d: 'flex' }}>
-
-                  <Delete />
-
+               <Col css={{d: 'flex'}}>
+                  <Tooltip
+                     content="Delete user"
+                     color="error"
+                     onClick={() => console.log('Delete user', user.id)}
+                  >
+                     <IconButton>x
+                        <DeleteIcon size={20} fill="#FF0080" />
+                     </IconButton>
+                  </Tooltip>
                </Col>
             </Row >
          );
