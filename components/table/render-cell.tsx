@@ -46,7 +46,7 @@ export const RenderCell = ({user, columnKey}: Props) => {
                      color="error"
                      onClick={() => console.log('Delete user', user.id)}
                   >
-                     <IconButton>
+                     <IconButton>x
                         <DeleteIcon size={20} fill="#FF0080" />
                      </IconButton>
                   </Tooltip>

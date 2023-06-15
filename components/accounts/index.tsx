@@ -12,6 +12,8 @@ import {SettingsIcon} from '../icons/sidebar/settings-icon';
 import {Flex} from '../styles/flex';
 import {TableWrapper} from '../table/table';
 import {AddUser} from './add-user';
+import {DataGridDemo} from '../tables/demoDataGrid';
+
 
 export const  Accounts = () => {
    return (
@@ -77,7 +79,7 @@ export const  Accounts = () => {
                </Button>
             </Flex>
          </Flex>
-         <TableWrapper/> 
+         <DataGridDemo/>
       </Flex>
    );
 };
