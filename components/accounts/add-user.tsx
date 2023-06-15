@@ -72,7 +72,7 @@ export const AddUser = () => {
                   disallowEmptySelection
                   selectionMode="single"
                   selectedKeys={selected}
-                //onSelectionChange={setSelected}
+                  //onSelectionChange={setSelected}
                 >
                   <Dropdown.Item key="นาย">นาย</Dropdown.Item>
                   <Dropdown.Item key="นาง">นาง</Dropdown.Item>
