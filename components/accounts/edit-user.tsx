@@ -24,7 +24,7 @@ export const Edit = () => {
 
     return (
         <>
-            <Tooltip content="Edit user">
+            <Tooltip content="Edit user" css={undefined} color={undefined} contentColor={undefined}>
                 <IconButton
                     onClick={handler}
                 >

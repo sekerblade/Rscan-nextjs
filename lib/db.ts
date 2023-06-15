@@ -1,4 +1,4 @@
-import mysql, { Pool, PoolConnection, FieldPacket, RowDataPacket } from 'mysql2/promise';
+import mysql, { Connection, Pool, QueryError, RowDataPacket, OkPacket, ResultSetHeader, FieldPacket } from 'mysql2';
 
 // Create a connection pool
 const pool: Pool = mysql.createPool({
@@ -11,17 +11,14 @@ const pool: Pool = mysql.createPool({
 });
 
 // Export a function to execute database queries
-export async function query(sql: string, values?: any[]): Promise<RowDataPacket[]> {
-    let connection: PoolConnection | undefined;
-    try {
-        connection = await pool.getConnection();
-        const [rows] = await connection.query<RowDataPacket[]>(sql, values);
-        return rows;
-    } catch (error) {
-        throw error;
-    } finally {
-        if (connection) {
-            connection.release();
-        }
-    }
+export function query(sql: string, values?: any[]): Promise<any> {
+    return new Promise((resolve, reject) => {
+        pool.query(sql, values, (error: QueryError | null, results: RowDataPacket[] | RowDataPacket[][] | OkPacket | OkPacket[] | ResultSetHeader, fields: FieldPacket[]) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(results);
+            }
+        });
+    });
 }
