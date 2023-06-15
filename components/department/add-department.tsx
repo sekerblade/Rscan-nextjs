@@ -78,7 +78,6 @@ export const AddDepartment = () => {
                 >
                   <Dropdown.Item key="สาขาไมด้า แอร์พอร์ต">สาขาไมด้า แอร์พอร์ต</Dropdown.Item>
                   <Dropdown.Item key="สาขาหลัก">สาขาหลัก</Dropdown.Item>
-
                 </Dropdown.Menu>
               </Dropdown>
               <Input
