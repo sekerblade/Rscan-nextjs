@@ -86,7 +86,6 @@ export const Accounts = () => {
                   </Button>
                </Flex>
             </Flex>
-
          </Flex>
          <DataGridDemo />
 
