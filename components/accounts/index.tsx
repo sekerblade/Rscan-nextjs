@@ -10,10 +10,9 @@ import { HouseIcon } from '../icons/breadcrumb/house-icon';
 import { UsersIcon } from '../icons/breadcrumb/users-icon';
 import { SettingsIcon } from '../icons/sidebar/settings-icon';
 import { Flex } from '../styles/flex';
-import { TableWrapper } from '../table/table';
 import { AddUser } from './add-user';
 import { DataGridDemo } from '../tables/demoDataGrid';
-
+import { SelectLabels } from '../filterBar/filterSelect'
 import Head from 'next/head';
 
 
@@ -70,13 +69,11 @@ export const Accounts = () => {
                      css={{ width: '100%', maxW: '410px' }}
                      placeholder="ค้นหาพนักงาน"
                   />
-                  <SettingsIcon />
                   <TrashIcon />
                   <InfoIcon />
                   <DotsIcon />
                </Flex>
                <Flex direction={'row'} css={{ gap: '$6' }} wrap={'wrap'}>
-
                   <AddUser />
                   <Button auto iconRight={<ExportIcon />}>
                      Export CSV
@@ -84,8 +81,8 @@ export const Accounts = () => {
                </Flex>
             </Flex>
          </Flex>
+         <SelectLabels />
          <DataGridDemo />
-
       </>
    );
 };

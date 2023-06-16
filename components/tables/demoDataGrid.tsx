@@ -1,6 +1,6 @@
 
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridValueGetterParams,GridToolbarQuickFilter,GridLogicOperator} from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 interface Employee {
   ID: number;
@@ -59,7 +59,8 @@ export const DataGridDemo = () => {
   }, []);
 
 
-  return (
+
+  return (  
     <Box sx={{ height: 620, width: '100%' }}>
       <DataGrid
         rows={employeeData}
