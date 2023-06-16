@@ -1,6 +1,5 @@
 import React from 'react'
-import { Tooltip, Button, Grid, Avatar, Text, } from "@nextui-org/react";
-import Link from 'next/link';
+import { Tooltip, Button, Grid, } from "@nextui-org/react";
 import { DeleteUser } from './DeleteUser';
 import { IconButton } from './table.styled';
 import { DeleteIcon } from '../icons/table/delete-icon';

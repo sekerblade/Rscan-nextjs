@@ -1,7 +1,9 @@
 
-import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
+import { Box, IconButton, Tooltip } from '@mui/material'
+import { Delete, Edit, Preview } from '@mui/icons-material'
+
 interface Employee {
   ID: number;
   EnrollNumber: number;
@@ -32,7 +34,32 @@ const columns: GridColDef[] = [
   { field: 'EmployeeCode', headerName: 'EmployeeCode', width: 150 },
   { field: 'Status', headerName: 'สถานะ', width: 110 },
   { field: 'DeptID', headerName: 'แผนก', width: 90 },
+  {
+    field: 'actions',
+    headerName: 'Actions',
+    type: 'actions',
+    width: 150,
+    renderCell: (params) => (
+      <Box>
+        <Tooltip title="View Detail">
+          <IconButton onClick={() => { }} >
+            <Preview />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Edit Employee">
+          <IconButton onClick={() => { }} >
+            <Edit />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Delete Employee">
+          <IconButton onClick={() => { }} >
+            <Delete />
+          </IconButton>
+        </Tooltip>
+      </Box>
+    ),
 
+  },
 ];
 
 
