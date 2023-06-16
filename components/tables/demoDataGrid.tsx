@@ -60,18 +60,18 @@ export const DataGridDemo = () => {
 
 
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
+    <Box sx={{ height: 620, width: '100%' }}>
       <DataGrid
         rows={employeeData}
         columns={columns}
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 10,
             },
           },
         }}
-        pageSizeOptions={[5, 10, 25]}
+        pageSizeOptions={[10, 15, 25]}
         checkboxSelection
         disableRowSelectionOnClick
       />
