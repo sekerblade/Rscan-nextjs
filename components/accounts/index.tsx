@@ -16,7 +16,6 @@ import { DataGridDemo } from '../tables/demoDataGrid';
 
 import Head from 'next/head';
 
-
 export const Accounts = () => {
    return (
       <>

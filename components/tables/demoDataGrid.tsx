@@ -1,8 +1,9 @@
-
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridValueGetterParams, GridRenderCellParams } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material'
 import { Delete, Edit, Preview } from '@mui/icons-material'
+import { RoomsActions } from './RoomsActions';
+import Employees from '../../pages/employee';
 
 interface Employee {
   ID: number;
@@ -39,32 +40,13 @@ const columns: GridColDef[] = [
     headerName: 'Actions',
     type: 'actions',
     width: 150,
-    renderCell: (params) => (
-      <Box>
-        <Tooltip title="View Detail">
-          <IconButton onClick={() => { }} >
-            <Preview />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Edit Employee">
-          <IconButton onClick={() => { }} >
-            <Edit />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Delete Employee">
-          <IconButton onClick={() => { }} >
-            <Delete />
-          </IconButton>
-        </Tooltip>
-      </Box>
+    renderCell: (params: GridRenderCellParams) => (
+      <RoomsActions params={{ ...params.row }} />
     ),
-
   },
 ];
 
-
 export const DataGridDemo = () => {
-
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
 
   useEffect(() => {
