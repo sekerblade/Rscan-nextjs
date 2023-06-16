@@ -2,22 +2,30 @@ import React, { useEffect, useState } from 'react';
 
 interface Employee {
     ID: number;
+    EnrollNumber: number;
+    Prefix: string;
     Name: string;
     SureName: string;
+    EmployeeCode: string;
+    Status: number;
+    DeptID: number;
 }
 
 const Employees = () => {
     const [employeeData, setEmployeeData] = useState<Employee[]>([]);
 
     useEffect(() => {
-        fetch('/api/employee')
-            .then((response) => response.json())
-            .then((data) => {
+        const fetchEmployeeData = async () => {
+            try {
+                const response = await fetch('/api/employee');
+                const data = await response.json();
                 setEmployeeData(data);
-            })
-            .catch((error) => {
+            } catch (error) {
                 console.error('Error:', error);
-            });
+            }
+        };
+
+        fetchEmployeeData();
     }, []);
 
     return (
@@ -27,6 +35,7 @@ const Employees = () => {
                 {employeeData.map((employee) => (
                     <li key={employee.ID}>
                         {employee.ID} {employee.Name} {employee.SureName}
+                        {employee.EnrollNumber} {employee.EmployeeCode} {employee.DeptID}
                     </li>
                 ))}
             </ul>
