@@ -1,15 +1,16 @@
 import { query } from '../../lib/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function employeesHandler(req: NextApiRequest, res: NextApiResponse) {
+export default async function employeesDelete(req: NextApiRequest, res: NextApiResponse) {
     
     try {
-        // Execute the query to fetch the "employees" table data
-        const employees = await query('');
+        
+        const {userId} = req.query;
+        const employees = await query('DELETE FROM Emp_Info WHERE ID = [userId];');
 
-        // Return the retrieved data as the response
+        
 
-        res.status(200).json(employees);
+        res.status(200).json({sucess : true});
     } catch (error) {
         console.error('Error retrieving employees:', error);
         res.status(500).json({ message: 'Internal Server Error' });

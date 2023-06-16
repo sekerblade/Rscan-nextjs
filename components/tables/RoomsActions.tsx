@@ -1,7 +1,7 @@
-import React from 'react';
 import { Box, Button, IconButton, Tooltip, Modal, Typography, Stack } from '@mui/material';
 import { Delete, Edit, Preview } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import React, { useEffect, useState } from 'react';
 
 interface Employee {
     ID: number;

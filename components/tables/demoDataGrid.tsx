@@ -1,9 +1,8 @@
 import { DataGrid, GridColDef, GridValueGetterParams, GridRenderCellParams } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
-import { Box, IconButton, Tooltip } from '@mui/material'
-import { Delete, Edit, Preview } from '@mui/icons-material'
+import { Box } from '@mui/material'
 import { RoomsActions } from './RoomsActions';
-import Employees from '../../pages/employee';
+
 
 interface Employee {
   ID: number;
