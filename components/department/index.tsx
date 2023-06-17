@@ -97,7 +97,6 @@ export const Department = () => {
                </Flex>
             </Flex>
             <Adion />
-
          </Flex>
       </>
    );

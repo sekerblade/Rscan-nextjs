@@ -30,7 +30,7 @@ const columns: GridColDef[] = [
   //     ` ${params.row.Name || ''} ${params.row.SureName || ''}`,
   // },
 
-  { field: 'Prefix', headerName: 'คำนำหน้า', width: 60 },
+  { field: 'Prefix', headerName: 'คำนำหน้า', width: 130 },
   { field: 'Name', headerName: 'ชื่อ', width: 100 },
   { field: 'SureName', headerName: 'นามสกุล', width: 100 },
   { field: 'EnrollNumber', headerName: 'EnrollNumber', width: 110, sortable: false, },
@@ -50,6 +50,8 @@ const columns: GridColDef[] = [
 
 export const DataGridDemo = () => {
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
+  const [filter, setFilter] = useState(true)
+  const [prefix,setPrefix] = useState('all')
 
   useEffect(() => {
     const fetchEmployeeData = async () => {
