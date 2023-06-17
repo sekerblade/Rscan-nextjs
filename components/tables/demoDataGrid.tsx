@@ -1,10 +1,8 @@
-import { DataGrid, GridColDef, GridValueGetterParams, GridRenderCellParams, GridToolbarContainer, GridToolbarExport, GridToolbar, GridToolbarColumnsButton, GridToolbarQuickFilter, GridToolbarDensitySelector } from '@mui/x-data-grid';
-import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams, GridToolbar, GridLocaleText, GridToolbarExport, GridToolbarContainer } from '@mui/x-data-grid';
+import { GridColDef, GridValueGetterParams, GridRenderCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarDensitySelector, GridToolbarExport, GridToolbarQuickFilter } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
-import { Box } from '@mui/material'
+import Box from '@mui/material/Box';
 import { RoomsActions } from './RoomsActions';
-
 
 
 interface Employee {
