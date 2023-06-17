@@ -1,7 +1,10 @@
-
-import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams,GridToolbarQuickFilter,GridLogicOperator} from '@mui/x-data-grid';
+import { GridColDef, GridValueGetterParams, GridRenderCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarDensitySelector, GridToolbarExport, GridToolbarQuickFilter } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
+import { RoomsActions } from './RoomsActions';
+
+
 interface Employee {
   ID: number;
   EnrollNumber: number;
@@ -14,30 +17,38 @@ interface Employee {
 }
 
 const columns: GridColDef[] = [
-  { field: 'ID', headerName: 'ID', width: 90 },
 
+  { field: 'ID', headerName: 'ID', width: 50 },
+
+  // {
+  //   field: 'fullName',
+  //   headerName: 'ชื่อเต็ม',
+  //   description: 'This column has a value getter and is not sortable.',
+  //   sortable: true,
+  //   width: 160,
+  //   valueGetter: (params: GridValueGetterParams) =>
+  //     ` ${params.row.Name || ''} ${params.row.SureName || ''}`,
+  // },
+
+  { field: 'Prefix', headerName: 'คำนำหน้า', width: 60 },
+  { field: 'Name', headerName: 'ชื่อ', width: 100 },
+  { field: 'SureName', headerName: 'นามสกุล', width: 100 },
+  { field: 'EnrollNumber', headerName: 'EnrollNumber', width: 110, sortable: false, },
+  { field: 'EmployeeCode', headerName: 'EmployeeCode', width: 100 },
+  { field: 'Status', headerName: 'สถานะ', width: 70 },
+  { field: 'DeptID', headerName: 'แผนก', width: 50 },
   {
-    field: 'fullName',
-    headerName: 'ชื่อเต็ม',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: true,
-    width: 160,
-    valueGetter: (params: GridValueGetterParams) =>
-      ` ${params.row.Name || ''} ${params.row.SureName || ''}`,
+    field: 'actions',
+    headerName: 'Actions',
+    type: 'actions',
+    width: 150,
+    renderCell: (params: GridRenderCellParams) => (
+      <RoomsActions params={{ ...params.row }} />
+    ),
   },
-  { field: 'EnrollNumber', headerName: 'EnrollNumber', width: 150, sortable: false, },
-  { field: 'Prefix', headerName: 'คำนำหน้า', width: 110 },
-  { field: 'Name', headerName: 'ชื่อ', width: 150 },
-  { field: 'SureName', headerName: 'นามสกุล', width: 150 },
-  { field: 'EmployeeCode', headerName: 'EmployeeCode', width: 150 },
-  { field: 'Status', headerName: 'สถานะ', width: 110 },
-  { field: 'DeptID', headerName: 'แผนก', width: 90 },
-
 ];
 
-
 export const DataGridDemo = () => {
-
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
 
   useEffect(() => {
@@ -58,24 +69,58 @@ export const DataGridDemo = () => {
     fetchEmployeeData();
   }, []);
 
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarQuickFilter />
+        <GridToolbarColumnsButton />
+        <GridToolbarDensitySelector />
+        <GridToolbarExport
+          csvOptions={{
+            utf8WithBom: true
+          }}
+        />
+      </GridToolbarContainer>
+    );
+  }
 
 
-  return (  
-    <Box sx={{ height: 620, width: '100%' }}>
+  const csvOptions = {
+    utf8WithBom: true,
+  };
+  return (
+    <Box sx={{ height: 667, width: '100%' }}>
       <DataGrid
         rows={employeeData}
         columns={columns}
+        slots={{ toolbar: CustomToolbar }}
+        slotProps={{
+          columnsPanel: {
+            disableHideAllButton: true,
+            disableShowAllButton: true,
+          },
+          //printOptions: { disableToolbarButton: true }
+        }}
         initialState={{
           pagination: {
             paginationModel: {
               pageSize: 10,
+
+            },
+          },
+          columns: {
+            columnVisibilityModel: {
+              // Hide columns 'Prefix' and 'EmployeeCode', the other columns will remain visible
+              Prefix: false,
+              EmployeeCode: false,
             },
           },
         }}
         pageSizeOptions={[10, 15, 25]}
-        checkboxSelection
+        //checkboxSelection
         disableRowSelectionOnClick
+      //exportOptions= {csvOptions}
       />
     </Box>
   );
-}
+};
