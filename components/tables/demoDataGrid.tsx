@@ -1,7 +1,10 @@
 import { DataGrid, GridColDef, GridValueGetterParams, GridRenderCellParams, GridToolbarContainer, GridToolbarExport, GridToolbar, GridToolbarColumnsButton, GridToolbarQuickFilter, GridToolbarDensitySelector } from '@mui/x-data-grid';
+import Box from '@mui/material/Box';
+import { DataGrid, GridColDef, GridValueGetterParams, GridToolbar, GridLocaleText, GridToolbarExport, GridToolbarContainer } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material'
 import { RoomsActions } from './RoomsActions';
+
 
 
 interface Employee {
@@ -104,6 +107,7 @@ export const DataGridDemo = () => {
           pagination: {
             paginationModel: {
               pageSize: 10,
+
             },
           },
           columns: {
@@ -121,4 +125,4 @@ export const DataGridDemo = () => {
       />
     </Box>
   );
-}
+};
