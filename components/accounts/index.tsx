@@ -81,7 +81,7 @@ export const Accounts = () => {
                </Flex>
             </Flex>
          </Flex>
-         <SelectLabels />
+         
          <DataGridDemo />
       </>
    );
