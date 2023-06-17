@@ -1,7 +1,9 @@
-
-import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridValueGetterParams, GridRenderCellParams } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
+import { Box } from '@mui/material'
+import { RoomsActions } from './RoomsActions';
+
+
 interface Employee {
   ID: number;
   EnrollNumber: number;
@@ -32,12 +34,18 @@ const columns: GridColDef[] = [
   { field: 'EmployeeCode', headerName: 'EmployeeCode', width: 150 },
   { field: 'Status', headerName: 'สถานะ', width: 110 },
   { field: 'DeptID', headerName: 'แผนก', width: 90 },
-
+  {
+    field: 'actions',
+    headerName: 'Actions',
+    type: 'actions',
+    width: 150,
+    renderCell: (params: GridRenderCellParams) => (
+      <RoomsActions params={{ ...params.row }} />
+    ),
+  },
 ];
 
-
 export const DataGridDemo = () => {
-
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
 
   useEffect(() => {
