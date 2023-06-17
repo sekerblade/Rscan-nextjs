@@ -60,29 +60,10 @@ export const Accounts = () => {
                justify={'between'}
                wrap={'wrap'}
             >
-               <Flex
-                  css={{
-                     'gap': '$6',
-                     'flexWrap': 'wrap',
-                     '@sm': { flexWrap: 'nowrap' },
-                  }}
-                  align={'center'}
-               >
-                  <Input
-                     css={{ width: '100%', maxW: '410px' }}
-                     placeholder="ค้นหาพนักงาน"
-                  />
-                  <SettingsIcon />
-                  <TrashIcon />
-                  <InfoIcon />
-                  <DotsIcon />
-               </Flex>
                <Flex direction={'row'} css={{ gap: '$6' }} wrap={'wrap'}>
 
                   <AddUser />
-                  <Button auto iconRight={<ExportIcon />}>
-                     Export CSV
-                  </Button>
+
                </Flex>
             </Flex>
          </Flex>
