@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react';
 
-function DepartmentPages(){
-    const [departments,setDepartments] = useState([]);
+interface Department {
+    ID: number;
+    DeptName: string;
+    DeptParent: number;
+    DeptLevel: number;
+    emp_id: number;
+  }
+  
+const DepartmentPages= () => {
+    const [departments,setDepartments] = useState<Department[]>([]);
 
     useEffect(() => {
         async function fetchDepartments(){

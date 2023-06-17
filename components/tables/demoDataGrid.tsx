@@ -93,6 +93,7 @@ export const DataGridDemo = () => {
   return (
     <Box sx={{ height: 667, width: '100%' }}>
       <DataGrid
+
         rows={employeeData}
         columns={columns}
         slots={{ toolbar: CustomToolbar }}
