@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react'
 import { useState } from 'react'
 import { Box, CircularProgress, Fab } from '@mui/material';
@@ -15,8 +14,12 @@ interface EditEmployeeProps {
 
 const EditEmployee: React.FC<EditEmployeeProps> = ({ params, rowId, setRowId }) => {
 
-    const [loading, setLoading] = useState(false)
-    const [success, setSuccess] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+
+    const handleSubmit = async () => {
+        setLoading(true);
+    }
 
     return (
         <>
@@ -28,32 +31,41 @@ const EditEmployee: React.FC<EditEmployeeProps> = ({ params, rowId, setRowId }) 
             >
                 {success ? (
                     <Fab
-                        color='primary'
+                        color="primary"
                         sx={{
                             width: 40,
                             height: 40,
                             bgcolor: green[500],
-                            '&:hover': { bgcolor: green[700] }
+                            '&:hover': { bgcolor: green[700] },
                         }}
                     >
                         <Check />
                     </Fab>
                 ) : (
                     <Fab
-                        color='primary'
+                        color="primary"
                         sx={{
                             width: 40,
                             height: 40,
-
                         }}
                         disabled={params.id !== rowId || loading}
+                        onClick={handleSubmit}
                     >
                         <Save />
                     </Fab>
                 )}
-
-
-
+                {loading && (
+                    <CircularProgress
+                        size={52}
+                        sx={{
+                            color: green[500],
+                            position: 'absolute',
+                            top: -6,
+                            left: -6,
+                            zIndex: 1,
+                        }}
+                    />
+                )}
             </Box>
         </>
     )
