@@ -1,6 +1,6 @@
-import React,{ useEffect, useState } from 'react';
-import { GridColDef, GridValueGetterParams, GridRenderCellParams } from '@mui/x-data-grid';
-import { DataGrid, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarDensitySelector, GridToolbarExport, GridToolbarQuickFilter } from '@mui/x-data-grid';
+import React, { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 
 interface Department {
@@ -23,7 +23,7 @@ export const DepartmentPages = () => {
   const [departments, setDepartments] = useState<Department[]>([]);
 
   useEffect(() => {
-    async function fetchDepartments() {
+    const fetchDepartments = async () => {
       try {
         const response = await fetch('/api/department');
         const data = await response.json();
@@ -31,24 +31,31 @@ export const DepartmentPages = () => {
           ...department,
           id: index + 1,
         }));
-        setDepartments(departmentWithId); // Update the state with departmentWithId
+        setDepartments(departmentWithId);
       } catch (error) {
         console.error('Error fetching departments', error);
       }
-    }
+    };
 
     fetchDepartments();
   }, []);
 
   return (
-    <div style={{ height: 667, width: '100%' }}>
+    <Box style={{ height: 667, width: '100%' }}>
       <DataGrid
-         rows={departments}
-         columns={columns}
-         checkboxSelection
-         pagination
-         pageSize={10}
+        rows={departments}
+        columns={columns}
+        checkboxSelection
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 10,
+
+            },
+          },
+
+        }}
       />
-    </div>
+    </Box>
   );
 };
