@@ -39,11 +39,13 @@ export const RoomsActions = ({ params: employee }: { params: Employee }) => {
                         <Preview />
                     </Tooltip>
                 </IconButton>
+
                 <IconButton onClick={() => { }}>
-                    <Tooltip title="">
+                    <Tooltip title="Edit Employee">
                         <Edit />
                     </Tooltip>
                 </IconButton>
+
                 <IconButton onClick={handleOpen}>
                     <Tooltip title="">
                         <Delete />
