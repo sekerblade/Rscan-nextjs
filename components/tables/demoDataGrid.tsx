@@ -50,7 +50,8 @@ const columns: GridColDef[] = [
 
 export const DataGridDemo = () => {
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
-  
+  const [filteredEmployeeData, setFilteredEmployeeData] = useState<Employee[]>([]);
+
 
 
   const handleFilterPrefix = (prefix) => {
@@ -59,7 +60,11 @@ export const DataGridDemo = () => {
         return employee;
       }
     });
-    setEmployeeData(filteredData);
+    setFilteredEmployeeData(filteredData);
+  };
+
+  const generateGenderDataForDropdown = () => {
+    return [...new Set(employeeData.map((employee) => employee.Prefix))];
   };
 
   useEffect(() => {
@@ -72,6 +77,7 @@ export const DataGridDemo = () => {
           id: index + 1,
         }));
         setEmployeeData(employeesWithId);
+        setFilteredEmployeeData(employeesWithId);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -80,9 +86,6 @@ export const DataGridDemo = () => {
     fetchEmployeeData();
   }, []);
 
-  const generateGenderDataForDropdown = () => {
-    return [...new Set(employeeData.map((employee) => employee.Prefix))];
-  };
 
   function CustomToolbar() {
     return (
@@ -107,7 +110,7 @@ export const DataGridDemo = () => {
     <Box sx={{ height: 667, width: '100%' }}>
       <BasicSelect anyPrefix={generateGenderDataForDropdown()} onPrefixFilters={handleFilterPrefix} />
       <DataGrid
-        rows={employeeData}
+        rows={filteredEmployeeData}
         columns={columns}
         slots={{ toolbar: CustomToolbar }}
         slotProps={{

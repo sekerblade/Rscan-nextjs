@@ -16,10 +16,10 @@ export const BasicSelect = ({anyPrefix, onPrefixFilters}) => {
 
   const handleChange = (field) => (event) => {
     const { value } = event.target;
-    setFilters({
-      ...filter,
+    setFilters((prevFilters) => ({
+      ...prevFilters,
       [field]: value,
-    });
+    }));
     switch (field) {
       case "prefix":
         onPrefixFilters(value);
