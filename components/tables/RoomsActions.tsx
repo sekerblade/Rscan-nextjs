@@ -1,19 +1,8 @@
 import { Box, Button, IconButton, Tooltip, Modal, Typography, Stack } from '@mui/material';
 import { Delete, Edit, Preview } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import React, { useEffect, useState } from 'react';
-
-interface Employee {
-    ID: number;
-    EnrollNumber: number;
-    Prefix: string;
-    Name: string;
-    SureName: string;
-    EmployeeCode: string;
-    Status: number;
-    DeptID: number;
-}
-
+import React, { useState } from 'react';
+import { Employee } from '../../types/employee';
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -28,8 +17,33 @@ const style = {
 
 export const RoomsActions = ({ params: employee }: { params: Employee }) => {
     const [open, setOpen] = React.useState(false);
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const handleDelete = () => {
+        fetch('/api/employee_delete', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ employeeId: employee.ID }),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    // Employee deleted successfully
+                    handleClose();
+                    window.location.reload();
+                } else {
+                    // Handle error case
+                    console.error('Error deleting employee:', response.status, response.statusText);
+                }
+            })
+            .catch((error) => {
+                console.error('Error deleting employee:', error);
+                // Handle error case
+            });
+    };
 
     return (
         <>
@@ -58,13 +72,18 @@ export const RoomsActions = ({ params: employee }: { params: Employee }) => {
                             Are you sure you want to delete this employee?
                         </Typography>
                         <Typography sx={{ mt: 2 }}>
-                            {/* Place delete confirmation logic here */}
-
                             <Stack spacing={2} direction="row">
-                                <Button variant="outlined" color="error" startIcon={<DeleteIcon />} >
+                                <Button
+                                    variant="outlined"
+                                    color="error"
+                                    startIcon={<DeleteIcon />}
+                                    onClick={handleDelete}
+                                >
                                     ลบพนักงาน
                                 </Button>
-                                <Button variant="outlined" onClick={handleClose}>ยกเลิก</Button>
+                                <Button variant="outlined" onClick={handleClose}>
+                                    ยกเลิก
+                                </Button>
                             </Stack>
                         </Typography>
                     </Box>

@@ -1,42 +1,21 @@
-import { GridColDef, GridValueGetterParams, GridRenderCellParams } from '@mui/x-data-grid';
+import { GridColDef, GridRenderCellParams, GridEditCellProps } from '@mui/x-data-grid';
 import { DataGrid, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarDensitySelector, GridToolbarExport, GridToolbarQuickFilter } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { RoomsActions } from './RoomsActions';
+import { Employee } from '../../types/employee';
+import { Panorama } from '@mui/icons-material';
 
-
-interface Employee {
-  ID: number;
-  EnrollNumber: number;
-  Prefix: string;
-  Name: string;
-  SureName: string;
-  EmployeeCode: string;
-  Status: number;
-  DeptID: number;
-}
 
 const columns: GridColDef[] = [
-
   { field: 'ID', headerName: 'ID', width: 50 },
-
-  // {
-  //   field: 'fullName',
-  //   headerName: 'ชื่อเต็ม',
-  //   description: 'This column has a value getter and is not sortable.',
-  //   sortable: true,
-  //   width: 160,
-  //   valueGetter: (params: GridValueGetterParams) =>
-  //     ` ${params.row.Name || ''} ${params.row.SureName || ''}`,
-  // },
-
-  { field: 'Prefix', headerName: 'คำนำหน้า', width: 60 },
-  { field: 'Name', headerName: 'ชื่อ', width: 100 },
-  { field: 'SureName', headerName: 'นามสกุล', width: 100 },
-  { field: 'EnrollNumber', headerName: 'EnrollNumber', width: 110, sortable: false, },
-  { field: 'EmployeeCode', headerName: 'EmployeeCode', width: 100 },
-  { field: 'Status', headerName: 'สถานะ', width: 70 },
-  { field: 'DeptID', headerName: 'แผนก', width: 50 },
+  { field: 'Prefix', headerName: 'คำนำหน้า', width: 60, editable: true },
+  { field: 'Name', headerName: 'ชื่อ', width: 100, editable: true },
+  { field: 'SureName', headerName: 'นามสกุล', width: 100, editable: true },
+  { field: 'EnrollNumber', headerName: 'EnrollNumber', width: 110, sortable: false },
+  { field: 'EmployeeCode', headerName: 'EmployeeCode', width: 100, editable: true },
+  { field: 'Status', headerName: 'สถานะ', width: 70, editable: true },
+  { field: 'DeptID', headerName: 'แผนก', width: 50, editable: true },
   {
     field: 'actions',
     headerName: 'Actions',
@@ -47,6 +26,14 @@ const columns: GridColDef[] = [
     ),
   },
 ];
+
+// export const DataGridDemo = ({ employeeData,
+//   onEmployeeDelete,
+// }: {
+//   employeeData: Employee[];
+//   onEmployeeDelete: (employeeId: number) => void;
+// }) => {
+
 
 export const DataGridDemo = () => {
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
@@ -69,6 +56,7 @@ export const DataGridDemo = () => {
     fetchEmployeeData();
   }, []);
 
+
   function CustomToolbar() {
     return (
       <GridToolbarContainer>
@@ -84,10 +72,6 @@ export const DataGridDemo = () => {
     );
   }
 
-
-  const csvOptions = {
-    utf8WithBom: true,
-  };
   return (
     <Box sx={{ height: 667, width: '100%' }}>
       <DataGrid
@@ -99,27 +83,22 @@ export const DataGridDemo = () => {
             disableHideAllButton: true,
             disableShowAllButton: true,
           },
-          //printOptions: { disableToolbarButton: true }
         }}
         initialState={{
           pagination: {
             paginationModel: {
               pageSize: 10,
-
             },
           },
           columns: {
             columnVisibilityModel: {
-              // Hide columns 'Prefix' and 'EmployeeCode', the other columns will remain visible
               Prefix: false,
               EmployeeCode: false,
             },
           },
         }}
         pageSizeOptions={[10, 15, 25]}
-        //checkboxSelection
         disableRowSelectionOnClick
-      //exportOptions= {csvOptions}
       />
     </Box>
   );
