@@ -1,5 +1,12 @@
 import { GridColDef, GridValueGetterParams, GridRenderCellParams, GridCellEditStopParams, GridCellEditStopReasons, MuiEvent } from '@mui/x-data-grid';
-import { DataGrid, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarDensitySelector, GridToolbarExport, GridToolbarQuickFilter } from '@mui/x-data-grid';
+import {
+    DataGrid,
+    GridToolbarContainer,
+    GridToolbarColumnsButton,
+    GridToolbarDensitySelector,
+    GridToolbarExport,
+    GridToolbarQuickFilter
+} from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import { Box, CircularProgress, Fab } from '@mui/material';
 import { RoomsActions } from './RoomsActions';
