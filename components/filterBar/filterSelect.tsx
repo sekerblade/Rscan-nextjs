@@ -28,9 +28,9 @@ export const BasicSelect = () =>{
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>Twenty</MenuItem>
-          <MenuItem value={21}>Twenty one</MenuItem>
-          <MenuItem value={22}>Twenty one and a half</MenuItem>
+          <MenuItem value={10}>นาย</MenuItem>
+          <MenuItem value={21}>นาง</MenuItem>
+          <MenuItem value={22}>นางสาว</MenuItem>
         </Select>
       </FormControl>
     </div>
