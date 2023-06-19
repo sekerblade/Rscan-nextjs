@@ -13,6 +13,7 @@ import { Flex } from '../styles/flex';
 import { AddDepartment } from './add-department';
 import { AddBranch } from './add-branch';
 import { Adion } from './Adion';
+import { DepartmentPages } from './DepartmentDataGrid';
 import Head from 'next/head'
 
 export const Department = () => {
@@ -97,7 +98,7 @@ export const Department = () => {
                </Flex>
             </Flex>
             <Adion />
-
+            <DepartmentPages/>
          </Flex>
       </>
    );

@@ -8,4 +8,4 @@ export type Employee = {
     EmployeeCode: string;
     Status: number;
     DeptID: number;
-};
+}
