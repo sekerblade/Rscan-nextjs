@@ -12,10 +12,10 @@ import { SettingsIcon } from '../icons/sidebar/settings-icon';
 import { Flex } from '../styles/flex';
 import { AddUser } from './add-user';
 import { DataGridDemo } from '../tables/demoDataGrid';
-import { BasicSelect } from '../filterBar/filterSelect'
 import Head from 'next/head';
 
 export const Accounts = () => {
+
    return (
       <>
          <Head>
@@ -62,7 +62,6 @@ export const Accounts = () => {
                </Flex>
             </Flex>
          </Flex>
-         <BasicSelect/>
          <DataGridDemo />
       </>
    );

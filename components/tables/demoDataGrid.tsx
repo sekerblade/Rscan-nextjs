@@ -3,7 +3,7 @@ import { DataGrid, GridToolbarContainer, GridToolbarColumnsButton, GridToolbarDe
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { RoomsActions } from './RoomsActions';
-
+import { BasicSelect } from '../filterBar/filterSelect';
 
 interface Employee {
   ID: number;
@@ -50,8 +50,17 @@ const columns: GridColDef[] = [
 
 export const DataGridDemo = () => {
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
-  const [filter, setFilter] = useState(true)
-  const [prefix,setPrefix] = useState('all')
+  
+
+
+  const handleFilterPrefix = (prefix) => {
+    const filteredData = employeeData.filter((employee) => {
+      if (employee.Prefix === prefix) {
+        return employee;
+      }
+    });
+    setEmployeeData(filteredData);
+  };
 
   useEffect(() => {
     const fetchEmployeeData = async () => {
@@ -70,6 +79,10 @@ export const DataGridDemo = () => {
 
     fetchEmployeeData();
   }, []);
+
+  const generateGenderDataForDropdown = () => {
+    return [...new Set(employeeData.map((employee) => employee.Prefix))];
+  };
 
   function CustomToolbar() {
     return (
@@ -92,6 +105,7 @@ export const DataGridDemo = () => {
   };
   return (
     <Box sx={{ height: 667, width: '100%' }}>
+      <BasicSelect anyPrefix={generateGenderDataForDropdown()} onPrefixFilters={handleFilterPrefix} />
       <DataGrid
         rows={employeeData}
         columns={columns}

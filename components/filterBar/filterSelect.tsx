@@ -1,38 +1,57 @@
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Box from '@mui/material/Box';
+import * as React from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { SelectChangeEvent } from "@mui/material";
+import Box from "@mui/material/Box";
+import { useState } from "react";
 
-export const BasicSelect = () =>{
-  const [age, setAge] = React.useState('');
+export const BasicSelect = ({anyPrefix, onPrefixFilters}) => {
+  const [filter, setFilters] = useState({
+    prefix: "",
+    Name: "",
+    SureName: "",
+  });
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+  const handleChange = (field) => (event) => {
+    const { value } = event.target;
+    setFilters({
+      ...filter,
+      [field]: value,
+    });
+    switch (field) {
+      case "prefix":
+        onPrefixFilters(value);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
     <div>
       <FormControl sx={{ m: 1, minWidth: 80 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">
+          คำนำหน้า
+        </InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
-          id="demo-simple-select-autowidth"
-          value={age}
-          onChange={handleChange}
+          id="prefix"
+          onChange={handleChange("prefix")}
           autoWidth
-          label="Age"
+          label="คำนำหน้า"
         >
           <MenuItem value="">
-            <em>None</em>
+            <em>เลือก</em>
           </MenuItem>
-          <MenuItem value={10}>นาย</MenuItem>
-          <MenuItem value={21}>นาง</MenuItem>
-          <MenuItem value={22}>นางสาว</MenuItem>
+          {anyPrefix && anyPrefix.map((prefix) => (
+            <MenuItem key={prefix} value={prefix}>
+              {prefix}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </div>
   );
-}
+};
