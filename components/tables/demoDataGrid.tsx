@@ -13,24 +13,16 @@ import { RoomsActions } from './RoomsActions';
 import { Check, Save } from '@mui/icons-material';
 import { green } from '@mui/material/colors';
 import EditEmployee from './editEmployee';
-
-
-interface Employee {
-    ID: number;
-    EnrollNumber: number;
-    Prefix: string;
-    Name: string;
-    SureName: string;
-    EmployeeCode: string;
-    Status: number;
-    DeptID: number;
-}
+import { Employee } from '../../types/employee';
 
 export const DataGridDemo = () => {
     const [employeeData, setEmployeeData] = useState<Employee[]>([]);
     const [rowId, setRowId] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+
+    const [filter, setFilter] = useState(true)
+    const [prefix, setPrefix] = useState('all')
 
     const handleSubmit = async () => {
         setLoading(true);
