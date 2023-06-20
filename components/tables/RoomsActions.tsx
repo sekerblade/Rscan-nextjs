@@ -3,7 +3,10 @@ import { Delete, Edit, Preview } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import React, { useState } from 'react';
 import { Employee } from '../../types/employee';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1e1f4a9b0e15e2a2702b392e0561dfa38ac35a37
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',

@@ -1,4 +1,5 @@
-export type  Employee = {
+
+export type Employee = {
     ID: number;
     EnrollNumber: number;
     Prefix: string;
