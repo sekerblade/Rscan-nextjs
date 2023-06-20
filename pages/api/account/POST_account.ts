@@ -4,12 +4,13 @@ import { query } from '../../../lib/db';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         try {
-            const { DeptName, DeptParent, DeptLevel, emp_id } = req.body;
+            
+            const {EnrollNumber,Prefix,Name,SureName,EmployeeCode,Status,DeptID } = req.body;
 
             // Perform the INSERT query
             const result = await query(
-                'INSERT INTO Emp_Dept (DeptName, DeptParent, DeptLevel, emp_id) VALUES (?, ?, ?, ?)',
-                [DeptName, DeptParent, DeptLevel, emp_id]
+                'INSERT INTO Emp_Info (EnrollNumber, Prefix, Name, SureName, EmployeeCode, Status, DeptID) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                [EnrollNumber,Prefix,Name,SureName,EmployeeCode,Status,DeptID]
             );
 
             // Return success response
