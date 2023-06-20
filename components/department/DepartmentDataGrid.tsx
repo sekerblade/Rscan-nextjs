@@ -2,14 +2,8 @@ import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
+import { Department } from '../../types/department';
 
-interface Department {
-  id: number;
-  DeptName: string;
-  DeptParent: number;
-  DeptLevel: number;
-  emp_id: number;
-}
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 100 },
@@ -45,7 +39,7 @@ export const DepartmentPages = () => {
       <DataGrid
         rows={departments}
         columns={columns}
-        checkboxSelection
+        //checkboxSelections
         initialState={{
           pagination: {
             paginationModel: {

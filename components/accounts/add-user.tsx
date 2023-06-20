@@ -9,6 +9,7 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import { Flex } from "../styles/flex";
+import { useState } from 'react';
 
 export const AddUser = () => {
   const [visible, setVisible] = React.useState(false);
@@ -23,6 +24,57 @@ export const AddUser = () => {
     setVisible(false);
     console.log("closed");
   };
+
+  const [firstname, setFirstName] = useState("")
+  const [lastname, setLastname] = useState("")
+  const [enrollnum, setEnrollnum] = useState("")
+  const [status, setStatus] = useState("")
+  const [dept, setDept] = useState("")
+  const [empcode, setEmpCode] = useState("3333")
+  const [prefix, setPrefix] = useState("นาย")
+
+  const formAddEmployee = {
+    Prefix: prefix,
+    EmployeeCode: empcode,
+    Name: firstname,
+    SureName: lastname,
+    EnrollNumber: enrollnum,
+    Status: status,
+    DeptID: dept,
+  }
+
+  const handleSubmit = async (e: any) => {
+
+    try {
+      const response = await fetch('/api/account/POST_account', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formAddEmployee),
+      });
+
+      if (response.ok) {
+        console.log('Data submitted successfully');
+        // Reset form data
+        setFirstName("");
+        setLastname("");
+        setEnrollnum("");
+        setStatus("");
+        setDept("");
+        setEmpCode("");
+        setPrefix("");
+        window.location.reload();
+      } else {
+        console.error('Error:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    closeHandler();
+  };
+
+
 
   return (
     <div>
@@ -72,7 +124,7 @@ export const AddUser = () => {
                   disallowEmptySelection
                   selectionMode="single"
                   selectedKeys={selected}
-                  //onSelectionChange={setSelected}
+                //onSelectionChange={setSelected}
                 >
                   <Dropdown.Item key="นาย">นาย</Dropdown.Item>
                   <Dropdown.Item key="นาง">นาง</Dropdown.Item>
@@ -81,6 +133,8 @@ export const AddUser = () => {
               </Dropdown>
               <Input
                 label="ชื่อจริง"
+                value={firstname}
+                onChange={({ target }) => setFirstName(target?.value)}
                 bordered
                 clearable
                 fullWidth
@@ -89,6 +143,8 @@ export const AddUser = () => {
               />
               <Input
                 label="นามสกุล"
+                value={lastname}
+                onChange={({ target }) => setLastname(target?.value)}
                 clearable
                 bordered
                 fullWidth
@@ -105,20 +161,24 @@ export const AddUser = () => {
               }}
             >
               <Input
-                label="Email"
+                label="Enrollnumber"
+                value={enrollnum}
+                onChange={({ target }) => setEnrollnum(target?.value)}
                 clearable
                 bordered
                 fullWidth
                 size="lg"
-                placeholder="กรอกEmail"
+                placeholder="กรอกEnrollnumber"
               />
               <Input
-                label="เบอร์มือถือ"
+                label="สถานะ"
+                value={status}
+                onChange={({ target }) => setStatus(target?.value)}
                 clearable
                 bordered
                 fullWidth
                 size="lg"
-                placeholder="Phone Number"
+                placeholder="กรอกสถานะ"
               />
             </Flex>
             <Flex
@@ -130,26 +190,28 @@ export const AddUser = () => {
             >
               <Input
                 label="แผนก"
+                value={dept}
+                onChange={({ target }) => setDept(target?.value)}
                 clearable
                 bordered
                 fullWidth
                 size="lg"
                 placeholder="กรุณากรอกแผนก"
               />
-              <Input
+              {/* <Input
                 label="Company"
                 clearable
                 bordered
                 fullWidth
                 size="lg"
                 placeholder="Company"
-              />
+              /> */}
             </Flex>
           </Flex>
         </Modal.Body>
         <Divider css={{ my: "$5" }} />
         <Modal.Footer>
-          <Button auto onClick={closeHandler}>
+          <Button auto onClick={handleSubmit}>
             เพิ่ม
           </Button>
         </Modal.Footer>
