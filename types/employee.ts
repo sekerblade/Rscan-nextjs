@@ -1,4 +1,3 @@
-
 export type Employee = {
     ID: number;
     EnrollNumber: number;

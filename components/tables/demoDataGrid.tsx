@@ -1,5 +1,12 @@
 
-import { GridColDef, GridValueGetterParams, GridRenderCellParams, GridCellEditStopParams, GridCellEditStopReasons, MuiEvent } from '@mui/x-data-grid';
+import {
+    GridColDef,
+    GridValueGetterParams,
+    GridRenderCellParams, GridCellEditStopParams,
+    GridCellEditStopReasons,
+    MuiEvent,
+    GridRowModel
+} from '@mui/x-data-grid';
 import {
     DataGrid,
     GridToolbarContainer,
@@ -8,30 +15,73 @@ import {
     GridToolbarExport,
     GridToolbarQuickFilter
 } from '@mui/x-data-grid';
+import Snackbar from '@mui/material/Snackbar';
+import Alert, { AlertProps } from '@mui/material/Alert';
 
 import React, { useEffect, useState } from 'react';
 import { Box, CircularProgress, Fab } from '@mui/material';
 import { RoomsActions } from './RoomsActions';
-
-import { Check, Save } from '@mui/icons-material';
-import { green } from '@mui/material/colors';
 import EditEmployee from './editEmployee';
 import { Employee } from '../../types/employee';
 
 
 export const DataGridDemo = () => {
     const [employeeData, setEmployeeData] = useState<Employee[]>([]);
-    const [rowId, setRowId] = useState<number | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
+
 
 
     const [filter, setFilter] = useState(true)
     const [prefix, setPrefix] = useState('all')
 
-    const handleSubmit = async () => {
-        setLoading(true);
+    const editHandler = () => {
+
+    }
+
+    const useFakeMutation = () => {
+        return React.useCallback(
+            (employee: Partial<Employee>) =>
+                new Promise<Partial<Employee>>((resolve, reject) => {
+                    setTimeout(() => {
+                        if (employee.Name?.trim() === '') {
+                            reject(new Error("Error while saving user: name can't be empty."));
+                        } else {
+                            resolve({ ...employee, Name: employee.Name });
+                        }
+                    }, 200);
+                }),
+            [],
+        );
     };
+
+    const mutateRow = useFakeMutation();
+
+    const [snackbar, setSnackbar] = React.useState<Pick<
+        AlertProps,
+        'children' | 'severity'
+    > | null>(null);
+
+    const handleCloseSnackbar = () => setSnackbar(null);
+
+    const processRowUpdate = React.useCallback(async (newRow: GridRowModel) => {
+
+
+        // Make the HTTP request to save in the backend
+
+        const re = await mutateRow(newRow);
+        setSnackbar({ children: 'User successfully saved', severity: 'success' });
+        const response = await fetch('/api/account/PUT_account', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(re),
+        });
+        return re;
+    },
+        [mutateRow],
+    );
+
+
 
     const columns: GridColDef[] = [
 
@@ -68,50 +118,7 @@ export const DataGridDemo = () => {
             headerName: 'Edit',
             type: 'actions',
             renderCell: (params: GridRenderCellParams) => (
-                <Box
-                    sx={{
-                        m: 1,
-                        position: 'relative',
-                    }}
-                >
-                    {success ? (
-                        <Fab
-                            color="primary"
-                            sx={{
-                                width: 40,
-                                height: 40,
-                                bgcolor: green[500],
-                                '&:hover': { bgcolor: green[700] },
-                            }}
-                        >
-                            <Check />
-                        </Fab>
-                    ) : (
-                        <Fab
-                            color="primary"
-                            sx={{
-                                width: 40,
-                                height: 40,
-                            }}
-                            disabled={params.row !== rowId || loading}
-                            onClick={handleSubmit}
-                        >
-                            <Save />
-                        </Fab>
-                    )}
-                    {loading && (
-                        <CircularProgress
-                            size={52}
-                            sx={{
-                                color: green[500],
-                                position: 'absolute',
-                                top: -6,
-                                left: -6,
-                                zIndex: 1,
-                            }}
-                        />
-                    )}
-                </Box>
+                <EditEmployee params={{ ...params.row }} />
             ),
         },
     ];
@@ -124,7 +131,7 @@ export const DataGridDemo = () => {
                 const data = await response.json();
                 const employeesWithId = data.map((employee: Employee, index: number) => ({
                     ...employee,
-                    id: index + 1,
+                    id: index + 0,
                 }));
                 setEmployeeData(employeesWithId);
             } catch (error) {
@@ -158,8 +165,11 @@ export const DataGridDemo = () => {
     return (
         <Box sx={{ height: 667, width: '100%' }}>
             <DataGrid
+                editMode="row"
                 rows={employeeData}
                 columns={columns}
+                processRowUpdate={processRowUpdate}
+                pageSizeOptions={[10, 15, 25]}
                 slots={{ toolbar: CustomToolbar }}
                 slotProps={{
                     columnsPanel: {
@@ -183,12 +193,24 @@ export const DataGridDemo = () => {
                         },
                     },
                 }}
-                pageSizeOptions={[10, 15, 25]}
-                //checkboxSelection
-                disableRowSelectionOnClick
-                //exportOptions= {csvOptions}
-                onCellEditStop={handleSubmit}
+
+            // //checkboxSelection
+            // disableRowSelectionOnClick
+            // //exportOptions= {csvOptions}
+            // onRowEditCommit={editHandler}
+            // setEditCellValue
+
             />
+            {!!snackbar && (
+                <Snackbar
+                    open
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    onClose={handleCloseSnackbar}
+                    autoHideDuration={6000}
+                >
+                    <Alert {...snackbar} onClose={handleCloseSnackbar} />
+                </Snackbar>
+            )}
         </Box>
     );
 };
