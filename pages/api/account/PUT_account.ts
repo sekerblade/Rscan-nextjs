@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             // Perform the INSERT query
             const result = await query(
-                'UPDATE Emp_Info SET EnrollNumber = "?",Prefix = "?",Name = "?",SureName = "?",EmployeeCode = "?",Status = "?",DeptID = "?", WHERE ID = ?',
+                'UPDATE Emp_Info SET EnrollNumber = ?,Prefix = ?,Name = ?,SureName = ?,EmployeeCode = ?,Status = ?,DeptID = ? WHERE ID = ?',
                 [EnrollNumber, Prefix, Name, SureName, EmployeeCode, Status, DeptID, ID]
                 
             );

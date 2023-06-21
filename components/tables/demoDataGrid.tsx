@@ -67,21 +67,19 @@ export const DataGridDemo = () => {
 
         // Make the HTTP request to save in the backend
 
-        const re = await mutateRow(newRow);
+        const res = await mutateRow(newRow);
         setSnackbar({ children: 'User successfully saved', severity: 'success' });
         const response = await fetch('/api/account/PUT_account', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(re),
+            body: JSON.stringify(res),
         });
-        return re;
+        return res;
     },
         [mutateRow],
     );
-
-
 
     const columns: GridColDef[] = [
 
