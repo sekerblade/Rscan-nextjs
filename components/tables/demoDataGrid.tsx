@@ -68,7 +68,7 @@ export const DataGridDemo = () => {
         // Make the HTTP request to save in the backend
 
         const res = await mutateRow(newRow);
-        setSnackbar({ children: 'User successfully saved', severity: 'success' });
+        setSnackbar({ children: 'Editing successfully saved', severity: 'success' });
         const response = await fetch('/api/account/PUT_account', {
             method: 'PUT',
             headers: {
@@ -111,14 +111,14 @@ export const DataGridDemo = () => {
                 <RoomsActions params={{ ...params.row }} />
             ),
         },
-        {
-            field: 'Editable',
-            headerName: 'Edit',
-            type: 'actions',
-            renderCell: (params: GridRenderCellParams) => (
-                <EditEmployee params={{ ...params.row }} />
-            ),
-        },
+        // {
+        //     field: 'Editable',
+        //     headerName: 'Edit',
+        //     type: 'actions',
+        //     renderCell: (params: GridRenderCellParams) => (
+        //         <EditEmployee params={{ ...params.row }} />
+        //     ),
+        // },
     ];
 
 
@@ -202,7 +202,7 @@ export const DataGridDemo = () => {
             {!!snackbar && (
                 <Snackbar
                     open
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                     onClose={handleCloseSnackbar}
                     autoHideDuration={6000}
                 >

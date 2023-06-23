@@ -21,11 +21,15 @@ export const Accounts = () => {
          <Head>
             <title>ข้อมูลพนักงาน</title>
          </Head>
+
          <Flex
             css={{
-              gap: "$6",
-              flexWrap: "wrap",
-              "@sm": { flexWrap: "nowrap" },
+               'mt': '$5',
+               'px': '$6',
+               '@sm': {
+                  mt: '$10',
+                  px: '$16',
+               },
             }}
             justify={'center'}
             direction={'column'}
@@ -61,9 +65,10 @@ export const Accounts = () => {
 
                </Flex>
             </Flex>
+            <BasicSelect />
+            <DataGridDemo />
          </Flex>
-         <BasicSelect/>
-         <DataGridDemo />
+
       </>
    );
 };
