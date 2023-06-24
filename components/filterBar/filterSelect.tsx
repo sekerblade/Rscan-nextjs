@@ -7,14 +7,14 @@ import { SelectChangeEvent } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 
-export const BasicSelect = ({anyPrefix, onPrefixFilters}) => {
+export const BasicSelect = ({anyPrefix, onPrefixFilters}: {anyPrefix: Array<string>, onPrefixFilters: Function}) => {
   const [filter, setFilters] = useState({
     prefix: "",
     Name: "",
     SureName: "",
   });
 
-  const handleChange = (field) => (event) => {
+  const handleChange = (field: any) => (event:any) => {
     const { value } = event.target;
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -22,7 +22,11 @@ export const BasicSelect = ({anyPrefix, onPrefixFilters}) => {
     }));
     switch (field) {
       case "prefix":
-        onPrefixFilters(value);
+        if (value === "") {
+          onPrefixFilters(""); // แสดงรายการพนักงานทั้งหมด
+        } else {
+          onPrefixFilters(value);
+        }
         break;
       default:
         break;
@@ -43,7 +47,7 @@ export const BasicSelect = ({anyPrefix, onPrefixFilters}) => {
           label="คำนำหน้า"
         >
           <MenuItem value="">
-            <em>เลือก</em>
+          <em>ทั้งหมด</em>
           </MenuItem>
           {anyPrefix && anyPrefix.map((prefix) => (
             <MenuItem key={prefix} value={prefix}>

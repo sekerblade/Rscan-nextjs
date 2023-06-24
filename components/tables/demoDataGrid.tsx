@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { RoomsActions } from './RoomsActions';
 import { BasicSelect } from '../filterBar/filterSelect';
-
 interface Employee {
   ID: number;
   EnrollNumber: number;
@@ -54,13 +53,17 @@ export const DataGridDemo = () => {
 
 
 
-  const handleFilterPrefix = (prefix) => {
-    const filteredData = employeeData.filter((employee) => {
-      if (employee.Prefix === prefix) {
-        return employee;
-      }
-    });
-    setFilteredEmployeeData(filteredData);
+  const handleFilterPrefix = (prefix: string) => {
+    if (prefix === "") {
+      setFilteredEmployeeData(employeeData); // แสดงรายการพนักงานทั้งหมด
+    } else {
+      const filteredData = employeeData.filter((employee) => {
+        if (employee.Prefix === prefix) {
+          return employee;
+        }
+      });
+      setFilteredEmployeeData(filteredData);
+    }
   };
 
   const generateGenderDataForDropdown = () => {
