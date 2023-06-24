@@ -11,11 +11,11 @@ import { UsersIcon } from '../components/icons/breadcrumb/users-icon';
 import { SettingsIcon } from '../components/icons/sidebar/settings-icon';
 import { Flex } from '../components/styles/flex';
 import { AddUser } from '../components/accounts/add-user';
+import { DataGridDemo } from '../tables/demoDataGrid';
 import Head from 'next/head';
 
 
 export const Accounts = () => {
-
    return (
       <>
          <Head>

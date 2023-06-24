@@ -2,7 +2,7 @@ import { Drawer, Box, Typography, IconButton } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
 
-const MuiDrawer = () => {
+export const MuiDrawer = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   
   return (
@@ -42,4 +42,3 @@ const MuiDrawer = () => {
   );
 };
 
-export default MuiDrawer;
