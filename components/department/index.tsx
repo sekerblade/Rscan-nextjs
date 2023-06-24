@@ -97,8 +97,8 @@ export const Department = () => {
                   </Button>
                </Flex>
             </Flex>
-            <Adion/>
-            <DepartmentPages/>
+            <Adion />
+            <DepartmentPages />
          </Flex>
       </>
    );

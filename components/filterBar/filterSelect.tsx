@@ -1,61 +1,38 @@
-import * as React from "react";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { SelectChangeEvent } from "@mui/material";
-import Box from "@mui/material/Box";
-import { useState } from "react";
+import * as React from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Box from '@mui/material/Box';
 
-export const BasicSelect = ({anyPrefix, onPrefixFilters}: {anyPrefix: Array<string>, onPrefixFilters: Function}) => {
-  const [filter, setFilters] = useState({
-    prefix: "",
-    Name: "",
-    SureName: "",
-  });
+export const BasicSelect = () =>{
+  const [age, setAge] = React.useState('');
 
-  const handleChange = (field: any) => (event:any) => {
-    const { value } = event.target;
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [field]: value,
-    }));
-    switch (field) {
-      case "prefix":
-        if (value === "") {
-          onPrefixFilters(""); // แสดงรายการพนักงานทั้งหมด
-        } else {
-          onPrefixFilters(value);
-        }
-        break;
-      default:
-        break;
-    }
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
   };
 
   return (
     <div>
       <FormControl sx={{ m: 1, minWidth: 80 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">
-          คำนำหน้า
-        </InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">Age</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
-          id="prefix"
-          onChange={handleChange("prefix")}
+          id="demo-simple-select-autowidth"
+          value={age}
+          onChange={handleChange}
           autoWidth
-          label="คำนำหน้า"
+          label="Age"
         >
           <MenuItem value="">
-          <em>ทั้งหมด</em>
+            <em>None</em>
           </MenuItem>
-          {anyPrefix && anyPrefix.map((prefix) => (
-            <MenuItem key={prefix} value={prefix}>
-              {prefix}
-            </MenuItem>
-          ))}
+          <MenuItem value={10}>Twenty</MenuItem>
+          <MenuItem value={21}>Twenty one</MenuItem>
+          <MenuItem value={22}>Twenty one and a half</MenuItem>
         </Select>
       </FormControl>
     </div>
   );
-};
+}
