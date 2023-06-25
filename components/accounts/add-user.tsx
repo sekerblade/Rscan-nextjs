@@ -78,7 +78,7 @@ export const AddUser = () => {
 
   return (
     <div>
-      <Button auto onClick={handler}>
+      <Button shadow color="primary" auto onClick={handler}>
         เพิ่มพนักงาน
       </Button>
       <Modal
@@ -87,6 +87,7 @@ export const AddUser = () => {
         width="800px"
         open={visible}
         onClose={closeHandler}
+        css={{ margin: 0 }}
       >
         <Modal.Header css={{ justifyContent: "start" }}>
           <Text id="modal-title" h4>

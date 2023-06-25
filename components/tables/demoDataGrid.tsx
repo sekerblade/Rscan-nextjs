@@ -17,22 +17,34 @@ import {
 } from '@mui/x-data-grid';
 import Snackbar from '@mui/material/Snackbar';
 import Alert, { AlertProps } from '@mui/material/Alert';
-
 import React, { useEffect, useState } from 'react';
 import { Box, CircularProgress, Fab } from '@mui/material';
 import { RoomsActions } from './RoomsActions';
 import EditEmployee from './editEmployee';
 import { Employee } from '../../types/employee';
-
+import { BasicSelect } from '../filterBar/filterSelect';
+import { AddUser } from "../accounts/add-user";
+import { Grid } from '@mui/material';
 
 export const DataGridDemo = () => {
     const [employeeData, setEmployeeData] = useState<Employee[]>([]);
-
-
-
-    const [filter, setFilter] = useState(true)
-    const [prefix, setPrefix] = useState('all')
-
+    const [filteredEmployeeData, setFilteredEmployeeData] = useState<Employee[]>([]);
+    const handleFilterPrefix = (prefixes: string[]) => {
+        if (prefixes.length === 0) {
+          setFilteredEmployeeData(employeeData); // แสดงรายการพนักงานทั้งหมดเมื่อไม่มีการเลือกคำนำหน้า
+        } else {
+          const filteredData = employeeData.filter((employee) =>
+            prefixes.includes(employee.Prefix)
+          );
+          setFilteredEmployeeData(filteredData);
+        }
+      };
+    
+    
+    
+      const generatePrefixDataForDropdown = () => {
+        return [...new Set(employeeData.map((employee) => employee.Prefix))];
+      };
     const editHandler = () => {
 
     }
@@ -124,21 +136,22 @@ export const DataGridDemo = () => {
 
     useEffect(() => {
         const fetchEmployeeData = async () => {
-            try {
-                const response = await fetch('/api/employee');
-                const data = await response.json();
-                const employeesWithId = data.map((employee: Employee, index: number) => ({
-                    ...employee,
-                    id: index + 0,
-                }));
-                setEmployeeData(employeesWithId);
-            } catch (error) {
-                console.error('Error:', error);
-            }
+          try {
+            const response = await fetch('/api/employee');
+            const data = await response.json();
+            const employeesWithId = data.map((employee: Employee, index: number) => ({
+              ...employee,
+              id: index + 1,
+            }));
+            setEmployeeData(employeesWithId);
+            setFilteredEmployeeData(employeesWithId);
+          } catch (error) {
+            console.error('Error:', error);
+          }
         };
-
+    
         fetchEmployeeData();
-    }, []);
+      }, []);
 
 
     function CustomToolbar() {
@@ -162,9 +175,21 @@ export const DataGridDemo = () => {
     };
     return (
         <Box sx={{ height: 667, width: '100%' }}>
+             <Grid container spacing={2}>
+             <Grid item xs={6}>
+            <BasicSelect
+              anyPrefix={generatePrefixDataForDropdown()}
+              onPrefixFilters={handleFilterPrefix}
+            />
+             </Grid>
+                <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-end', margin: 0 }}>
+                <AddUser />
+                </Grid>
+      </Grid>
+      <Box sx={{ mt: 1}}>
             <DataGrid
                 editMode="row"
-                rows={employeeData}
+                rows={filteredEmployeeData}
                 columns={columns}
                 processRowUpdate={processRowUpdate}
                 pageSizeOptions={[10, 15, 25]}
@@ -209,6 +234,7 @@ export const DataGridDemo = () => {
                     <Alert {...snackbar} onClose={handleCloseSnackbar} />
                 </Snackbar>
             )}
+            </Box>
         </Box>
     );
 };

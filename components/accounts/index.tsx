@@ -10,11 +10,9 @@ import { HouseIcon } from '../icons/breadcrumb/house-icon';
 import { UsersIcon } from '../icons/breadcrumb/users-icon';
 import { SettingsIcon } from '../icons/sidebar/settings-icon';
 import { Flex } from '../styles/flex';
-import { AddUser } from './add-user';
 import { DataGridDemo } from '../tables/demoDataGrid';
-import { BasicSelect } from '../filterBar/filterSelect'
+import { MuiDrawer } from '../tables/muiDrawer';
 import Head from 'next/head';
-
 
 export const Accounts = () => {
    return (
@@ -22,12 +20,14 @@ export const Accounts = () => {
          <Head>
             <title>ข้อมูลพนักงาน</title>
          </Head>
-
          <Flex
             css={{
-              gap: "$6",
-              flexWrap: "wrap",
-              "@sm": { flexWrap: "nowrap" },
+               mt: '$5',
+               px: '$6',
+               '@sm': {
+                  mt: '$10',
+                  px: '$16',
+               },
             }}
             justify={'center'}
             direction={'column'}
@@ -40,7 +40,6 @@ export const Accounts = () => {
                   </Link>
                   <Text>/</Text>
                </Crumb>
-
                <Crumb>
                   <UsersIcon />
                   <CrumbLink href="#">ข้อมูลพนักงาน</CrumbLink>
@@ -50,21 +49,8 @@ export const Accounts = () => {
                   <CrumbLink href="#">รายชื่อ</CrumbLink>
                </Crumb>
             </Breadcrumbs>
-
             <Text h3>ข้อมูลพนักงาน</Text>
-            <Flex
-               css={{ gap: '$8' }}
-               align={'center'}
-               justify={'between'}
-               wrap={'wrap'}
-            >
-               <Flex direction={'row'} css={{ gap: '$6' }} wrap={'wrap'}>
-                  <AddUser />
-
-               </Flex>
-            </Flex>
-            <BasicSelect />
-            <DataGridDemo />
+               <MuiDrawer/> 
          </Flex>
       </>
    );
