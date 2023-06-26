@@ -19,9 +19,6 @@ export const MuiDrawer = () => {
           <Typography variant="h6" component="div">
             side panel
           </Typography>
-          <Typography variant="h6" component="div">
-            <BasicSelect />
-          </Typography>
         </Box>
       </Drawer>
 
