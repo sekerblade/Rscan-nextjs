@@ -8,9 +8,26 @@ import {
     GridToolbarQuickFilter,
     GridColDef,
     GridRenderCellParams,
-    GridRowModel
+    GridRowModel,
 } from '@mui/x-data-grid';
-import { Box, CircularProgress, Fab, Snackbar, Alert, AlertProps, Modal, Typography } from '@mui/material';
+import {
+    Box,
+    CircularProgress,
+    Fab,
+    Snackbar,
+    Alert,
+    AlertProps,
+    Modal,
+    Typography,
+    Dialog,
+    IconButton,
+    Tooltip,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    Button,
+} from '@mui/material';
+import { Edit } from '@mui/icons-material';
 import { RoomsActions } from './RoomsActions';
 import { Employee } from '../../types/employee';
 
@@ -46,32 +63,64 @@ export const DataGridDemo = () => {
 
     const handleCloseSnackbar = () => setSnackbar(null);
 
-    const confirmEditable = () => {
-        return (
-            <>
+    const [open, setOpen] = useState(false);
 
-            </>
-        );
+    const handleClickOpen = () => {
+        setOpen(true);
     };
 
-    const processRowUpdate = React.useCallback(async (newRow: GridRowModel) => {
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-        // This is Function to Confrim Editable
-        confirmEditable();
-        // Make the HTTP request to save in the backend
+    // const confirmEditable = () => {
+
+    //     return (
+    //         <>
+    //             <Dialog
+    //                 maxWidth="xs"
+    //                 open={open}
+    //                 onClose={handleClose}
+    //             >
+    //                 <DialogTitle>Are you sure?</DialogTitle>
+    //                 <DialogContent dividers>
+    //                     Hello world
+    //                 </DialogContent>
+    //                 <DialogActions>
+    //                     <Button >
+    //                         No
+    //                     </Button>
+    //                     <Button >Yes</Button>
+    //                 </DialogActions>
+    //             </Dialog>
+    //         </>
+    //     );
+    // };
+
+    const [activate, setActivate] = useState(false)
+
+    const onEditStart = () => {
+
+    }
+
+    const processRowUpdate = React.useCallback(async (newRow: GridRowModel) => {
         const res = await mutateRow(newRow);
         setSnackbar({ children: 'Editing successfully saved', severity: 'success' });
-        const response = await fetch('/api/account/PUT_account', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(res),
-        });
+        // This is Function to Confrim Editable
+        if (activate) {
+            // Make the HTTP request to save in the backend
+            const response = await fetch('/api/account/PUT_account', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(res),
+            });
+        }
 
         return res;
     },
-        [mutateRow],
+        [activate, mutateRow],
     );
 
     const columns: GridColDef[] = [
@@ -99,11 +148,24 @@ export const DataGridDemo = () => {
             field: 'actions',
             headerName: 'Actions',
             type: 'actions',
-            width: 150,
+            width: 100,
             renderCell: (params: GridRenderCellParams) => (
                 <RoomsActions params={{ ...params.row }} />
             ),
         },
+        {
+            field: 'Edits',
+            headerName: 'Edits',
+            type: 'actions',
+            width: 100,
+            renderCell: () => (
+                <IconButton onClick={() => { }}>
+                    <Tooltip title="Edit Employee">
+                        <Edit />
+                    </Tooltip>
+                </IconButton>
+            ),
+        }
     ];
 
     useEffect(() => {
@@ -149,6 +211,7 @@ export const DataGridDemo = () => {
                 rows={employeeData}
                 columns={columns}
                 processRowUpdate={processRowUpdate}
+                onRowEditStart={onEditStart}
                 pageSizeOptions={[10, 15, 25]}
                 slots={{ toolbar: CustomToolbar }}
                 slotProps={{

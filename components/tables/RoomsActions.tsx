@@ -50,16 +50,10 @@ export const RoomsActions = ({ params: employee }: { params: Employee }) => {
         <>
             <Box>
                 {/* <IconButton onClick={() => { }}>
-                    <Tooltip title="">
-                        <Preview />
-                    </Tooltip>
-                </IconButton> */}
-
-                <IconButton onClick={() => { }}>
                     <Tooltip title="Edit Employee">
                         <Edit />
                     </Tooltip>
-                </IconButton>
+                </IconButton> */}
 
                 <IconButton onClick={handleOpen}>
                     <Tooltip title="">
@@ -72,7 +66,7 @@ export const RoomsActions = ({ params: employee }: { params: Employee }) => {
                             ยืนยันการลบพนักงานหรือไม่?
                         </Typography>
                         <Typography sx={{ mt: 2 }}>
-                            Are you sure you want to delete this employee?
+                            คุณแน่ใจหรือไม่ว่าจะลบพนักงานคนนี้
                         </Typography>
                         <Typography sx={{ mt: 2 }}>
                             <Stack spacing={2} direction="row">
