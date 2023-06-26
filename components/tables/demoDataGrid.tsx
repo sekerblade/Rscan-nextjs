@@ -174,7 +174,7 @@ export const DataGridDemo = () => {
         utf8WithBom: true,
     };
     return (
-        <Box sx={{ height: 667, width: '100%' }}>
+        <Box sx={{ mt:1, height: 667, width: '100%' }}>
              <Grid container spacing={2}>
              <Grid item xs={6}>
             <BasicSelect

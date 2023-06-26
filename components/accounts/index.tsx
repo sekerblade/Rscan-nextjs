@@ -49,7 +49,7 @@ export const Accounts = () => {
                   <CrumbLink href="#">รายชื่อ</CrumbLink>
                </Crumb>
             </Breadcrumbs>
-            <Text h3>ข้อมูลพนักงาน</Text>
+            <Text>ข้อมูลพนักงาน</Text>
                <MuiDrawer/> 
          </Flex>
       </>
