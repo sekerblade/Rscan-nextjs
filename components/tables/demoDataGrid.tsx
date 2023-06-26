@@ -1,26 +1,18 @@
-
-import {
-    GridColDef,
-    GridValueGetterParams,
-    GridRenderCellParams, GridCellEditStopParams,
-    GridCellEditStopReasons,
-    MuiEvent,
-    GridRowModel
-} from '@mui/x-data-grid';
+import React, { useEffect, useState } from 'react';
 import {
     DataGrid,
     GridToolbarContainer,
     GridToolbarColumnsButton,
     GridToolbarDensitySelector,
     GridToolbarExport,
-    GridToolbarQuickFilter
+    GridToolbarQuickFilter,
+    GridColDef,
+    GridRenderCellParams,
+    GridRowModel
 } from '@mui/x-data-grid';
-import Snackbar from '@mui/material/Snackbar';
-import Alert, { AlertProps } from '@mui/material/Alert';
 import React, { useEffect, useState } from 'react';
-import { Box, CircularProgress, Fab } from '@mui/material';
+import { Box, CircularProgress, Fab, Snackbar, Alert, AlertProps, Modal, Typography } from '@mui/material';
 import { RoomsActions } from './RoomsActions';
-import EditEmployee from './editEmployee';
 import { Employee } from '../../types/employee';
 import { BasicSelect } from '../filterBar/filterSelect';
 import { AddUser } from "../accounts/add-user";
@@ -74,11 +66,19 @@ export const DataGridDemo = () => {
 
     const handleCloseSnackbar = () => setSnackbar(null);
 
+    const confirmEditable = () => {
+        return (
+            <>
+
+            </>
+        );
+    };
+
     const processRowUpdate = React.useCallback(async (newRow: GridRowModel) => {
 
-
+        // This is Function to Confrim Editable
+        confirmEditable();
         // Make the HTTP request to save in the backend
-
         const res = await mutateRow(newRow);
         setSnackbar({ children: 'Editing successfully saved', severity: 'success' });
         const response = await fetch('/api/account/PUT_account', {
@@ -88,6 +88,7 @@ export const DataGridDemo = () => {
             },
             body: JSON.stringify(res),
         });
+
         return res;
     },
         [mutateRow],
@@ -107,13 +108,13 @@ export const DataGridDemo = () => {
         //     ` ${params.row.Name || ''} ${params.row.SureName || ''}`,
         // },
 
-        { field: 'Prefix', headerName: 'คำนำหน้า', width: 60, editable: true },
+        { field: 'Prefix', headerName: 'คำนำหน้า', width: 100, editable: true },
         { field: 'Name', headerName: 'ชื่อ', width: 100, editable: true },
         { field: 'SureName', headerName: 'นามสกุล', width: 100, editable: true },
         { field: 'EnrollNumber', headerName: 'EnrollNumber', width: 110, sortable: false, editable: true },
         { field: 'EmployeeCode', headerName: 'EmployeeCode', width: 100, editable: true },
-        { field: 'Status', headerName: 'สถานะ', width: 70, editable: true },
-        { field: 'DeptID', headerName: 'แผนก', width: 50, editable: true },
+        { field: 'Status', headerName: 'สถานะ', width: 100, editable: true },
+        { field: 'DeptID', headerName: 'แผนก', width: 100, editable: true },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -123,16 +124,7 @@ export const DataGridDemo = () => {
                 <RoomsActions params={{ ...params.row }} />
             ),
         },
-        // {
-        //     field: 'Editable',
-        //     headerName: 'Edit',
-        //     type: 'actions',
-        //     renderCell: (params: GridRenderCellParams) => (
-        //         <EditEmployee params={{ ...params.row }} />
-        //     ),
-        // },
     ];
-
 
     useEffect(() => {
         const fetchEmployeeData = async () => {
@@ -153,7 +145,6 @@ export const DataGridDemo = () => {
         fetchEmployeeData();
       }, []);
 
-
     function CustomToolbar() {
         return (
             <GridToolbarContainer>
@@ -168,7 +159,6 @@ export const DataGridDemo = () => {
             </GridToolbarContainer>
         );
     }
-
 
     const csvOptions = {
         utf8WithBom: true,
@@ -220,8 +210,6 @@ export const DataGridDemo = () => {
             // //checkboxSelection
             // disableRowSelectionOnClick
             // //exportOptions= {csvOptions}
-            // onRowEditCommit={editHandler}
-            // setEditCellValue
 
             />
             {!!snackbar && (
