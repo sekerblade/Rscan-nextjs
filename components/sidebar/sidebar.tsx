@@ -113,6 +113,12 @@ export const SidebarWrapper = () => {
                         title="ประกาศข่าวสาร"
                         icon={<ProductsIcon />}
                      />
+                     <SidebarItem
+                        isActive={router.pathname === '/login'}
+                        title="login page"
+                        icon={<CustomersIcon />}
+                        href="login"
+                     />
                   </SidebarMenu>
                   <SidebarMenu title="Updates">
                      <SidebarItem
@@ -120,6 +126,7 @@ export const SidebarWrapper = () => {
                         title="Changelog"
                         icon={<ChangeLogIcon />}
                      />
+
                   </SidebarMenu>
                </Sidebar.Body>
                <Sidebar.Footer>

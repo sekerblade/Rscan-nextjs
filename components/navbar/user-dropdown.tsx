@@ -1,8 +1,18 @@
-import {Avatar, Dropdown, Navbar, Text} from '@nextui-org/react';
+import { useRouter } from 'next/router';
+import { Avatar, Dropdown, Navbar, Text } from '@nextui-org/react';
 import React from 'react';
-import {DarkModeSwitch} from './darkmodeswitch';
+import { DarkModeSwitch } from './darkmodeswitch';
 
 export const UserDropdown = () => {
+   const router = useRouter();
+
+   const handleLogout = () => {
+      // Perform any logout logic here, such as clearing authentication tokens or session data
+
+      // Redirect to the login page after logout
+      router.push("/login"); // Replace "/login" with the actual login page route
+   };
+
    return (
       <Dropdown placement="bottom-right">
          <Navbar.Item>
@@ -18,13 +28,13 @@ export const UserDropdown = () => {
          </Navbar.Item>
          <Dropdown.Menu
             aria-label="User menu actions"
-            onAction={(actionKey) => console.log({actionKey})}
+            onAction={(actionKey) => console.log({ actionKey })}
          >
-            <Dropdown.Item key="profile" css={{height: '$18'}}>
-               <Text b color="inherit" css={{d: 'flex'}}>
+            <Dropdown.Item key="profile" css={{ height: '$18' }}>
+               <Text b color="inherit" css={{ d: 'flex' }}>
                   Signed in as
                </Text>
-               <Text b color="inherit" css={{d: 'flex'}}>
+               <Text b color="inherit" css={{ d: 'flex' }}>
                   zoey@example.com
                </Text>
             </Dropdown.Item>
@@ -40,8 +50,24 @@ export const UserDropdown = () => {
             <Dropdown.Item key="help_and_feedback" withDivider>
                Help & Feedback
             </Dropdown.Item>
-            <Dropdown.Item key="logout" withDivider color="error">
-               Log Out
+            <Dropdown.Item key="logout" withDivider>
+               <button
+                  onClick={handleLogout}
+                  style={{
+                     display: 'flex',
+                     width: '100%',
+                     justifyContent: 'flex-start',
+                     alignItems: 'center',
+                     padding: '8px 16px',
+                     backgroundColor: 'transparent',
+                     border: 'none',
+                     cursor: 'pointer',
+                  }}
+               >
+                  <Text color="error" b>
+                     Log Out
+                  </Text>
+               </button>
             </Dropdown.Item>
             <Dropdown.Item key="switch" withDivider>
                <DarkModeSwitch />
