@@ -1,27 +1,33 @@
+import React, { useState } from "react";
+import { Flex } from "../styles/flex";
 import {
   Button,
-  Divider,
-  Input,
+  Select,
+  SelectChangeEvent,
+  FormControl,
+  FormHelperText,
+  MenuItem,
+  InputLabel,
   Modal,
-  Text,
-  Radio,
-  Dropdown,
-} from "@nextui-org/react";
-import React from "react";
-import { Flex } from "../styles/flex";
-import { useState } from 'react';
+  Box,
+  Typography,
+  TextField
+} from "@mui/material";
+import style from "styled-jsx/style";
 
 export const AddUser = () => {
-  const [visible, setVisible] = React.useState(false);
-  const handler = () => setVisible(true);
-  const [selected, setSelected] = React.useState(new Set(["คำนำหน้า"]));
-  const selectedValue = React.useMemo(
-    () => Array.from(selected).join(", ").replaceAll("_", " "),
-    [selected]
-  );
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const closeHandler = () => {
-    setVisible(false);
+    setOpen(false);
     console.log("closed");
   };
 
@@ -31,7 +37,7 @@ export const AddUser = () => {
   const [status, setStatus] = useState("")
   const [dept, setDept] = useState("")
   const [empcode, setEmpCode] = useState("3333")
-  const [prefix, setPrefix] = useState("นาย")
+  const [prefix, setPrefix] = useState(age)
 
   const formAddEmployee = {
     Prefix: prefix,
@@ -43,7 +49,7 @@ export const AddUser = () => {
     DeptID: dept,
   }
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async () => {
 
     try {
       const response = await fetch('/api/account/POST_account', {
@@ -74,14 +80,117 @@ export const AddUser = () => {
     closeHandler();
   };
 
-
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    height: 500,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
   return (
-    <div>
-      <Button auto onClick={handler}>
-        เพิ่มพนักงาน
-      </Button>
+    <>
+      <Button variant="contained" onClick={handleOpen} >เพิ่มพนักงาน</Button>
       <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Flex
+            direction={"column"}
+            css={{
+              flexWrap: "wrap",
+              gap: "$8",
+              "@lg": { flexWrap: "nowrap", gap: "$12" },
+            }}
+          >
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <Select
+                value={age}
+                onChange={({ target }) => setPrefix(target?.value)}
+                displayEmpty
+                inputProps={{ 'aria-label': 'Without label' }}
+              >
+                <em>คำนำหน้า</em>
+                <MenuItem value={"นาย"}>นาย</MenuItem>
+                <MenuItem value={"นาง"}>นาง</MenuItem>
+                <MenuItem value={"นางสาว"}>นางสาว</MenuItem>
+              </Select>
+              <FormHelperText>คำนำหน้า</FormHelperText>
+            </FormControl>
+            <Flex
+              css={{
+                gap: "$10",
+                flexWrap: "wrap",
+                "@lg": { flexWrap: "nowrap" },
+              }}
+            >
+              <TextField
+                id="outlined-basic"
+                label="ชื่อจริง"
+                variant="outlined"
+                value={firstname}
+                onChange={({ target }) => setFirstName(target?.value)} />
+              <TextField
+                id="outlined-basic"
+                label="นามสกุล"
+                variant="outlined"
+                value={lastname}
+                onChange={({ target }) => setLastname(target?.value)} />
+            </Flex>
+
+            <Flex
+              css={{
+                gap: "$10",
+                flexWrap: "wrap",
+                "@lg": { flexWrap: "nowrap" },
+              }}
+            >
+
+              <TextField
+                id="outlined-basic"
+                label="Enrollnumber"
+                variant="outlined"
+                value={enrollnum}
+                onChange={({ target }) => setEnrollnum(target?.value)} />
+              <TextField
+                id="outlined-basic"
+                label="สถานะ"
+                variant="outlined"
+                value={status}
+                onChange={({ target }) => setStatus(target?.value)} />
+
+            </Flex>
+            <Flex
+              css={{
+                gap: "$10",
+                flexWrap: "wrap",
+                "@lg": { flexWrap: "nowrap" },
+              }}
+            >
+              <TextField
+                id="outlined-basic"
+                label="แผนก"
+                variant="outlined"
+                value={dept}
+                onChange={({ target }) => setDept(target?.value)} />
+            </Flex >
+            <Button variant="contained" onClick={handleSubmit}>Sumit</Button>
+          </Flex >
+        </Box>
+      </Modal>
+
+    </>
+  );
+};
+/* <Modal
         closeButton
         aria-labelledby="modal-title"
         width="800px"
@@ -103,6 +212,22 @@ export const AddUser = () => {
               "@lg": { flexWrap: "nowrap", gap: "$12" },
             }}
           >
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <Select
+                value={age}
+                onChange={handleChange}
+                displayEmpty
+                inputProps={{ 'aria-label': 'Without label' }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+              <FormHelperText>Without label</FormHelperText>
+            </FormControl>
             <Flex
               css={{
                 gap: "$10",
@@ -111,26 +236,7 @@ export const AddUser = () => {
               }}
             >
 
-              <Dropdown>
-                <Text>
-                  คำนำหน้า
-                  <Dropdown.Button flat color="default" css={{ tt: "capitalize" }}>
-                    {selectedValue}
-                  </Dropdown.Button>
-                </Text>
-                <Dropdown.Menu
-                  variant="light"
-                  aria-label="Single selection actions"
-                  disallowEmptySelection
-                  selectionMode="single"
-                  selectedKeys={selected}
-                //onSelectionChange={setSelected}
-                >
-                  <Dropdown.Item key="นาย">นาย</Dropdown.Item>
-                  <Dropdown.Item key="นาง">นาง</Dropdown.Item>
-                  <Dropdown.Item key="นางสาว">นางสาว</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+
               <Input
                 label="ชื่อจริง"
                 value={firstname}
@@ -205,17 +311,13 @@ export const AddUser = () => {
                 fullWidth
                 size="lg"
                 placeholder="Company"
-              /> */}
-            </Flex>
-          </Flex>
-        </Modal.Body>
+              /> }
+            </Flex >
+          </Flex >
+        </Modal.Body >
         <Divider css={{ my: "$5" }} />
         <Modal.Footer>
-          <Button auto onClick={handleSubmit}>
-            เพิ่ม
-          </Button>
+          <Button variant="contained" onClick={handleSubmit}>Sumit</Button>
         </Modal.Footer>
-      </Modal>
-    </div>
-  );
-};
+      </Modal >
+*/
