@@ -10,10 +10,9 @@ import { HouseIcon } from '../icons/breadcrumb/house-icon';
 import { UsersIcon } from '../icons/breadcrumb/users-icon';
 import { SettingsIcon } from '../icons/sidebar/settings-icon';
 import { Flex } from '../styles/flex';
-import { TableWrapper } from '../table/table';
 import { AddUser } from './add-user';
 import { DataGridDemo } from '../tables/demoDataGrid';
-
+import { BasicSelect } from '../filterBar/filterSelect'
 import Head from 'next/head';
 
 export const Accounts = () => {
@@ -22,6 +21,7 @@ export const Accounts = () => {
          <Head>
             <title>ข้อมูลพนักงาน</title>
          </Head>
+
          <Flex
             css={{
                'mt': '$5',
@@ -61,13 +61,13 @@ export const Accounts = () => {
                wrap={'wrap'}
             >
                <Flex direction={'row'} css={{ gap: '$6' }} wrap={'wrap'}>
-
                   <AddUser />
 
                </Flex>
             </Flex>
+            <BasicSelect />
+            <DataGridDemo />
          </Flex>
-         <DataGridDemo />
 
       </>
    );

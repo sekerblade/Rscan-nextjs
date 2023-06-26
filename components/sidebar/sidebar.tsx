@@ -56,14 +56,16 @@ export const SidebarWrapper = () => {
                   />
                   <SidebarMenu title="ตั้งค่าพื้นฐาน">
                      <SidebarItem
-                        isActive={router.pathname === '/customers'}
-                        title="รายงานตามวัน"
+                        isActive={router.pathname === '/worktime'}
+                        title="ข้อมูลการทำงาน"
                         icon={<CustomersIcon />}
+                        href="worktime"
                      />
                      <SidebarItem
-                        isActive={router.pathname === '/payments'}
-                        title="รายงานตามช่วงเวลา"
+                        isActive={router.pathname === '/wtManagement'}
+                        title="จัดการเวลากะการทำงาน"
                         icon={<PaymentsIcon />}
+                        href='wtManagement'
                      />
                      <CollapseItems
                         icon={<BalanceIcon />}
@@ -81,7 +83,7 @@ export const SidebarWrapper = () => {
                   <SidebarMenu title="General">
                      <SidebarItem
                         isActive={router.pathname === '/department'}
-                        title="องค์กร / สาขา / แผนก"
+                        title="บริหารงานองค์กร"
                         icon={<DevIcon />}
                         href="department"
                      />
@@ -97,7 +99,7 @@ export const SidebarWrapper = () => {
                      />
                      <SidebarItem
                         isActive={router.pathname === '/accounts'}
-                        title="พนักงาน"
+                        title="บริหารข้อมูลพนักงาน"
                         icon={<AccountsIcon />}
                         href="accounts"
                      />
@@ -111,6 +113,12 @@ export const SidebarWrapper = () => {
                         title="ประกาศข่าวสาร"
                         icon={<ProductsIcon />}
                      />
+                     <SidebarItem
+                        isActive={router.pathname === '/login'}
+                        title="login page"
+                        icon={<CustomersIcon />}
+                        href="login"
+                     />
                   </SidebarMenu>
                   <SidebarMenu title="Updates">
                      <SidebarItem
@@ -118,6 +126,7 @@ export const SidebarWrapper = () => {
                         title="Changelog"
                         icon={<ChangeLogIcon />}
                      />
+
                   </SidebarMenu>
                </Sidebar.Body>
                <Sidebar.Footer>
