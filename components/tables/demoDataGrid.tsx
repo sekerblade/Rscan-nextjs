@@ -211,7 +211,11 @@ export const DataGridDemo = () => {
         <Grid
           item
           xs={6}
+<<<<<<< Updated upstream
           sx={{ display: "flex", justifyContent: "flex-end", margin: 0}}
+=======
+          sx={{ display: "flex", justifyContent: "flex-end", margin: 1}}
+>>>>>>> Stashed changes
         >
           <AddUser />
         </Grid>
