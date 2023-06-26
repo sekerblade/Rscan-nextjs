@@ -41,7 +41,6 @@ function MyApp({ Component, pageProps }: AppProps) {
          }}
       >
          <NextUIProvider>
-
             {router.pathname === '/login' ? (
                <LoginPage />
             ) : (
@@ -49,7 +48,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <Component {...pageProps} />
                </Layout>
             )}
-
          </NextUIProvider>
       </NextThemesProvider>
    );

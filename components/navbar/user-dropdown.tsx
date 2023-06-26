@@ -10,7 +10,14 @@ export const UserDropdown = () => {
       // Perform any logout logic here, such as clearing authentication tokens or session data
 
       // Redirect to the login page after logout
-      router.push("/login"); // Replace "/login" with the actual login page route
+      if (typeof window !== 'undefined') {
+         if (router.replace) {
+            router.replace('/login');
+         } else {
+            window.location.replace('/login');
+         }
+      }
+
    };
 
    return (
