@@ -16,7 +16,7 @@ import Head from 'next/head';
 
 export const Accounts = () => {
    return (
-      <>
+      <div>
          <Head>
             <title>ข้อมูลพนักงาน</title>
          </Head>
@@ -50,8 +50,8 @@ export const Accounts = () => {
                </Crumb>
             </Breadcrumbs>
             <Text>ข้อมูลพนักงาน</Text>
-               <MuiDrawer/> 
+            <MuiDrawer/> 
          </Flex>
-      </>
+      </div>
    );
 };

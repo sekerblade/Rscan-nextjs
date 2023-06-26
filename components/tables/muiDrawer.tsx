@@ -9,7 +9,7 @@ export const MuiDrawer = () => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      {/* Sizebar ที่เคลื่อนที่ไปด้านขวา */}
+      {/* Sidebar ที่เคลื่อนที่ไปด้านขวา */}
       <Drawer
         anchor="right"
         open={isDrawerOpen}
@@ -17,20 +17,15 @@ export const MuiDrawer = () => {
       >
         <Box p={2} width="250px" textAlign="center" role="presentation">
           <Typography variant="h6" component="div">
-            side panel
+            Side Panel
           </Typography>
         </Box>
       </Drawer>
 
       {/* เนื้อหาหลัก */}
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, p: 0, display: "flex", flexDirection: "row" }}
-      >
+      <Box component="main" sx={{ flexGrow: 1, p: 0, display: "flex", flexDirection: "row" }}>
         <Box sx={{ flexGrow: 1 }}>
-          <Typography paragraph sx={{ flexGrow: 1 }}>
-            <DataGridDemo />
-          </Typography>
+          <DataGridDemo />
         </Box>
       </Box>
     </Box>

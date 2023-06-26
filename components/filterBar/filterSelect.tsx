@@ -10,9 +10,20 @@ import CheckIcon from '@mui/icons-material/Check';
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 
-export const BasicSelect = ({ anyPrefix, onPrefixFilters }: { anyPrefix: Array<string>, onPrefixFilters: Function }) => {
+export const BasicSelect = ({
+  anyPrefix,
+  onPrefixFilters,
+  anyDept,
+  onDeptFilters,
+}: {
+  anyPrefix: Array<string>;
+  onPrefixFilters: Function;
+  anyDept: Array<string>;
+  onDeptFilters: Function;
+}) => {
   const [filter, setFilters] = useState({
     prefix: [],
+    dept: [],
     Name: "",
     SureName: "",
   });
@@ -25,11 +36,10 @@ export const BasicSelect = ({ anyPrefix, onPrefixFilters }: { anyPrefix: Array<s
     }));
     switch (field) {
       case "prefix":
-        if (value.length === 0) {
-          onPrefixFilters([]); // แสดงรายการพนักงานทั้งหมดเมื่อไม่มีการเลือกคำนำหน้า
-        } else {
-          onPrefixFilters(value);
-        }
+        onPrefixFilters(value);
+        break;
+      case "dept":
+        onDeptFilters(value);
         break;
       default:
         break;
@@ -38,7 +48,7 @@ export const BasicSelect = ({ anyPrefix, onPrefixFilters }: { anyPrefix: Array<s
 
   return (
     <div>
-      <FormControl variant="standard" sx={{ p:0 ,mb: 0, minWidth: 100 } }>
+      <FormControl variant="standard" sx={{ p: 0, mb: 0, minWidth: 100 }}>
         <InputLabel id="demo-multiple-chip-label">คำนำหน้า</InputLabel>
         <Select
           multiple
@@ -53,13 +63,40 @@ export const BasicSelect = ({ anyPrefix, onPrefixFilters }: { anyPrefix: Array<s
               ))}
             </Stack>
           )}
-          native={false}// เปลี่ยนไอคอนเป็น CheckIcon
+          native={false}
         >
-          {anyPrefix && anyPrefix.map((prefix) => (
-            <MenuItem key={prefix} value={prefix}>
-              {prefix}
-            </MenuItem>
-          ))}
+          {anyPrefix &&
+            anyPrefix.map((prefix) => (
+              <MenuItem key={prefix} value={prefix}>
+                {prefix}
+              </MenuItem>
+            ))}
+        </Select>
+      </FormControl>
+
+      <FormControl variant="standard" sx={{ p: 0, mb: 0, minWidth: 100 }}>
+        <InputLabel id="demo-multiple-chip-label">แผนก</InputLabel>
+        <Select
+          multiple
+          labelId="demo-multiple-chip-label"
+          id="dept"
+          value={filter.dept}
+          onChange={handleChange("dept")}
+          renderValue={(selected) => (
+            <Stack direction="row" spacing={1}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} />
+              ))}
+            </Stack>
+          )}
+          native={false}
+        >
+          {anyDept &&
+            anyDept.map((dept) => (
+              <MenuItem key={dept} value={dept}>
+                {dept}
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
     </div>

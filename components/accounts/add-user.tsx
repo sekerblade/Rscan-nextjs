@@ -95,7 +95,7 @@ export const AddUser = () => {
 
   return (
     <>
-      <Button variant="contained" onClick={handleOpen} >เพิ่มพนักงาน</Button>
+      <Button variant="contained" onClick={handleOpen}>เพิ่มพนักงาน</Button>
       <Modal
         open={open}
         onClose={handleClose}
