@@ -11,6 +11,7 @@ import {
   GridRowModel,
 } from "@mui/x-data-grid";
 import {
+<<<<<<< Updated upstream
   Box,
   CircularProgress,
   Fab,
@@ -19,12 +20,33 @@ import {
   AlertProps,
   Modal,
   Typography,
+=======
+    Box,
+    CircularProgress,
+    Fab,
+    Snackbar,
+    Alert,
+    AlertProps,
+    Modal,
+    Typography,
+    Dialog,
+    IconButton,
+    Tooltip,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    Button,
+>>>>>>> Stashed changes
 } from "@mui/material";
 import { RoomsActions } from "./RoomsActions";
 import { Employee } from "../../types/employee";
 import { BasicSelect } from "../filterBar/filterSelect";
 import { AddUser } from "../accounts/add-user";
 import { Grid } from "@mui/material";
+<<<<<<< Updated upstream
+=======
+import { Edit } from '@mui/icons-material';
+>>>>>>> Stashed changes
 
 export const DataGridDemo = () => {
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
@@ -78,6 +100,10 @@ export const DataGridDemo = () => {
         }),
       []
     );
+<<<<<<< Updated upstream
+=======
+};
+>>>>>>> Stashed changes
   };
 
   const mutateRow = useFakeMutation();
@@ -212,7 +238,11 @@ export const DataGridDemo = () => {
           item
           xs={6}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
           sx={{ display: "flex", justifyContent: "flex-end", margin: 0}}
+=======
+          sx={{ display: "flex", justifyContent: "flex-end", margin: 1}}
+>>>>>>> Stashed changes
 =======
           sx={{ display: "flex", justifyContent: "flex-end", margin: 1}}
 >>>>>>> Stashed changes
