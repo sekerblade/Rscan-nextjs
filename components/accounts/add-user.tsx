@@ -14,6 +14,7 @@ import {
   TextField
 } from "@mui/material";
 import style from "styled-jsx/style";
+import { Employee } from "../../types/employee";
 
 export const AddUser = () => {
   const [age, setAge] = React.useState('');
@@ -21,6 +22,17 @@ export const AddUser = () => {
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
   };
+
+  const [test, setTest] = useState<Employee>({
+    ID: 0,
+    EnrollNumber: 0,
+    Prefix: 'test',
+    Name: 'test',
+    SureName: 'test',
+    EmployeeCode: 'test',
+    Status: 0,
+    DeptID: 0,
+  });
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
