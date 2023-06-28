@@ -14,7 +14,6 @@ import { AddUser } from './add-user';
 import { DataGridDemo } from '../tables/demoDataGrid';
 import { BasicSelect } from '../filterBar/filterSelect'
 import Head from 'next/head';
-
 export const Accounts = () => {
    return (
       <>
@@ -62,7 +61,6 @@ export const Accounts = () => {
             >
                <Flex direction={'row'} css={{ gap: '$6' }} wrap={'wrap'}>
                   <AddUser />
-
                </Flex>
             </Flex>
             <BasicSelect />

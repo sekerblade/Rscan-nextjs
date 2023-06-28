@@ -215,10 +215,10 @@ export const DataGridDemo = () => {
                 pageSizeOptions={[10, 15, 25]}
                 slots={{ toolbar: CustomToolbar }}
                 slotProps={{
-                    columnsPanel: {
-                        disableHideAllButton: true,
-                        disableShowAllButton: true,
-                    },
+                    // columnsPanel: {
+                    //     disableHideAllButton: true,
+                    //     disableShowAllButton: true,
+                    // },
                     //printOptions: { disableToolbarButton: true }
                 }}
                 initialState={{
