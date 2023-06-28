@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import { SearchOptions } from './search'
 import Button from '@mui/material/Button';
 import { Flex } from '../styles/flex';
+import { TextField } from '@mui/material';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -86,6 +87,15 @@ export const TabOptions = () => {
                 <TabPanel value={value} index={1}>
                     รายงานผลรวม
                     <SearchOptions />
+                    <br />
+                    <TextField
+                        type="text"
+                        className="form-control"
+                        id="reservation"
+                        name="reservation"
+                        value="01/06/2023 - 30/06/2023">
+
+                    </TextField>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     รายงาน I/O
