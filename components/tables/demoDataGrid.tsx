@@ -65,62 +65,26 @@ export const DataGridDemo = () => {
 
     const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    // const confirmEditable = () => {
-
-    //     return (
-    //         <>
-    //             <Dialog
-    //                 maxWidth="xs"
-    //                 open={open}
-    //                 onClose={handleClose}
-    //             >
-    //                 <DialogTitle>Are you sure?</DialogTitle>
-    //                 <DialogContent dividers>
-    //                     Hello world
-    //                 </DialogContent>
-    //                 <DialogActions>
-    //                     <Button >
-    //                         No
-    //                     </Button>
-    //                     <Button >Yes</Button>
-    //                 </DialogActions>
-    //             </Dialog>
-    //         </>
-    //     );
-    // };
-
-    const [activate, setActivate] = useState(false)
-
-    const onEditStart = () => {
-
-    }
 
     const processRowUpdate = React.useCallback(async (newRow: GridRowModel) => {
         const res = await mutateRow(newRow);
         setSnackbar({ children: 'Editing successfully saved', severity: 'success' });
         // This is Function to Confrim Editable
-        if (activate) {
-            // Make the HTTP request to save in the backend
-            const response = await fetch('/api/account/PUT_account', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(res),
-            });
-        }
+
+        // Make the HTTP request to save in the backend
+        const response = await fetch('/api/account/PUT_account', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(res),
+        });
+
 
         return res;
     },
-        [activate, mutateRow],
+        [mutateRow],
     );
 
     const columns: GridColDef[] = [
@@ -211,7 +175,6 @@ export const DataGridDemo = () => {
                 rows={employeeData}
                 columns={columns}
                 processRowUpdate={processRowUpdate}
-                onRowEditStart={onEditStart}
                 pageSizeOptions={[10, 15, 25]}
                 slots={{ toolbar: CustomToolbar }}
                 slotProps={{
