@@ -90,17 +90,6 @@ export const DataGridDemo = () => {
     const columns: GridColDef[] = [
 
         { field: 'ID', headerName: 'ID', width: 50 },
-
-        // {
-        //   field: 'fullName',
-        //   headerName: 'ชื่อเต็ม',
-        //   description: 'This column has a value getter and is not sortable.',
-        //   sortable: true,
-        //   width: 160,
-        //   valueGetter: (params: GridValueGetterParams) =>
-        //     ` ${params.row.Name || ''} ${params.row.SureName || ''}`,
-        // },
-
         { field: 'Prefix', headerName: 'คำนำหน้า', width: 100, editable: true },
         { field: 'Name', headerName: 'ชื่อ', width: 100, editable: true },
         { field: 'SureName', headerName: 'นามสกุล', width: 100, editable: true },
@@ -200,9 +189,9 @@ export const DataGridDemo = () => {
                     },
                 }}
 
-            // //checkboxSelection
-            // disableRowSelectionOnClick
-            // //exportOptions= {csvOptions}
+                checkboxSelection
+            //disableRowSelectionOnClick
+            //exportOptions= {csvOptions}
 
             />
             {!!snackbar && (
