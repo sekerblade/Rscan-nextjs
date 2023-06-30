@@ -21,6 +21,9 @@
       "axios": "^1.4.0",
       "caniuse-lite": "^1.0.30001502",
       "csv-parser": "^3.0.0",
+      "file-saver": "^2.0.5",
+      "jspdf": "^2.5.1",
+      "jspdf-autotable": "^3.5.29",
       "mysql2": "^3.3.5",
       "next": "12.3.0",
       "next-themes": "^0.2.1",
@@ -29,7 +32,8 @@
       "react-apexcharts": "^1.4.0",
       "react-dom": "18.2.0",
       "styled-components": "^5.3.11",
-      "xlsx": "^0.18.5"
+      "xlsx": "^0.18.5",
+      "xml-js": "^1.6.11"
    },
    "devDependencies": {
       "@types/file-saver": "^2.0.5",

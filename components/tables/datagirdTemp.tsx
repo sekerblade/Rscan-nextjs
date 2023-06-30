@@ -164,7 +164,6 @@ export const DataGridDemo = () => {
             </GridToolbarContainer>
         );
     }
-
     const csvOptions = {
         utf8WithBom: true,
     };
@@ -203,6 +202,7 @@ export const DataGridDemo = () => {
             // //checkboxSelection
             // disableRowSelectionOnClick
             // //exportOptions= {csvOptions}
+
             />
             {!!snackbar && (
                 <Snackbar
