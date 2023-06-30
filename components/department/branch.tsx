@@ -54,7 +54,19 @@ export const Branch = () => {
 
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography> {item.department_name}</Typography>
+
+                                <Accordion>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon />}
+                                        aria-controls="panel1a-content"
+                                        id="panel1a-header"
+                                    >
+                                        <Typography> {item.department_name}</Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+
+                                    </AccordionDetails>
+                                </Accordion>
                             </AccordionDetails>
                         </Accordion>
                     </Grid>)}

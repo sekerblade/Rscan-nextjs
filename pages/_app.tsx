@@ -29,7 +29,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       if (pathname === '/') {
          router.push('/login');
       }
-   }), [];
+   }, []);
+
 
    return (
       <NextThemesProvider
