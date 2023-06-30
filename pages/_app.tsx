@@ -31,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       }
    }, []);
 
+
    return (
       <NextThemesProvider
          defaultTheme="system"
