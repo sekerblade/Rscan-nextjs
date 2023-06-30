@@ -65,78 +65,31 @@ export const DataGridDemo = () => {
 
     const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    // const confirmEditable = () => {
-
-    //     return (
-    //         <>
-    //             <Dialog
-    //                 maxWidth="xs"
-    //                 open={open}
-    //                 onClose={handleClose}
-    //             >
-    //                 <DialogTitle>Are you sure?</DialogTitle>
-    //                 <DialogContent dividers>
-    //                     Hello world
-    //                 </DialogContent>
-    //                 <DialogActions>
-    //                     <Button >
-    //                         No
-    //                     </Button>
-    //                     <Button >Yes</Button>
-    //                 </DialogActions>
-    //             </Dialog>
-    //         </>
-    //     );
-    // };
-
-    const [activate, setActivate] = useState(false)
-
-    const onEditStart = () => {
-
-    }
 
     const processRowUpdate = React.useCallback(async (newRow: GridRowModel) => {
         const res = await mutateRow(newRow);
         setSnackbar({ children: 'Editing successfully saved', severity: 'success' });
         // This is Function to Confrim Editable
-        if (activate) {
-            // Make the HTTP request to save in the backend
-            const response = await fetch('/api/account/PUT_account', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(res),
-            });
-        }
+
+        // Make the HTTP request to save in the backend
+        const response = await fetch('/api/account/PUT_account', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(res),
+        });
+
 
         return res;
     },
-        [activate, mutateRow],
+        [mutateRow],
     );
 
     const columns: GridColDef[] = [
 
         { field: 'ID', headerName: 'ID', width: 50 },
-
-        // {
-        //   field: 'fullName',
-        //   headerName: 'ชื่อเต็ม',
-        //   description: 'This column has a value getter and is not sortable.',
-        //   sortable: true,
-        //   width: 160,
-        //   valueGetter: (params: GridValueGetterParams) =>
-        //     ` ${params.row.Name || ''} ${params.row.SureName || ''}`,
-        // },
-
         { field: 'Prefix', headerName: 'คำนำหน้า', width: 100, editable: true },
         { field: 'Name', headerName: 'ชื่อ', width: 100, editable: true },
         { field: 'SureName', headerName: 'นามสกุล', width: 100, editable: true },
@@ -211,7 +164,6 @@ export const DataGridDemo = () => {
                 rows={employeeData}
                 columns={columns}
                 processRowUpdate={processRowUpdate}
-                onRowEditStart={onEditStart}
                 pageSizeOptions={[10, 15, 25]}
                 slots={{ toolbar: CustomToolbar }}
                 slotProps={{
@@ -237,9 +189,9 @@ export const DataGridDemo = () => {
                     },
                 }}
 
-            // //checkboxSelection
-            // disableRowSelectionOnClick
-            // //exportOptions= {csvOptions}
+                checkboxSelection
+            //disableRowSelectionOnClick
+            //exportOptions= {csvOptions}
 
             />
             {!!snackbar && (

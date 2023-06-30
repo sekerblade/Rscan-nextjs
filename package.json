@@ -11,6 +11,7 @@
    "dependencies": {
       "@emotion/react": "^11.11.1",
       "@emotion/styled": "^11.11.0",
+      "@gsebdev/react-simple-datepicker": "^1.0.21",
       "@mui/icons-material": "^5.11.16",
       "@mui/material": "^5.13.5",
       "@mui/styled-engine-sc": "^5.12.0",
@@ -26,6 +27,7 @@
       "papaparse": "^5.4.1",
       "react": "18.2.0",
       "react-apexcharts": "^1.4.0",
+      "react-datepicker": "^4.14.1",
       "react-dom": "18.2.0",
       "styled-components": "^5.3.11",
       "xlsx": "^0.18.5"
@@ -35,6 +37,7 @@
       "@types/node": "18.7.18",
       "@types/papaparse": "^5.3.7",
       "@types/react": "18.0.20",
+      "@types/react-datepicker": "^4.11.2",
       "@types/react-dom": "18.0.6",
       "eslint": "8.23.1",
       "eslint-config-next": "12.3.0",
