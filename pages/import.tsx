@@ -89,7 +89,7 @@ export default function App() {
         for (var j = 0; j < columns.length; ++j) if (rowNew[j] != null) rows[rowNew.id][j] = isNaN(+rowNew[j]) ? rowNew[j] : +rowNew[j];
         setRows([...rows]);
         return rowNew;
-    }, [columns, rows]);
+    }, [columns, rows, sheets, workBook]);
 
 
     /* method is called when the export format is changed */
@@ -101,7 +101,7 @@ export default function App() {
         setExportFormat(format);
     };
 
-    const handleImport = async () => {
+    const handleImport = useCallback(async () => {
         if (file) {
             const fileData = await file.arrayBuffer();
             await handleAB(fileData);
@@ -137,11 +137,11 @@ export default function App() {
                 console.error('Error while saving data to the database');
             }
         }
-    };
+    }, [file]);
 
     useEffect(() => {
         handleImport();
-    }, [file]);
+    }, [handleImport]); // Include 'handleImport' in the dependency array
 
     return (
         <>

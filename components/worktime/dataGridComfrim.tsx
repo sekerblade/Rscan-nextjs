@@ -24,29 +24,34 @@ const columns: GridColDef[] = [
 
 
 export const DataGridComfrim: React.FC<DataGridComfrimProps> = ({ selectedEmployeeIds }) => {
-    const [employeeData, setEmployeeData] = useState<Employee[]>([]);
+    const [rows, setRows] = useState<Employee[]>([]);
 
     useEffect(() => {
         const fetchEmployeeData = async () => {
             try {
                 const response = await fetch('/api/employee');
                 const data = await response.json();
-                const employeesWithId = data.map((employee: Employee, index: number) => ({
+
+                // Assign a unique `id` to each employee data object
+                const employeesWithId = data.map((employee: Employee) => ({
                     ...employee,
-                    id: index + 0,
+                    id: employee.ID, // Assuming `ID` is the unique identifier
                 }));
-                setEmployeeData(employeesWithId);
+
+                // Filter the data based on the selectedEmployeeIds
+                const filteredData = employeesWithId.filter((employee: Employee) =>
+                    selectedEmployeeIds.includes(employee.ID)
+                );
+
+                setRows(filteredData);
             } catch (error) {
                 console.error('Error:', error);
             }
         };
 
         fetchEmployeeData();
-    }, []);
+    }, [selectedEmployeeIds]);
 
-    const filteredEmployeeData = employeeData.filter((employee) =>
-        selectedEmployeeIds.includes(employee.ID)
-    );
 
     return (
         <>
@@ -61,8 +66,7 @@ export const DataGridComfrim: React.FC<DataGridComfrimProps> = ({ selectedEmploy
 
                 <Box sx={{ height: 450, width: '100%' }}>
                     <DataGrid
-                        rows={filteredEmployeeData}
-                        columns={columns}
+                        rows={rows} columns={columns}
                         pageSizeOptions={[10, 15, 25]}
                     />
                 </Box>
