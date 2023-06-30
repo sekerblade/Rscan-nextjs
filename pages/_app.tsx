@@ -29,8 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       if (pathname === '/') {
          router.push('/login');
       }
-   }, []);
-
+   }, []); // Include 'router' in the dependency array
 
    return (
       <NextThemesProvider

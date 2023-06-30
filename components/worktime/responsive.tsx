@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import {
     Box,
@@ -21,6 +21,26 @@ export const Responsive = () => {
     const [dateStart, setDateStart] = useState();
     const [dateEnd, setDateEnd] = useState();
     const [selectedEmployeeIds, setSelectedEmployeeIds] = useState<number[]>([]);
+    const [employeeConfirm, setEmployeeConfirm] = useState<number[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('/api/employee');
+                const data = await response.json();
+
+                // Filter out duplicate employee IDs
+                const uniqueEmployeeIds = Array.from(new Set([...employeeConfirm, ...selectedEmployeeIds]));
+
+                setEmployeeConfirm(uniqueEmployeeIds);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        fetchData();
+    }, [selectedEmployeeIds, employeeConfirm]); // Include 'selectedEmployeeIds' and 'employeeConfirm' in the dependency array
+
 
     const handleSelectedEmployeeIdsChange = (selectedIds: number[]) => {
         setSelectedEmployeeIds(selectedIds);
@@ -151,11 +171,11 @@ export const Responsive = () => {
                         border: '1px dashed grey',
                     }}
                 >
-                    <Typography>บุคคลกรที่เลือก = {selectedEmployeeIds.join(', ')}</Typography>
+                    <Typography>บุคคลกรที่เลือก = {employeeConfirm.length} คน</Typography>
 
 
                     {/* Pass the selectedEmployeeIds as a prop to DataGridComfrim */}
-                    <DataGridComfrim selectedEmployeeIds={selectedEmployeeIds} />
+                    <DataGridComfrim selectedEmployeeIds={employeeConfirm} />
                 </Box>
             </Box>
         </>

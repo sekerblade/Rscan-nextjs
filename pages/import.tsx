@@ -31,7 +31,7 @@ export default function App() {
     const [sheets, setSheets] = useState<string[]>([]); // list of sheet names
     const [current, setCurrent] = useState<string>(""); // selected sheet
     const [file, setFile] = useState<File | null>(null);
-
+    const [exportFormat, setExportFormat] = useState(""); // selected export format
     /* called when sheet dropdown is changed */
     function selectSheet(name: string) {
         /* update workbook cache in case the current worksheet was changed */
@@ -89,9 +89,19 @@ export default function App() {
         for (var j = 0; j < columns.length; ++j) if (rowNew[j] != null) rows[rowNew.id][j] = isNaN(+rowNew[j]) ? rowNew[j] : +rowNew[j];
         setRows([...rows]);
         return rowNew;
-    }, [columns, rows]);
+    }, [columns, rows, sheets, workBook]);
 
-    const handleImport = async () => {
+
+    /* method is called when the export format is changed */
+    const handleExportFormatChange = (event: ChangeEvent<{ value: unknown }>) => {
+        const format = event.target.value as string;
+        if (format) {
+            saveFile(format);
+        }
+        setExportFormat(format);
+    };
+
+    const handleImport = useCallback(async () => {
         if (file) {
             const fileData = await file.arrayBuffer();
             await handleAB(fileData);
@@ -127,11 +137,11 @@ export default function App() {
                 console.error('Error while saving data to the database');
             }
         }
-    };
+    }, [file]);
 
     useEffect(() => {
         handleImport();
-    }, [file]);
+    }, [handleImport]); // Include 'handleImport' in the dependency array
 
     return (
         <>
@@ -148,9 +158,14 @@ export default function App() {
                     <DataGrid columns={columns} rows={rows} processRowUpdate={processRowUpdate} />
                 </div>
                 <p>Click one of the buttons to create a new file with the modified data</p>
-                <div className="flex-cont">{["xlsx", "xlsb", "xls", "csv"].map((ext) => (
-                    <button key={ext} onClick={() => saveFile(ext)}>export [.{ext}]</button>
-                ))}</div>
+                <p>Select export format:</p>
+                <select value={exportFormat} onChange={handleExportFormatChange}>
+                    <option value="">-- Select format --</option>
+                    <option value="xlsx">Excel (xlsx)</option>
+                    <option value="xlsb">Excel (xlsb)</option>
+                    <option value="xls">Excel (xls)</option>
+                    <option value="csv">CSV</option>
+                </select>
                 <button onClick={handleImport}>Import Data</button> {/* Import button added */}
             </>)}
         </>
