@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import {
     Box,
     Container,
@@ -9,37 +8,28 @@ import {
     AccordionSummary,
     AccordionDetails,
     Button,
-} from '@mui/material'
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { DataGridSelection } from './dataGridSelection';
-import { DataGridComfrim } from './dataGridComfrim';
+import { DataGridConfirm } from './dataGridConfirm';
 
 export const Responsive = () => {
-
-    const [dateStart, setDateStart] = useState();
-    const [dateEnd, setDateEnd] = useState();
+    const [dateStart, setDateStart] = useState<Date | null>(null); // Provide initial value of null
+    const [dateEnd, setDateEnd] = useState<Date | null>(null); // Provide initial value of null
     const [selectedEmployeeIds, setSelectedEmployeeIds] = useState<number[]>([]);
     const [employeeConfirm, setEmployeeConfirm] = useState<number[]>([]);
 
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('/api/employee');
-                const data = await response.json();
+        // Filter out duplicate employee IDs
+        const uniqueEmployeeIds = Array.from(
+            new Set([...employeeConfirm, ...selectedEmployeeIds])
+        );
 
-                // Filter out duplicate employee IDs
-                const uniqueEmployeeIds = Array.from(new Set([...employeeConfirm, ...selectedEmployeeIds]));
-
-                setEmployeeConfirm(uniqueEmployeeIds);
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
-
-        fetchData();
-    }, [selectedEmployeeIds, employeeConfirm]); // Include 'selectedEmployeeIds' and 'employeeConfirm' in the dependency array
+        setEmployeeConfirm(uniqueEmployeeIds);
+    }, [selectedEmployeeIds]);
 
 
     const handleSelectedEmployeeIdsChange = (selectedIds: number[]) => {
@@ -49,13 +39,15 @@ export const Responsive = () => {
     function onChangeHandler(value: any) {
         setDateStart(value[0]);
         setDateEnd(value[1]);
+    }
 
-    }
     if (selectedEmployeeIds.length === 0) {
-        console.log("im fucked")
+        console.log('im fucked');
     } else {
-        console.log("good job")
+        console.log('good job');
+        console.log(employeeConfirm)
     }
+
 
     return (
         <>
@@ -175,7 +167,11 @@ export const Responsive = () => {
 
 
                     {/* Pass the selectedEmployeeIds as a prop to DataGridComfrim */}
-                    <DataGridComfrim selectedEmployeeIds={employeeConfirm} />
+                    <DataGridConfirm selectedEmployeeIds={employeeConfirm}
+                        dateStart={dateStart}
+                        dateEnd={dateEnd} onSearch={function (): void {
+                            throw new Error('Function not implemented.');
+                        }} />
                 </Box>
             </Box>
         </>
