@@ -10,6 +10,7 @@ import {
   GridRenderCellParams,
   GridRowModel,
 } from "@mui/x-data-grid";
+<<<<<<< Updated upstream
 import {
 <<<<<<< Updated upstream
   Box,
@@ -38,14 +39,21 @@ import {
     Button,
 >>>>>>> Stashed changes
 } from "@mui/material";
+=======
+import { Box, CircularProgress, Snackbar, Alert, Grid } from "@mui/material";
+>>>>>>> Stashed changes
 import { RoomsActions } from "./RoomsActions";
 import { Employee } from "../../types/employee";
 import { BasicSelect } from "../filterBar/filterSelect";
 import { AddUser } from "../accounts/add-user";
+<<<<<<< Updated upstream
 import { Grid } from "@mui/material";
 <<<<<<< Updated upstream
 =======
 import { Edit } from '@mui/icons-material';
+>>>>>>> Stashed changes
+=======
+
 >>>>>>> Stashed changes
 
 export const DataGridDemo = () => {
@@ -107,35 +115,35 @@ export const DataGridDemo = () => {
   };
 
   const mutateRow = useFakeMutation();
+<<<<<<< Updated upstream
 
   const [snackbar, setSnackbar] = React.useState<Pick<
     AlertProps,
     "children" | "severity"
   > | null>(null);
+=======
+  const [snackbar, setSnackbar] = React.useState<
+    Pick<AlertProps, "children" | "severity"> | null
+  >(null);
+>>>>>>> Stashed changes
 
   const handleCloseSnackbar = () => setSnackbar(null);
 
-  const confirmEditable = () => {
-    return <></>;
-  };
-
   const processRowUpdate = React.useCallback(
     async (newRow: GridRowModel) => {
-      // This is Function to Confrim Editable
-      confirmEditable();
-      // Make the HTTP request to save in the backend
       const res = await mutateRow(newRow);
       setSnackbar({
         children: "Editing successfully saved",
         severity: "success",
       });
-      const response = await fetch("/api/account/PUT_account", {
+      const response = await fetch(`/api/employee/${newRow.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(res),
       });
+      // Handle the response as needed
 
       return res;
     },
@@ -176,7 +184,6 @@ export const DataGridDemo = () => {
     {
       field: "actions",
       headerName: "Actions",
-      type: "actions",
       width: 150,
       renderCell: (params: GridRenderCellParams) => (
         <RoomsActions params={{ ...params.row }} />
@@ -265,6 +272,7 @@ export const DataGridDemo = () => {
             },
             //printOptions: { disableToolbarButton: true }
           }}
+<<<<<<< Updated upstream
           initialState={{
             pagination: {
               paginationModel: {
@@ -294,6 +302,10 @@ export const DataGridDemo = () => {
             <Alert {...snackbar} onClose={handleCloseSnackbar} />
           </Snackbar>
         )}
+=======
+          onCellEditCommit={processRowUpdate}
+        />
+>>>>>>> Stashed changes
       </Box>
     </Box>
   );

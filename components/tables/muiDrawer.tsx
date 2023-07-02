@@ -1,7 +1,7 @@
 import { Drawer, Box, Typography, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
-import { DataGridDemo } from "../tables/demoDataGrid";
+import DataGridDemo from "../tables/demoDataGrid"; // Corrected import
 import { BasicSelect } from "../filterBar/filterSelect";
 
 export const MuiDrawer = () => {
