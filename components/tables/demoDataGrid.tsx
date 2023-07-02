@@ -10,62 +10,21 @@ import {
   GridRenderCellParams,
   GridRowModel,
 } from "@mui/x-data-grid";
-<<<<<<< Updated upstream
-import {
-<<<<<<< Updated upstream
-  Box,
-  CircularProgress,
-  Fab,
-  Snackbar,
-  Alert,
-  AlertProps,
-  Modal,
-  Typography,
-=======
-    Box,
-    CircularProgress,
-    Fab,
-    Snackbar,
-    Alert,
-    AlertProps,
-    Modal,
-    Typography,
-    Dialog,
-    IconButton,
-    Tooltip,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    Button,
->>>>>>> Stashed changes
-} from "@mui/material";
-=======
 import { Box, CircularProgress, Snackbar, Alert, Grid } from "@mui/material";
->>>>>>> Stashed changes
 import { RoomsActions } from "./RoomsActions";
 import { Employee } from "../../types/employee";
 import { BasicSelect } from "../filterBar/filterSelect";
 import { AddUser } from "../accounts/add-user";
-<<<<<<< Updated upstream
-import { Grid } from "@mui/material";
-<<<<<<< Updated upstream
-=======
-import { Edit } from '@mui/icons-material';
->>>>>>> Stashed changes
-=======
 
->>>>>>> Stashed changes
 
 export const DataGridDemo = () => {
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
-  const [filteredEmployeeData, setFilteredEmployeeData] = useState<Employee[]>(
-    []
-  );
+  const [filteredEmployeeData, setFilteredEmployeeData] = useState<Employee[]>([]);
   const [deptFilter, setDeptFilter] = useState<string[]>([]);
 
   const handleFilterPrefix = (prefixes: string[]) => {
     if (prefixes.length === 0) {
-      setFilteredEmployeeData(employeeData); // แสดงรายการพนักงานทั้งหมดเมื่อไม่มีการเลือกคำนำหน้า
+      setFilteredEmployeeData(employeeData);
     } else {
       const filteredData = employeeData.filter((employee) =>
         prefixes.includes(employee.Prefix)
@@ -73,6 +32,7 @@ export const DataGridDemo = () => {
       setFilteredEmployeeData(filteredData);
     }
   };
+
   const handleFilterDept = (depts: string[]) => {
     if (depts.length === 0) {
       setFilteredEmployeeData(employeeData);
@@ -108,24 +68,12 @@ export const DataGridDemo = () => {
         }),
       []
     );
-<<<<<<< Updated upstream
-=======
-};
->>>>>>> Stashed changes
   };
 
   const mutateRow = useFakeMutation();
-<<<<<<< Updated upstream
-
-  const [snackbar, setSnackbar] = React.useState<Pick<
-    AlertProps,
-    "children" | "severity"
-  > | null>(null);
-=======
   const [snackbar, setSnackbar] = React.useState<
     Pick<AlertProps, "children" | "severity"> | null
   >(null);
->>>>>>> Stashed changes
 
   const handleCloseSnackbar = () => setSnackbar(null);
 
@@ -152,17 +100,6 @@ export const DataGridDemo = () => {
 
   const columns: GridColDef[] = [
     { field: "ID", headerName: "ID", width: 50 },
-
-    // {
-    //   field: 'fullName',
-    //   headerName: 'ชื่อเต็ม',
-    //   description: 'This column has a value getter and is not sortable.',
-    //   sortable: true,
-    //   width: 160,
-    //   valueGetter: (params: GridValueGetterParams) =>
-    //     ` ${params.row.Name || ''} ${params.row.SureName || ''}`,
-    // },
-
     { field: "Prefix", headerName: "คำนำหน้า", width: 100, editable: true },
     { field: "Name", headerName: "ชื่อ", width: 100, editable: true },
     { field: "SureName", headerName: "นามสกุล", width: 100, editable: true },
@@ -218,18 +155,11 @@ export const DataGridDemo = () => {
         <GridToolbarQuickFilter />
         <GridToolbarColumnsButton />
         <GridToolbarDensitySelector />
-        <GridToolbarExport
-          csvOptions={{
-            utf8WithBom: true,
-          }}
-        />
+        <GridToolbarExport csvOptions={{ utf8WithBom: true }} />
       </GridToolbarContainer>
     );
   }
 
-  const csvOptions = {
-    utf8WithBom: true,
-  };
   return (
     <Box sx={{ mt: 1, height: 667, width: "100%" }}>
       <Grid container spacing={2}>
@@ -244,15 +174,7 @@ export const DataGridDemo = () => {
         <Grid
           item
           xs={6}
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-          sx={{ display: "flex", justifyContent: "flex-end", margin: 0}}
-=======
-          sx={{ display: "flex", justifyContent: "flex-end", margin: 1}}
->>>>>>> Stashed changes
-=======
-          sx={{ display: "flex", justifyContent: "flex-end", margin: 1}}
->>>>>>> Stashed changes
+          sx={{ display: "flex", justifyContent: "flex-end", margin: 0 }}
         >
           <AddUser />
         </Grid>
@@ -262,51 +184,27 @@ export const DataGridDemo = () => {
           editMode="row"
           rows={filteredEmployeeData}
           columns={columns}
-          processRowUpdate={processRowUpdate}
-          pageSizeOptions={[10, 15, 25]}
-          slots={{ toolbar: CustomToolbar }}
-          slotProps={{
-            columnsPanel: {
-              disableHideAllButton: true,
-              disableShowAllButton: true,
-            },
-            //printOptions: { disableToolbarButton: true }
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          checkboxSelection
+          disableSelectionOnClick
+          components={{
+            Toolbar: CustomToolbar,
           }}
-<<<<<<< Updated upstream
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 10,
-              },
-            },
-            columns: {
-              columnVisibilityModel: {
-                // Hide columns 'Prefix' and 'EmployeeCode', the other columns will remain visible
-                Prefix: false,
-                EmployeeCode: false,
-              },
-            },
-          }}
-
-          // //checkboxSelection
-          // disableRowSelectionOnClick
-          // //exportOptions= {csvOptions}
-        />
-        {!!snackbar && (
-          <Snackbar
-            open
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            onClose={handleCloseSnackbar}
-            autoHideDuration={6000}
-          >
-            <Alert {...snackbar} onClose={handleCloseSnackbar} />
-          </Snackbar>
-        )}
-=======
           onCellEditCommit={processRowUpdate}
         />
->>>>>>> Stashed changes
       </Box>
+      <Snackbar open={snackbar !== null} autoHideDuration={6000}>
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar?.severity}
+          sx={{ width: "100%" }}
+        >
+          {snackbar?.children}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
+
+export default DataGridDemo;

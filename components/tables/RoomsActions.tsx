@@ -48,56 +48,6 @@ export const RoomsActions = ({ params: employee }: { params: Employee }) => {
       });
   };
 
-<<<<<<< Updated upstream
-    return (
-        <>
-            <Box>
-                {/* <IconButton onClick={() => { }}>
-                    <Tooltip title="">
-                        <Preview />
-                    </Tooltip>
-                </IconButton> */}
-
-                <IconButton onClick={() => { }}>
-                    <Tooltip title="Edit Employee">
-                        <Edit />
-                    </Tooltip>
-                </IconButton>
-
-                <IconButton onClick={handleOpen}>
-                    <Tooltip title="">
-                        <Delete />
-                    </Tooltip>
-                </IconButton>
-                <Modal open={open} onClose={handleClose}>
-                    <Box sx={style}>
-                        <Typography variant="h6" component="h2">
-                            ยืนยันการลบพนักงานหรือไม่?
-                        </Typography>
-                        <Typography sx={{ mt: 2 }}>
-                            Are you sure you want to delete this employee?
-                        </Typography>
-                        <Typography sx={{ mt: 2 }}>
-                            <Stack spacing={2} direction="row">
-                                <Button
-                                    variant="outlined"
-                                    color="error"
-                                    startIcon={<DeleteIcon />}
-                                    onClick={handleDelete}
-                                >
-                                    ลบพนักงาน
-                                </Button>
-                                <Button variant="outlined" onClick={handleClose}>
-                                    ยกเลิก
-                                </Button>
-                            </Stack>
-                        </Typography>
-                    </Box>
-                </Modal>
-            </Box>
-        </>
-    );
-=======
   const handleEdit = () => {
     router.push(`/${employee.ID}`);
   };
@@ -143,5 +93,4 @@ export const RoomsActions = ({ params: employee }: { params: Employee }) => {
       </Box>
     </>
   );
->>>>>>> Stashed changes
 };
