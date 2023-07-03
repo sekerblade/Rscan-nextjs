@@ -8,50 +8,49 @@ import { Layout } from '../components/layout/layout';
 import LoginPage from './login';
 
 const lightTheme = createTheme({
-   type: 'light',
-   theme: {
-      colors: {},
-   },
+  type: 'light',
+  theme: {
+    colors: {},
+  },
 });
 
 const darkTheme = createTheme({
-   type: 'dark',
-   theme: {
-      colors: {},
-   },
+  type: 'dark',
+  theme: {
+    colors: {},
+  },
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-   const router = useRouter();
+  const router = useRouter();
 
-   useEffect(() => {
-      const { pathname } = router;
-      if (pathname === '/') {
-         router.push('/login');
-      }
-   }, []);
+  useEffect(() => {
+    const { pathname } = router;
+    if (pathname === '/') {
+      router.push('/login');
+    }
+  }, []);
 
-
-   return (
-      <NextThemesProvider
-         defaultTheme="system"
-         attribute="class"
-         value={{
-            light: lightTheme.className,
-            dark: darkTheme.className,
-         }}
-      >
-         <NextUIProvider>
-            {router.pathname === '/login' ? (
-               <LoginPage />
-            ) : (
-               <Layout>
-                  <Component {...pageProps} />
-               </Layout>
-            )}
-         </NextUIProvider>
-      </NextThemesProvider>
-   );
+  return (
+    <NextThemesProvider
+      defaultTheme="system"
+      attribute="class"
+      value={{
+        light: lightTheme.className,
+        dark: darkTheme.className,
+      }}
+    >
+      <NextUIProvider>
+        {router.pathname === '/login' ? (
+          <LoginPage />
+        ) : (
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        )}
+      </NextUIProvider>
+    </NextThemesProvider>
+  );
 }
 
 export default MyApp;

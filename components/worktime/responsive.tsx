@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import {
     Box,
     Container,
@@ -9,33 +8,47 @@ import {
     AccordionSummary,
     AccordionDetails,
     Button,
-} from '@mui/material'
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { DataGridSelection } from './dataGridSelection';
-import { DataGridComfrim } from './dataGridComfrim';
+import DataGridConfirm from './dataGridConfirm';
 
 export const Responsive = () => {
-
-    const [dateStart, setDateStart] = useState();
-    const [dateEnd, setDateEnd] = useState();
+    const [dateStart, setDateStart] = useState<Date | null>(null);
+    const [dateEnd, setDateEnd] = useState<Date | null>(null);
     const [selectedEmployeeIds, setSelectedEmployeeIds] = useState<number[]>([]);
+    const [employeeConfirm, setEmployeeConfirm] = useState<number[]>([]);
+
+    useEffect(() => {
+        const uniqueEmployeeIds = Array.from(
+            new Set([...employeeConfirm, ...selectedEmployeeIds])
+        );
+
+        setEmployeeConfirm(uniqueEmployeeIds);
+    }, [selectedEmployeeIds]);
 
     const handleSelectedEmployeeIdsChange = (selectedIds: number[]) => {
         setSelectedEmployeeIds(selectedIds);
     };
 
-    function onChangeHandler(value: any) {
+    function onChangeHandler(value: [Date, Date]) {
         setDateStart(value[0]);
         setDateEnd(value[1]);
+    }
 
-    }
-    if (selectedEmployeeIds.length === 0) {
-        console.log("im fucked")
-    } else {
-        console.log("good job")
-    }
+    const handleSearch = (
+        selectedEmployeeIds: number[],
+        dateStart: Date | null,
+        dateEnd: Date | null
+    ) => {
+        // Implement your search functionality here
+        console.log(selectedEmployeeIds);
+        console.log(dateStart);
+        console.log(dateEnd);
+    };
+
 
     return (
         <>
@@ -151,11 +164,16 @@ export const Responsive = () => {
                         border: '1px dashed grey',
                     }}
                 >
-                    <Typography>บุคคลกรที่เลือก = {selectedEmployeeIds.join(', ')}</Typography>
+                    <Typography>บุคคลกรที่เลือก = {employeeConfirm.length} คน</Typography>
 
 
                     {/* Pass the selectedEmployeeIds as a prop to DataGridComfrim */}
-                    <DataGridComfrim selectedEmployeeIds={selectedEmployeeIds} />
+                    <DataGridConfirm
+                        selectedEmployeeIds={employeeConfirm}
+                        dateStart={dateStart}
+                        dateEnd={dateEnd}
+                        onSearch={handleSearch} // Pass the handleSearch function as the onSearch prop
+                    />
                 </Box>
             </Box>
         </>
