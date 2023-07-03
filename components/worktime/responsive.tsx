@@ -13,17 +13,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { DataGridSelection } from './dataGridSelection';
-import { DataGridConfirm } from './dataGridConfirm';
+import DataGridConfirm from './dataGridConfirm';
 
 export const Responsive = () => {
-    const [dateStart, setDateStart] = useState<Date | null>(null); // Provide initial value of null
-    const [dateEnd, setDateEnd] = useState<Date | null>(null); // Provide initial value of null
+    const [dateStart, setDateStart] = useState<Date | null>(null);
+    const [dateEnd, setDateEnd] = useState<Date | null>(null);
     const [selectedEmployeeIds, setSelectedEmployeeIds] = useState<number[]>([]);
     const [employeeConfirm, setEmployeeConfirm] = useState<number[]>([]);
 
-
     useEffect(() => {
-        // Filter out duplicate employee IDs
         const uniqueEmployeeIds = Array.from(
             new Set([...employeeConfirm, ...selectedEmployeeIds])
         );
@@ -31,22 +29,25 @@ export const Responsive = () => {
         setEmployeeConfirm(uniqueEmployeeIds);
     }, [selectedEmployeeIds]);
 
-
     const handleSelectedEmployeeIdsChange = (selectedIds: number[]) => {
         setSelectedEmployeeIds(selectedIds);
     };
 
-    function onChangeHandler(value: any) {
+    function onChangeHandler(value: [Date, Date]) {
         setDateStart(value[0]);
         setDateEnd(value[1]);
     }
 
-    if (selectedEmployeeIds.length === 0) {
-        console.log('im fucked');
-    } else {
-        console.log('good job');
-        console.log(employeeConfirm)
-    }
+    const handleSearch = (
+        selectedEmployeeIds: number[],
+        dateStart: Date | null,
+        dateEnd: Date | null
+    ) => {
+        // Implement your search functionality here
+        console.log(selectedEmployeeIds);
+        console.log(dateStart);
+        console.log(dateEnd);
+    };
 
 
     return (
@@ -167,11 +168,12 @@ export const Responsive = () => {
 
 
                     {/* Pass the selectedEmployeeIds as a prop to DataGridComfrim */}
-                    <DataGridConfirm selectedEmployeeIds={employeeConfirm}
+                    <DataGridConfirm
+                        selectedEmployeeIds={employeeConfirm}
                         dateStart={dateStart}
-                        dateEnd={dateEnd} onSearch={function (): void {
-                            throw new Error('Function not implemented.');
-                        }} />
+                        dateEnd={dateEnd}
+                        onSearch={handleSearch} // Pass the handleSearch function as the onSearch prop
+                    />
                 </Box>
             </Box>
         </>

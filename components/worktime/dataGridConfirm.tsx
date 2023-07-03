@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
-import { Box, Button } from '@mui/material'
+import React, { useEffect, useState } from 'react';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { Box, Button } from '@mui/material';
 import { Employee } from '../../types/employee';
-import { Link } from '@nextui-org/react';
 import SearchIcon from '@mui/icons-material/Search';
+import { useRouter } from 'next/router';
 
 interface DataGridConfirmProps {
     selectedEmployeeIds: number[];
     dateStart: Date | null;
     dateEnd: Date | null;
-    onSearch: () => void; // Add this line
+    onSearch: (selectedEmployeeIds: number[], dateStart: Date | null, dateEnd: Date | null) => void;
 }
-
 
 const columns: GridColDef[] = [
     { field: 'ID', headerName: 'ID', width: 50 },
@@ -24,14 +23,13 @@ const columns: GridColDef[] = [
     { field: 'DeptID', headerName: 'แผนก', width: 75, editable: true },
 ];
 
-
-
-export const DataGridConfirm: React.FC<DataGridConfirmProps> = ({
+const DataGridConfirm: React.FC<DataGridConfirmProps> = ({
     selectedEmployeeIds,
     dateStart,
     dateEnd,
-    onSearch, // Add this line
+    onSearch,
 }) => {
+    const router = useRouter();
     const [rows, setRows] = useState<Employee[]>([]);
 
     useEffect(() => {
@@ -60,25 +58,35 @@ export const DataGridConfirm: React.FC<DataGridConfirmProps> = ({
         fetchEmployeeData();
     }, [selectedEmployeeIds]);
 
+    const handleSearch = () => {
+        // Call the onSearch function
+        onSearch(selectedEmployeeIds, dateStart, dateEnd);
 
+        // Redirect to the secret page with query parameters
+        router.push({
+            pathname: '/secretpage',
+            query: {
+                selectedEmployeeIds: JSON.stringify(selectedEmployeeIds),
+                dateStart: dateStart?.toISOString(),
+                dateEnd: dateEnd?.toISOString(),
+            },
+        });
+    };
 
     return (
         <>
             <Box>
                 <Box sx={{ marginLeft: 43.5, marginBottom: 1 }}>
-                    <Link href="secretpage">
-                        <Button variant="contained" endIcon={<SearchIcon />} onClick={onSearch}>
-                            ค้นหา
-                        </Button>
-                    </Link>
+                    <Button variant="contained" endIcon={<SearchIcon />} onClick={handleSearch}>
+                        ค้นหา
+                    </Button>
                 </Box>
                 <Box sx={{ height: 450, width: '100%' }}>
-                    <DataGrid
-                        rows={rows} columns={columns}
-                        pageSizeOptions={[10, 15, 25]}
-                    />
+                    <DataGrid rows={rows} columns={columns} pageSizeOptions={[10, 15, 25]} />
                 </Box>
             </Box>
         </>
     );
 };
+
+export default DataGridConfirm;

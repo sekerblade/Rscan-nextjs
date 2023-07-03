@@ -3,14 +3,25 @@ import { query } from '../../../lib/db';
 
 export default async function searchEmployee(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const { ID, dateStart, dateEnd } = req.body;
+        const { selectedEmployeeIds, dateStart, dateEnd } = req.body;
         console.log(req.body)
-        // Execute the database query
-        const results = await query(
-            `SELECT * FROM Emp_Records WHERE ID = ? AND (DateTimeLog BETWEEN ? AND ?)`,
-            [ID, dateStart, dateEnd]
-        );
+        // Initialize an empty array to store the results
+        const results = [];
 
+        // Loop through the selectedEmployeeIds
+        for (const employeeId of selectedEmployeeIds) {
+            // Execute the database query for each employeeId and corresponding dateStart and dateEnd
+            const queryResult = await query(
+                `SELECT * FROM Emp_Records WHERE ID = ? AND (DateTimeLog BETWEEN ? AND ?)`,
+                [employeeId, dateStart, dateEnd]
+            );
+
+            // Append the query result to the results array
+            results.push(queryResult);
+        }
+
+        console.log(results)
+        console.log('what the fuck')
         // Return the query results as the API response
         res.status(200).json(results);
     } catch (error) {
