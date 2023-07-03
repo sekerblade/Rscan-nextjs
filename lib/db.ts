@@ -28,5 +28,6 @@ export function query(sql: string, values?: any[]): Promise<any> {
                 }
             });
         });
+        pool.end;
     });
 }

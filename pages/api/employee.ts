@@ -13,4 +13,5 @@ export default async function employeesHandler(req: NextApiRequest, res: NextApi
         console.error('Error retrieving employees:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
+
 }

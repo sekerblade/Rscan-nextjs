@@ -15,6 +15,7 @@ import { AddBranch } from './add-branch';
 import { Adion } from './Adion';
 import { DepartmentPages } from './DepartmentDataGrid';
 import Head from 'next/head'
+import { Branch } from './branch';
 
 export const Department = () => {
    return (
@@ -97,8 +98,8 @@ export const Department = () => {
                   </Button>
                </Flex>
             </Flex>
-            <Adion />
-            <DepartmentPages />
+            <Branch />
+            {/* <DepartmentPages /> */}
          </Flex>
       </>
    );

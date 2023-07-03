@@ -122,9 +122,10 @@ export const SidebarWrapper = () => {
                   </SidebarMenu>
                   <SidebarMenu title="Updates">
                      <SidebarItem
-                        isActive={router.pathname === '/changelog'}
-                        title="Changelog"
+                        isActive={router.pathname === '/import'}
+                        title="import"
                         icon={<ChangeLogIcon />}
+                        href='import'
                      />
 
                   </SidebarMenu>

@@ -4,14 +4,14 @@ import { query } from '../../../lib/db';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'PUT') {
         try {
-            
-           const {EnrollNumber, Prefix, Name, SureName, EmployeeCode, Status, DeptID, ID } = req.body;
+
+            const { EnrollNumber, Prefix, Name, SureName, EmployeeCode, Status, DeptID, ID } = req.body;
 
             // Perform the INSERT query
             const result = await query(
                 'UPDATE Emp_Info SET EnrollNumber = ?,Prefix = ?,Name = ?,SureName = ?,EmployeeCode = ?,Status = ?,DeptID = ? WHERE ID = ?',
                 [EnrollNumber, Prefix, Name, SureName, EmployeeCode, Status, DeptID, ID]
-                
+
             );
 
             // Return success response

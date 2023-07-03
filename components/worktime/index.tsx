@@ -1,6 +1,7 @@
 import React from 'react'
 import { Flex } from '../styles/flex';
 import { TabOptions } from './tabs';
+import { Box } from '@mui/material';
 
 
 
@@ -20,7 +21,6 @@ export const Worktime = () => {
                 justify={'center'}
                 direction={'column'}
             >
-                <h2>ข้อมูลการทำงาน</h2>
                 <TabOptions />
 
             </Flex>

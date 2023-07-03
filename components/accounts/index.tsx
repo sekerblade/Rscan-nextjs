@@ -13,7 +13,6 @@ import { Flex } from '../styles/flex';
 import { DataGridDemo } from '../tables/demoDataGrid';
 import { MuiDrawer } from '../tables/muiDrawer';
 import Head from 'next/head';
-
 export const Accounts = () => {
    return (
       <div>
