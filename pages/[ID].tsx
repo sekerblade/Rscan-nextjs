@@ -2,19 +2,30 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Grid, TextField, Button, Typography, Box } from '@mui/material';
 
+interface Employee {
+  ID: number;
+  EnrollNumber: string;
+  Prefix: string;
+  Name: string;
+  SureName: string;
+  EmployeeCode: string;
+  Status: string;
+  DeptID: string;
+}
+
 const EmployeeDetails = () => {
   const router = useRouter();
   const { ID } = router.query;
-  const [employeeData, setEmployeeData] = useState([]);
-  const [editData, setEditData] = useState({});
-  const [filteredEmployeeData, setFilteredEmployeeData] = useState([]);
+  const [employeeData, setEmployeeData] = useState<Employee[]>([]);
+  const [editData, setEditData] = useState<Employee | (() => Employee)>(() => ({} as Employee));
+  const [filteredEmployeeData, setFilteredEmployeeData] = useState<Employee[]>([]);
 
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await fetch("/api/employee");
+        const response = await fetch('/api/employee');
         const data = await response.json();
-        const employeesWithId = data.map((employee) => ({
+        const employeesWithId: Employee[] = data.map((employee: Employee) => ({
           ...employee,
           id: employee.ID,
         }));
@@ -23,7 +34,7 @@ const EmployeeDetails = () => {
         // Filter employee data based on the desired employee ID
         const desiredEmployeeId = Number(ID);
         const filteredEmployee = employeesWithId.find(
-          (employee) => employee.id === desiredEmployeeId
+          (employee) => employee.ID === desiredEmployeeId
         );
         if (filteredEmployee) {
           // Employee with the desired ID found
@@ -32,10 +43,10 @@ const EmployeeDetails = () => {
           setFilteredEmployeeData([filteredEmployee]); // Initialize filteredEmployeeData with the fetched employee data
         } else {
           // Employee with the desired ID not found
-          console.error("Employee with ID", desiredEmployeeId, "not found");
+          console.error('Employee with ID', desiredEmployeeId, 'not found');
         }
       } catch (error) {
-        console.error("Error:", error);
+        console.error('Error:', error);
       }
     };
 
@@ -44,10 +55,10 @@ const EmployeeDetails = () => {
     }
   }, [ID]);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setEditData((prevData) => ({
-      ...prevData,
+      ...(typeof prevData === 'function' ? prevData() : prevData),
       [name]: value,
     }));
   };
@@ -68,7 +79,7 @@ const EmployeeDetails = () => {
 
         // Find the index of the updated employee in the filteredEmployeeData array
         const updatedIndex = filteredEmployeeData.findIndex(
-          (employee) => employee.id === updatedEmployee.id
+          (employee) => employee.ID === updatedEmployee.ID
         );
 
         if (updatedIndex !== -1) {
@@ -100,7 +111,7 @@ const EmployeeDetails = () => {
             fullWidth
             name="ID"
             label="Employee ID"
-            value={editData.ID || ""}
+            value={(editData as Employee).ID || ''}
             onChange={handleInputChange}
           />
         </Grid>
@@ -109,7 +120,7 @@ const EmployeeDetails = () => {
             fullWidth
             name="EnrollNumber"
             label="Enroll Number"
-            value={editData.EnrollNumber || ""}
+            value={(editData as Employee).EnrollNumber || ''}
             onChange={handleInputChange}
           />
         </Grid>
@@ -118,7 +129,7 @@ const EmployeeDetails = () => {
             fullWidth
             name="Prefix"
             label="Prefix"
-            value={editData.Prefix || ""}
+            value={(editData as Employee).Prefix || ''}
             onChange={handleInputChange}
           />
         </Grid>
@@ -127,7 +138,7 @@ const EmployeeDetails = () => {
             fullWidth
             name="Name"
             label="Name"
-            value={editData.Name || ""}
+            value={(editData as Employee).Name || ''}
             onChange={handleInputChange}
           />
         </Grid>
@@ -136,7 +147,7 @@ const EmployeeDetails = () => {
             fullWidth
             name="SureName"
             label="Sure Name"
-            value={editData.SureName || ""}
+            value={(editData as Employee).SureName || ''}
             onChange={handleInputChange}
           />
         </Grid>
@@ -145,7 +156,7 @@ const EmployeeDetails = () => {
             fullWidth
             name="EmployeeCode"
             label="Employee Code"
-            value={editData.EmployeeCode || ""}
+            value={(editData as Employee).EmployeeCode || ''}
             onChange={handleInputChange}
           />
         </Grid>
@@ -154,7 +165,7 @@ const EmployeeDetails = () => {
             fullWidth
             name="Status"
             label="Status"
-            value={editData.Status || ""}
+            value={(editData as Employee).Status || ''}
             onChange={handleInputChange}
           />
         </Grid>
@@ -163,7 +174,7 @@ const EmployeeDetails = () => {
             fullWidth
             name="DeptID"
             label="Department ID"
-            value={editData.DeptID || ""}
+            value={(editData as Employee).DeptID || ''}
             onChange={handleInputChange}
           />
         </Grid>
@@ -174,7 +185,7 @@ const EmployeeDetails = () => {
         </Grid>
       </Grid>
     </Box>
-  );
+  );  
 };
 
 export default EmployeeDetails;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  DataGrid,
   GridToolbarContainer,
   GridToolbarColumnsButton,
   GridToolbarDensitySelector,
@@ -15,6 +14,9 @@ import { RoomsActions } from "./RoomsActions";
 import { Employee } from "../../types/employee";
 import { BasicSelect } from "../filterBar/filterSelect";
 import { AddUser } from "../accounts/add-user";
+import { AlertProps } from "@mui/material/Alert";
+import { GridPagination } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
 
 
 export const DataGridDemo = () => {
@@ -38,18 +40,18 @@ export const DataGridDemo = () => {
       setFilteredEmployeeData(employeeData);
     } else {
       const filteredData = employeeData.filter((employee) =>
-        depts.includes(employee.DeptID)
-      );
+      depts.includes(employee.DeptID.toString())
+    );
       setFilteredEmployeeData(filteredData);
     }
   };
 
   const generateDeptDataForDropdown = () => {
-    return [...new Set(employeeData.map((employee) => employee.DeptID))];
+    return [...new Set(employeeData.map((employee) => employee.DeptID.toString()))];
   };
 
   const generatePrefixDataForDropdown = () => {
-    return [...new Set(employeeData.map((employee) => employee.Prefix))];
+    return [...new Set(employeeData.map((employee) => employee.Prefix.toString()))];
   };
 
   const useFakeMutation = () => {
@@ -159,6 +161,13 @@ export const DataGridDemo = () => {
       </GridToolbarContainer>
     );
   }
+  function CustomPagination() {
+    return (
+      <GridPagination
+        rowsPerPageOptions={[10]} // กำหนดจำนวนแถวต่อหน้า
+      />
+    );
+  }
 
   return (
     <Box sx={{ mt: 1, height: 667, width: "100%" }}>
@@ -180,19 +189,40 @@ export const DataGridDemo = () => {
         </Grid>
       </Grid>
       <Box sx={{ mt: 1 }}>
-        <DataGrid
-          editMode="row"
-          rows={filteredEmployeeData}
-          columns={columns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-          checkboxSelection
-          disableSelectionOnClick
-          components={{
-            Toolbar: CustomToolbar,
-          }}
-          onCellEditCommit={processRowUpdate}
-        />
+      <DataGrid
+  editMode="row"
+  rows={filteredEmployeeData}
+  columns={columns}
+  processRowUpdate={processRowUpdate}
+  pageSizeOptions={[10, 15, 25]}
+  slots={{ toolbar: CustomToolbar }}
+  slotProps={{
+      // columnsPanel: {
+      //     disableHideAllButton: true,
+      //     disableShowAllButton: true,
+      // },
+      //printOptions: { disableToolbarButton: true }
+  }}
+  initialState={{
+      pagination: {
+          paginationModel: {
+              pageSize: 10,
+
+          },
+      },
+      columns: {
+          columnVisibilityModel: {
+              // Hide columns 'Prefix' and 'EmployeeCode', the other columns will remain visible
+              Prefix: false,
+              EmployeeCode: false,
+          },
+      },
+  }}
+
+  checkboxSelection
+//disableRowSelectionOnClick
+//exportOptions= {csvOptions}
+/>
       </Box>
       <Snackbar open={snackbar !== null} autoHideDuration={6000}>
         <Alert
