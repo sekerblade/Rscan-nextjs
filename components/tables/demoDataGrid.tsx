@@ -27,15 +27,46 @@ import {
     DialogActions,
     Button,
 } from '@mui/material';
-import { Edit } from '@mui/icons-material';
+import { Edit, ShowChart } from '@mui/icons-material';
 import { RoomsActions } from './RoomsActions';
 import { Employee } from '../../types/employee';
+import { Check, Save } from '@mui/icons-material';
+import { green } from '@mui/material/colors';
+import EditEmployee from './editEmployee';
+import { resolve } from 'path';
+
+const useFakeMutation = () => {
+    return React.useCallback(
+        (employee: Partial<Employee>) =>
+            new Promise<Partial<Employee>>((resolve, reject) => {
+                setTimeout(() => {
+                    if (employee.Name?.trim() === '') {
+                        reject(new Error("Error while saving user: name can't be empty."));
+                    } else {
+                        resolve({ ...employee, Name: employee.Name });
+                    }
+                }, 200);
+            }),
+        [],
+    );
+};
+
+
+
+
 
 export const DataGridDemo = () => {
     const [employeeData, setEmployeeData] = useState<Employee[]>([]);
 
     const [filter, setFilter] = useState(true)
     const [prefix, setPrefix] = useState('all')
+    const [sendData, setSendData] = useState(0)
+
+    const [rowId, setRowId] = useState<any>()
+
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [show, setShow] = useState(true);
 
 
     const useFakeMutation = () => {
@@ -54,6 +85,7 @@ export const DataGridDemo = () => {
         );
     };
 
+
     const mutateRow = useFakeMutation();
 
     const [snackbar, setSnackbar] = React.useState<Pick<
@@ -63,14 +95,10 @@ export const DataGridDemo = () => {
 
     const handleCloseSnackbar = () => setSnackbar(null);
 
-    const [open, setOpen] = useState(false);
 
-
-
-    const processRowUpdate = React.useCallback(async (newRow: GridRowModel) => {
+    const processRowUpdate = React.useCallback(async (newRow: GridRowModel,) => {
         const res = await mutateRow(newRow);
         setSnackbar({ children: 'Editing successfully saved', severity: 'success' });
-        // This is Function to Confrim Editable
 
         // Make the HTTP request to save in the backend
         const response = await fetch('/api/account/PUT_account', {
@@ -78,14 +106,18 @@ export const DataGridDemo = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(res),
+            body: JSON.stringify(res)
         });
-
-
         return res;
     },
         [mutateRow],
     );
+
+
+
+
+
+
 
     const columns: GridColDef[] = [
 
@@ -97,6 +129,59 @@ export const DataGridDemo = () => {
         { field: 'EmployeeCode', headerName: 'EmployeeCode', width: 100, editable: true },
         { field: 'Status', headerName: 'สถานะ', width: 100, editable: true },
         { field: 'DeptID', headerName: 'แผนก', width: 100, editable: true },
+        // {
+        //     field: 'A',
+        //     headerName: 'A',
+        //     type: 'actions',
+        //     width: 100,
+        //     renderCell: () => (
+        //         <Box
+        //             sx={{
+        //                 m: 1,
+        //                 position: 'relative',
+        //             }}
+        //         >
+        //             {success ? (
+        //                 <Fab
+        //                     color="primary"
+        //                     sx={{
+        //                         width: 40,
+        //                         height: 40,
+        //                         bgcolor: green[500],
+        //                         '&:hover': { bgcolor: green[700] },
+        //                     }}
+        //                 >
+        //                     <Check />
+        //                 </Fab>
+        //             ) : (
+        //                 <Fab
+        //                     color="primary"
+        //                     sx={{
+        //                         width: 40,
+        //                         height: 40,
+        //                     }}
+        //                     disabled={show}
+        //                 // onClick={handleSubmit}
+        //                 >
+        //                     <Save />
+        //                 </Fab>
+        //             )}
+        //             {loading && (
+        //                 <CircularProgress
+        //                     size={52}
+        //                     sx={{
+        //                         color: green[500],
+        //                         position: 'absolute',
+        //                         top: -6,
+        //                         left: -6,
+        //                         zIndex: 1,
+        //                     }}
+        //                 />
+        //             )}
+        //         </Box>
+
+        //     )
+        // },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -119,6 +204,7 @@ export const DataGridDemo = () => {
                 </IconButton>
             ),
         }
+
     ];
 
     useEffect(() => {
@@ -163,7 +249,9 @@ export const DataGridDemo = () => {
                 editMode="row"
                 rows={employeeData}
                 columns={columns}
+                getRowId={(row) => row.ID}
                 processRowUpdate={processRowUpdate}
+                onRowEditStart={(row) => setShow(false)}
                 pageSizeOptions={[10, 15, 25]}
                 slots={{ toolbar: CustomToolbar }}
                 slotProps={{
@@ -188,7 +276,6 @@ export const DataGridDemo = () => {
                         },
                     },
                 }}
-
                 checkboxSelection
             //disableRowSelectionOnClick
             //exportOptions= {csvOptions}

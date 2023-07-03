@@ -1,5 +1,4 @@
-import React from 'react'
-import { SearchOptions } from './search'
+import React, { useState } from 'react'
 import {
     TextField,
     Typography,
@@ -8,7 +7,6 @@ import {
     Tabs,
     Box,
 } from '@mui/material';
-import { Responsive } from './responsive';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -43,9 +41,9 @@ function a11yProps(index: number) {
     };
 }
 
-export const TabOptions = () => {
+const TabTime = () => {
 
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0)
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -60,26 +58,41 @@ export const TabOptions = () => {
                         <Tab label="รายงานปกติ" {...a11yProps(1)} />
                         <Tab label="รายงาน I/O" {...a11yProps(2)} />
                         <Tab label="ตารางเวลา" {...a11yProps(3)} />
+                        <Tab label="ตารางเวลา" {...a11yProps(4)} />
+                        <Tab label="ตารางเวลา" {...a11yProps(5)} />
+                        <Tab label="ตารางเวลา" {...a11yProps(6)} />
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    <Responsive />
-
+                    ตารางเวลา
 
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    รายงานผลรวม
+                    ตารางวัน
 
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    รายงาน I/O
+                    รอบการทำงาน
 
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    ตารางเวลา
+                    ตารางทำงาน
+
+                </TabPanel>
+                <TabPanel value={value} index={4}>
+                    วันหยุดประจำปี
+
+                </TabPanel>
+                <TabPanel value={value} index={5}>
+                    การลางาน
+
+                </TabPanel>
+                <TabPanel value={value} index={6}>
+                    เงื่อนไขพิเศษ
 
                 </TabPanel>
             </Box>
         </>
     )
 }
+export default TabTime

@@ -8,21 +8,10 @@ export const Worktime = () => {
 
     return (
         <>
-            <Flex
-                css={{
-                    'mt': '$5',
-                    'px': '$6',
-                    '@sm': {
-                        mt: '$10',
-                        px: '$16',
-                    },
-                }}
-                justify={'center'}
-                direction={'column'}
-            >
-                <TabOptions />
 
-            </Flex>
+            <TabOptions />
+
+
         </>
     )
 }
