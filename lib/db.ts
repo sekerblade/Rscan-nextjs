@@ -7,7 +7,7 @@ const pool: Pool = mysql.createPool({
     password: 'Pa$$w0rd',
     database: 'adgcoth_001',
     port: 3306,
-    connectionLimit: 20, // Increase the connection limit if necessary
+    connectionLimit: 200, // Increase the connection limit if necessary
 });
 
 // Export a function to execute database queries
