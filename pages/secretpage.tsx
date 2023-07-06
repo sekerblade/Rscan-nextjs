@@ -1,10 +1,10 @@
 import React from 'react'
-import SecretPage from "../components/secretpage"
+import SecretPage from "../components/worktime/secretpage"
 
 const secretpage = () => {
     return (
         <>
-            <SecretPage />
+            <SecretPage selectedEmployeeIds={[]} dateStart={null} dateEnd={null} />
         </>
     )
 }

@@ -9,6 +9,7 @@ import {
     Box,
 } from '@mui/material';
 import { Responsive } from './responsive';
+import SecretPage from "./secretpage"
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -60,23 +61,27 @@ export const TabOptions = () => {
                         <Tab label="รายงานปกติ" {...a11yProps(1)} />
                         <Tab label="รายงาน I/O" {...a11yProps(2)} />
                         <Tab label="ตารางเวลา" {...a11yProps(3)} />
+                        <Tab label="แสดงผลตารางเวลา" {...a11yProps(4)} />
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    <Responsive />
 
 
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    รายงานผลรวม
+                    <p>รายงาน 2</p>
 
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    รายงาน I/O
+                    <p>รายงาน 3</p>
 
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    ตารางเวลา
+                    <p>รายงาน 4</p>
+
+                </TabPanel>
+                <TabPanel value={value} index={4}>
+                    แสดงผลตารางเวลา
 
                 </TabPanel>
             </Box>

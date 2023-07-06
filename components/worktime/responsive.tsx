@@ -145,8 +145,8 @@ export const Responsive = () => {
                 </Box>
                 <Box // เลือกคน 1
                     sx={{
-                        width: 375,
-                        height: 650,
+                        width: 400,
+                        height: 750,
                         backgroundColor: 'white',
                         border: '1px dashed grey'
                     }}
@@ -158,8 +158,8 @@ export const Responsive = () => {
                 </Box>
                 <Box
                     sx={{
-                        width: 450,
-                        height: 650,
+                        width: 520,
+                        height: 750,
                         backgroundColor: 'white',
                         border: '1px dashed grey',
                     }}
