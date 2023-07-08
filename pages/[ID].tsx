@@ -6,6 +6,9 @@ import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import { Padding } from "@mui/icons-material";
+import TextareaAutosize from "@mui/base/TextareaAutosize";
+import { Edit } from "@mui/icons-material";
 interface Employee {
   ID: number;
   EnrollNumber: string;
@@ -28,6 +31,9 @@ const EmployeeDetails = () => {
     []
   );
   const [isEditing, setIsEditing] = useState(false);
+  const handleEditIconClick = () => {
+    setIsEditing(!isEditing);
+  };
 
   useEffect(() => {
     const fetchEmployeeData = async () => {
@@ -136,69 +142,66 @@ const EmployeeDetails = () => {
   return (
     <Box
       component="span"
-      sx={{ width: "100%", height: "100%" }}
+      sx={{ width: "100%", height: "100%", margin: "10px",}}
     >
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ height: "auto", width: "auto" }}>
         <Grid item xs={12} md={4}>
-          <MainContent>
+          <MainContent sx={{ margin: 3 }}>
             <Avatar
               alt="Profile Picture"
               src="https://randomuser.me/api/portraits/men/1.jpg"
               sx={{
-                width: 155,
-                height: 155,
+                width: 170,
+                height: 168,
                 margin: "auto",
                 mb: 2,
                 border: "2px solid ",
               }}
             />
-            <Typography variant="h5" align="center" mt={2}>
-              {employeeData[0].Name}
-            </Typography>
-            <Typography variant="subtitle1" align="center" mt={1}>
-              {employeeData[0].SureName}
-            </Typography>
           </MainContent>
         </Grid>
-        <Grid item xs={12} md={8}>
-          <SideContent>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item xs={6}>
-                <Typography variant="h6" align="left">
-                  ข้อมูลส่วนตัว
-                </Typography>
+        <Grid item xs={12} md={7}>
+          <SideContent sx={{ margin: 3 }}>
+            <Grid container spacing={0} alignItems="center">
+              <Grid item xs={12}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography variant="h6" align="left" sx={{ mb: 2 }}>
+                    ข้อมูลส่วนตัว
+                  </Typography>
+                  <IconButton
+                    onClick={handleEditIconClick}
+                    sx={{ color: "blue" }}
+                  >
+                    <Edit />
+                  </IconButton>
+                </Box>
               </Grid>
-              <Grid item xs={6} container justifyContent="flex-end">
-                <Grid container alignItems="center" justifyContent="flex-end">
-                  <Grid item>
-                    <IconButton onClick={handleEdit} disabled={isEditing}>
-                      <EditIcon style={{ color: "blue" }} />
-                    </IconButton>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   label="Prefix"
                   name="Prefix"
                   value={editData.Prefix}
                   onChange={handleInputChange}
-                  sx={{ mb: 3 }}
+                  sx={{ mb: 2, width: "100%" }}
                   size="small"
                   disabled={!isEditing}
-                  fullWidth
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   label="Name"
                   name="Name"
                   value={editData.Name}
                   onChange={handleInputChange}
-                  sx={{ mb: 3 }}
-                  disabled={!isEditing}
+                  sx={{ mb: 2, width: "100%" }}
                   size="small"
-                  fullWidth
+                  disabled={!isEditing}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -207,13 +210,12 @@ const EmployeeDetails = () => {
                   name="SureName"
                   value={editData.SureName}
                   onChange={handleInputChange}
-                  sx={{ mb: 3 }}
-                  disabled={!isEditing}
+                  sx={{ mb: 2, width: "100%" }}
                   size="small"
-                  fullWidth
+                  disabled={!isEditing}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   label="SureName"
                   name="SureName"
@@ -221,275 +223,234 @@ const EmployeeDetails = () => {
                   onChange={handleInputChange}
                   disabled={!isEditing}
                   size="small"
-                  fullWidth
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   label="SureName"
                   name="SureName"
                   value={editData.SureName}
                   onChange={handleInputChange}
-                  sx={{ ml: 3 }}
                   disabled={!isEditing}
                   size="small"
-                  fullWidth
                 />
               </Grid>
             </Grid>
           </SideContent>
-          <Grid container spacing={2} sx={{ mt: 3, ml: 0 }}>
-            <SideContent>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item xs={6}>
-                <Typography variant="h6" align="left">
-                  ข้อมูลส่วนตัว
+        </Grid>
+      </Grid>
+      <Grid container spacing={3} sx={{ height: "auto", width: "auto" }}>
+        <Grid item xs={12} md={11}>
+          <SideContent sx={{ margin: 3, marginTop: 0 }}>
+            <Grid container spacing={0}>
+              <Grid item xs={12}>
+                <Typography variant="h6" align="left" sx={{ mb: 2 }}>
+                  ประวัติการศึกษา
                 </Typography>
               </Grid>
-              <Grid item xs={6} container justifyContent="flex-end">
-                <Grid container alignItems="center" justifyContent="flex-end">
-                  <Grid item>
-                    <IconButton onClick={handleEdit} disabled={isEditing}>
-                      <EditIcon style={{ color: "blue" }} />
-                    </IconButton>
-                  </Grid>
-                </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Prefix"
+                  name="Prefix"
+                  value={editData.Prefix}
+                  onChange={handleInputChange}
+                  sx={{ mb: 2, width: "100%" }}
+                  size="small"
+                  disabled={!isEditing}
+                />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Name"
+                  name="Name"
+                  value={editData.Name}
+                  onChange={handleInputChange}
+                  sx={{ mb: 2, width: "100%" }}
+                  size="small"
+                  disabled={!isEditing}
+                />
               </Grid>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="ระดับปริญญา"
-                    name="DegreeLevel"
-                    value={editData.DegreeLevel}
-                    onChange={handleInputChange}
-                    sx={{ mt: 3 }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="ชื่อสถาบัน"
-                    name="InstitutionName"
-                    value={editData.InstitutionName}
-                    onChange={handleInputChange}
-                    sx={{ mt: 3 }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="ปีที่เริ่ม"
-                    name="StartYear"
-                    value={editData.StartYear}
-                    onChange={handleInputChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="ปีที่จบ"
-                    name="EndYear"
-                    value={editData.EndYear}
-                    onChange={handleInputChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="ระยะเวลา"
-                    name="Duration"
-                    value={editData.Duration}
-                    onChange={handleInputChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="สาขาวิชา"
-                    name="Major"
-                    value={editData.Major}
-                    onChange={handleInputChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="วุฒิที่ได้รับ"
-                    name="DegreeReceived"
-                    value={editData.DegreeReceived}
-                    onChange={handleInputChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    label="เกรดที่ได้"
-                    name="Grade"
-                    value={editData.Grade}
-                    onChange={handleInputChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    label="หมายเหตุ"
-                    name="Remarks"
-                    value={editData.Remarks}
-                    onChange={handleInputChange}
-                  />
-                </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="SureName"
+                  name="SureName"
+                  value={editData.SureName}
+                  onChange={handleInputChange}
+                  sx={{ mb: 2, width: "100%" }}
+                  size="small"
+                  disabled={!isEditing}
+                />
               </Grid>
-            </SideContent>
-            <Grid container spacing={2} sx={{ mt: 3, ml: 0 }}>
-              <SideContent>
-              <Grid container spacing={2} alignItems="center">
-              <Grid item xs={6}>
-                <Typography variant="h6" align="left">
-                  ข้อมูลส่วนตัว
-                </Typography>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="SureName"
+                  name="SureName"
+                  value={editData.SureName}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  size="small"
+                />
               </Grid>
-              <Grid item xs={6} container justifyContent="flex-end">
-                <Grid container alignItems="center" justifyContent="flex-end">
-                  <Grid item>
-                    <IconButton onClick={handleEdit} disabled={isEditing}>
-                      <EditIcon style={{ color: "blue" }} />
-                    </IconButton>
-                  </Grid>
-                </Grid>
-              </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      label="Enroll Number"
-                      name="EnrollNumber"
-                      value={editData.EnrollNumber}
-                      onChange={handleInputChange}
-                      sx={{ mb: 3, mt: 3, mr: 3 }} // กำหนดระยะห่างด้านล่างเป็น 3
-                    />
-                    <TextField
-                      label="Prefix"
-                      name="Prefix"
-                      value={editData.Prefix}
-                      onChange={handleInputChange}
-                      sx={{ mb: 3, mt: 3, mr: 3 }} // กำหนดระยะห่างด้านล่างเป็น 3
-                    />
-                    <TextField
-                      label="Employee Code"
-                      name="EmployeeCode"
-                      value={editData.EmployeeCode}
-                      onChange={handleInputChange}
-                      sx={{ mb: 3, mt: 3, mr: 3 }} // กำหนดระยะห่างด้านล่างเป็น 3
-                    />
-                    <TextField
-                      label="Status"
-                      name="Status"
-                      value={editData.Status}
-                      onChange={handleInputChange}
-                      mb={2}
-                      sx={{ mb: 3, mt: 3, mr: 3 }} // กำหนดระยะห่างด้านล่างเป็น 3
-                    />
-                    <TextField
-                      label="Department ID"
-                      name="DeptID"
-                      value={editData.DeptID}
-                      onChange={handleInputChange}
-                      sx={{ mb: 3, mt: 3, mr: 3 }} // กำหนดระยะห่างด้านล่างเป็น 3
-                    />
-                  </Grid>
-                </Grid>
-              </SideContent>
-              <Grid container spacing={2} sx={{ mt: 3, ml: 0 }}>
-                <SideContent>
-                <Grid container spacing={2} alignItems="center">
-              <Grid item xs={6}>
-                <Typography variant="h6" align="left">
-                  ข้อมูลส่วนตัว
-                </Typography>
-              </Grid>
-              <Grid item xs={6} container justifyContent="flex-end">
-                <Grid container alignItems="center" justifyContent="flex-end">
-                  <Grid item>
-                    <IconButton onClick={handleEdit} disabled={isEditing}>
-                      <EditIcon style={{ color: "blue" }} />
-                    </IconButton>
-                  </Grid>
-                </Grid>
-              </Grid>
-                </Grid>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        label="ระดับปริญญา"
-                        name="DegreeLevel"
-                        value={editData.DegreeLevel}
-                        onChange={handleInputChange}
-                        sx={{ mt: 3 }}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        label="ชื่อสถาบัน"
-                        name="InstitutionName"
-                        value={editData.InstitutionName}
-                        onChange={handleInputChange}
-                        sx={{ mt: 3 }}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        label="ปีที่เริ่ม"
-                        name="StartYear"
-                        value={editData.StartYear}
-                        onChange={handleInputChange}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        label="ปีที่จบ"
-                        name="EndYear"
-                        value={editData.EndYear}
-                        onChange={handleInputChange}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        label="ระยะเวลา"
-                        name="Duration"
-                        value={editData.Duration}
-                        onChange={handleInputChange}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        label="สาขาวิชา"
-                        name="Major"
-                        value={editData.Major}
-                        onChange={handleInputChange}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        label="วุฒิที่ได้รับ"
-                        name="DegreeReceived"
-                        value={editData.DegreeReceived}
-                        onChange={handleInputChange}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        label="เกรดที่ได้"
-                        name="Grade"
-                        value={editData.Grade}
-                        onChange={handleInputChange}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        label="หมายเหตุ"
-                        name="Remarks"
-                        value={editData.Remarks}
-                        onChange={handleInputChange}
-                      />
-                    </Grid>
-                  </Grid>
-                </SideContent>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="SureName"
+                  name="SureName"
+                  value={editData.SureName}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  size="small"
+                />
               </Grid>
             </Grid>
-          </Grid>
+          </SideContent>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3} sx={{ height: "auto", width: "auto" }}>
+        <Grid item xs={12} md={11}>
+          <SideContent sx={{ margin: 3, marginTop: 0 }}>
+            <Grid container spacing={0}>
+              <Grid item xs={12}>
+                <Typography variant="h6" align="left" sx={{ mb: 2 }}>
+                  ผู้ติดต่อฉุกเฉิน
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Prefix"
+                  name="Prefix"
+                  value={editData.Prefix}
+                  onChange={handleInputChange}
+                  sx={{ mb: 2, width: "100%" }}
+                  size="small"
+                  disabled={!isEditing}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Name"
+                  name="Name"
+                  value={editData.Name}
+                  onChange={handleInputChange}
+                  sx={{ mb: 2, width: "100%" }}
+                  size="small"
+                  disabled={!isEditing}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="SureName"
+                  name="SureName"
+                  value={editData.SureName}
+                  onChange={handleInputChange}
+                  sx={{ mb: 2, width: "100%" }}
+                  size="small"
+                  disabled={!isEditing}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="SureName"
+                  name="SureName"
+                  value={editData.SureName}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  size="small"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="SureName"
+                  name="SureName"
+                  value={editData.SureName}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  size="small"
+                />
+              </Grid>
+            </Grid>
+          </SideContent>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3} sx={{ height: "auto", width: "auto" }}>
+        <Grid item xs={12} md={11}>
+          <SideContent sx={{ margin: 3, marginTop: 0 }}>
+            <Grid container spacing={0}>
+              <Grid item xs={12}>
+                <Typography variant="h6" align="left" sx={{ mb: 2 }}>
+                  ที่อยู่/ภูมิลำเนาเก่า
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Prefix"
+                  name="Prefix"
+                  value={editData.Prefix}
+                  onChange={handleInputChange}
+                  sx={{ mb: 2, width: "100%" }}
+                  size="small"
+                  disabled={!isEditing}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Name"
+                  name="Name"
+                  value={editData.Name}
+                  onChange={handleInputChange}
+                  sx={{ mb: 2, width: "100%" }}
+                  size="small"
+                  disabled={!isEditing}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="SureName"
+                  name="SureName"
+                  value={editData.SureName}
+                  onChange={handleInputChange}
+                  sx={{ mb: 2, width: "100%" }}
+                  size="small"
+                  disabled={!isEditing}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="SureName"
+                  name="SureName"
+                  value={editData.SureName}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  size="small"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="SureName"
+                  name="SureName"
+                  value={editData.SureName}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  size="small"
+                />
+              </Grid>
+            </Grid>
+          </SideContent>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3} sx={{ height: "auto", width: "auto" }}>
+        <Grid item xs={12} md={11}>
+          <SideContent sx={{ margin: 3, marginTop: 0 }}>
+            <Grid container spacing={0}>
+              <Grid item xs={12}>
+                <Typography variant="h6" align="left" sx={{ mb: 2 }}>
+                  Complain text
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={1}>
+                <TextareaAutosize />;
+              </Grid>
+            </Grid>
+          </SideContent>
         </Grid>
       </Grid>
     </Box>
