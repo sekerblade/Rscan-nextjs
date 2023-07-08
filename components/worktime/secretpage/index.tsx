@@ -3,6 +3,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import { v4 as uuidv4 } from 'uuid';
+import { TabOptions } from '../tabs';
 
 interface EmployeeRecord {
     ID: number;
@@ -37,6 +38,8 @@ const SecretPage: React.FC<SecretPageProps> = ({
 }) => {
     const router = useRouter();
     const [employeeData, setEmployeeData] = useState<EmployeeRecord[]>([]);
+
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -85,12 +88,16 @@ const SecretPage: React.FC<SecretPageProps> = ({
     }, [router.query]);
 
     return (
-        <Box sx={{ height: 450, width: '100%' }}>
-            <DataGrid
-                rows={employeeData}
-                columns={columns}
-                getRowId={(row) => row.id} // Specify the custom id for each row
-            />
+        <Box>
+            <TabOptions />
+            <Box sx={{ height: 450, width: '100%' }}>
+
+                <DataGrid
+                    rows={employeeData}
+                    columns={columns}
+                    getRowId={(row) => row.id} // Specify the custom id for each row
+                />
+            </Box>
         </Box>
     );
 };

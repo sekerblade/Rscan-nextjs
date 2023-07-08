@@ -10,7 +10,7 @@ import { HouseIcon } from '../icons/breadcrumb/house-icon';
 import { UsersIcon } from '../icons/breadcrumb/users-icon';
 import { SettingsIcon } from '../icons/sidebar/settings-icon';
 import { Flex } from '../styles/flex';
-import { DataGridDemo } from '../tables/demoDataGrid';
+import DataGridDemo from '../tables/demoDataGrid';
 import { MuiDrawer } from '../tables/muiDrawer';
 import Head from 'next/head';
 export const Accounts = () => {
@@ -49,7 +49,7 @@ export const Accounts = () => {
                </Crumb>
             </Breadcrumbs>
             <Text>ข้อมูลพนักงาน</Text>
-            <MuiDrawer/> 
+            <MuiDrawer />
          </Flex>
       </div>
    );

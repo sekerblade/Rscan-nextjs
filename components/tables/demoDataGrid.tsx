@@ -19,7 +19,7 @@ import { GridPagination } from '@mui/x-data-grid';
 import { DataGrid } from "@mui/x-data-grid";
 
 
-export const DataGridDemo = () => {
+const DataGridDemo = () => {
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
   const [filteredEmployeeData, setFilteredEmployeeData] = useState<Employee[]>([]);
   const [deptFilter, setDeptFilter] = useState<string[]>([]);
@@ -40,8 +40,8 @@ export const DataGridDemo = () => {
       setFilteredEmployeeData(employeeData);
     } else {
       const filteredData = employeeData.filter((employee) =>
-      depts.includes(employee.DeptID.toString())
-    );
+        depts.includes(employee.DeptID.toString())
+      );
       setFilteredEmployeeData(filteredData);
     }
   };
@@ -189,40 +189,40 @@ export const DataGridDemo = () => {
         </Grid>
       </Grid>
       <Box sx={{ mt: 1 }}>
-      <DataGrid
-  editMode="row"
-  rows={filteredEmployeeData}
-  columns={columns}
-  processRowUpdate={processRowUpdate}
-  pageSizeOptions={[10, 15, 25]}
-  slots={{ toolbar: CustomToolbar }}
-  slotProps={{
-      // columnsPanel: {
-      //     disableHideAllButton: true,
-      //     disableShowAllButton: true,
-      // },
-      //printOptions: { disableToolbarButton: true }
-  }}
-  initialState={{
-      pagination: {
-          paginationModel: {
-              pageSize: 10,
+        <DataGrid
+          editMode="row"
+          rows={filteredEmployeeData}
+          columns={columns}
+          processRowUpdate={processRowUpdate}
+          pageSizeOptions={[10, 15, 25]}
+          slots={{ toolbar: CustomToolbar }}
+          slotProps={{
+            // columnsPanel: {
+            //     disableHideAllButton: true,
+            //     disableShowAllButton: true,
+            // },
+            //printOptions: { disableToolbarButton: true }
+          }}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
 
-          },
-      },
-      columns: {
-          columnVisibilityModel: {
-              // Hide columns 'Prefix' and 'EmployeeCode', the other columns will remain visible
-              Prefix: false,
-              EmployeeCode: false,
-          },
-      },
-  }}
+              },
+            },
+            columns: {
+              columnVisibilityModel: {
+                // Hide columns 'Prefix' and 'EmployeeCode', the other columns will remain visible
+                Prefix: false,
+                EmployeeCode: false,
+              },
+            },
+          }}
 
-  checkboxSelection
-//disableRowSelectionOnClick
-//exportOptions= {csvOptions}
-/>
+          checkboxSelection
+        //disableRowSelectionOnClick
+        //exportOptions= {csvOptions}
+        />
       </Box>
       <Snackbar open={snackbar !== null} autoHideDuration={6000}>
         <Alert
