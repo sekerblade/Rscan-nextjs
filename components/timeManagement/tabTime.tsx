@@ -7,6 +7,7 @@ import {
     Tabs,
     Box,
 } from '@mui/material';
+import { TimeShift } from './timeShift';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -54,7 +55,7 @@ const TabTime = () => {
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} >
-                        <Tab label="เลือกการค้นหา" {...a11yProps(0)} />
+                        <Tab label="ตั้งค่าตารางเวลา" {...a11yProps(0)} />
                         <Tab label="รายงานปกติ" {...a11yProps(1)} />
                         <Tab label="รายงาน I/O" {...a11yProps(2)} />
                         <Tab label="ตารางเวลา" {...a11yProps(3)} />
@@ -64,7 +65,7 @@ const TabTime = () => {
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                    ตารางเวลา
+                    <TimeShift />
 
                 </TabPanel>
                 <TabPanel value={value} index={1}>
