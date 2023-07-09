@@ -122,7 +122,7 @@ const EmployeeDetails = () => {
     textAlign: "center",
     color: theme.palette.text.secondary,
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.5)",
-    transition: "background-color 0.3s, box-shadow 0.3s",
+    transition: "background-color 0.3s, box-shadow 0.1s",
   
     "&:hover": {
       backgroundColor: theme.palette.mode === "dark" ? "#27303b" : "#e0e0e0",
@@ -136,10 +136,10 @@ const EmployeeDetails = () => {
     padding: theme.spacing(4),
     textAlign: "left",
     color: theme.palette.text.secondary,
-    boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+    boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
   
     "&:hover": {
-      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)",
+      boxShadow: "2px 3px 6px rgba(0, 0, 0, 0.5)",
     },
   }));
   
