@@ -116,21 +116,33 @@ const EmployeeDetails = () => {
   }));
 
   const MainContent = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#DCDCDC",
     ...theme.typography.body2,
-    padding: theme.spacing(3),
+    padding: theme.spacing(4),
     textAlign: "center",
     color: theme.palette.text.secondary,
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.5)",
+    transition: "background-color 0.3s, box-shadow 0.3s",
+  
+    "&:hover": {
+      backgroundColor: theme.palette.mode === "dark" ? "#27303b" : "#e0e0e0",
+      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)",
+    },  
   }));
 
   const SideContent = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#FFFFFF",
     ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
+    padding: theme.spacing(4),
+    textAlign: "left",
     color: theme.palette.text.secondary,
+    boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+  
+    "&:hover": {
+      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)",
+    },
   }));
-
+  
   if (employeeData.length === 0) {
     // Loading state or error handling
     return <div>Loading...</div>;
@@ -151,8 +163,8 @@ const EmployeeDetails = () => {
               alt="Profile Picture"
               src="https://randomuser.me/api/portraits/men/1.jpg"
               sx={{
-                width: 170,
-                height: 168,
+                width: 180,
+                height: 185,
                 margin: "auto",
                 mb: 2,
                 border: "2px solid ",
@@ -176,7 +188,7 @@ const EmployeeDetails = () => {
                   </Typography>
                   <IconButton
                     onClick={handleEditIconClick}
-                    sx={{ color: "blue" }}
+                    sx={{ color: "black" }}
                   >
                     <Edit />
                   </IconButton>
