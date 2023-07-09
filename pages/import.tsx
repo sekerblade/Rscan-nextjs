@@ -173,25 +173,4 @@ export default function App() {
 }
 
 
-import axios from 'axios';
-
-async function fetchData() {
-  try {
-    const response = await axios.get('https://www.adg.co.th/API_Service/employee.js');
-    const data = response.data;
-    console.log(data); // The retrieved data in JavaScript format
-
-    // If you want to parse the JavaScript code and extract the JSON data
-    const regex = /res\.status\(200\)\.json\((.*?)\);/s;
-    const match = regex.exec(data);
-    if (match && match[1]) {
-      const jsonData = JSON.parse(match[1]);
-      console.log(jsonData); // The retrieved data in JSON format
-    }
-  } catch (error) {
-    console.error('Error retrieving data:', error);
-  }
-}
-
-fetchData();
 
