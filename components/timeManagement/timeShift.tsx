@@ -2,9 +2,9 @@ import React from 'react'
 import {
     Box,
     Button,
-    OutlinedInput,
     Stack,
     TextField,
+    Typography,
 
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -28,7 +28,7 @@ export const TimeShift = () => {
                 <Box sx={{//Boxซ้าย
                     border: 1,
                     width: '25%',
-                    height: 630,
+                    height: 800,
 
                 }}>
                     <p>รายการหัวข้อ</p>
@@ -54,32 +54,33 @@ export const TimeShift = () => {
                 <Box sx={{ //ฺBoxขวา
                     border: 1,
                     width: '70%',
-                    height: 630,
+                    height: 800,
                     display: 'flex',
                     flexDirection: 'column',
                 }}>
-                    <Box sx={{
+                    <Box sx={{ //ปุ่มบนสุด
                         width: '100%',
-                        height: '7%',
-                        flexDirection: 'row',
+                        height: 60,
+                        border: '1px solid',
                         borderRadius: '16px',
+                        flexDirection: 'row',
                         marginTop: 2,
                         marginLeft: 2,
                     }}>
                         <Stack spacing={1} direction="row" >
-                            <Button variant="outlined" size="small" startIcon={<AddCircleIcon />}>
+                            <Button variant="outlined" size="medium" startIcon={<AddCircleIcon />}>
                                 Add
                             </Button>
-                            <Button variant="outlined" size="small" startIcon={<EditNoteSharpIcon />}>
+                            <Button variant="outlined" size="medium" startIcon={<EditNoteSharpIcon />}>
                                 Edit
                             </Button>
-                            <Button variant="outlined" size="small" startIcon={<SaveIcon />}>
+                            <Button variant="outlined" size="medium" startIcon={<SaveIcon />}>
                                 Save
                             </Button>
-                            <Button variant="outlined" size="small" startIcon={<DeleteIcon />}>
+                            <Button variant="outlined" size="medium" startIcon={<DeleteIcon />}>
                                 Delete
                             </Button>
-                            <Button variant="outlined" size="small" startIcon={<CancelIcon />}>
+                            <Button variant="outlined" size="medium" startIcon={<CancelIcon />}>
                                 Cancel
                             </Button>
                         </Stack>
@@ -89,34 +90,66 @@ export const TimeShift = () => {
 
                     <Box sx={{ //กล่องบน
                         width: '100%',
-                        height: '23%',
+                        height: 175,
+                        marginLeft: 3,
 
                     }}>
                         <p>ตั้งค่าทั่วไป</p>
-                        <Stack spacing={2}>
-                            <Stack spacing={2} direction="row" useFlexGap flexWrap="wrap">
-                                <p>รหัส</p>
-                                <input type='text' className='ID' />
-                                <p>ชื่อ</p>
-                                <input type='text' className='Name' />
-                                <p>สถานะ</p>
-                                <input type='text' className='Status' />
-                            </Stack>
-                            <Stack spacing={2} direction="row" useFlexGap flexWrap="wrap">
-                                <p>รหัสทำงาน</p>
-                                <input type='text' className='workID' />
-                                <p>ชนิดตารางเวลา</p>
-                                <input type='text' className='timeType' />
 
-                            </Stack>
+                        <Stack spacing={1} direction="row" useFlexGap flexWrap="wrap">
+                            <Typography variant="h6" gutterBottom>
+                                รหัส :
+                            </Typography>
+                            <TextField
+                                required
+                                id="outlined-required"
+                                size="small"
+                            />
+                            <Typography variant="h6" gutterBottom>
+                                สถานะ :
+                            </Typography>
+                            <TextField
+                                required
+                                id="outlined-required"
+                                size="small"
+                            />
+                            <Typography variant="h6" gutterBottom>
+                                ชนิดตารางเวลา :
+                            </Typography>
+                            <TextField
+                                required
+                                id="outlined-required"
+                                size="small"
+                            />
                         </Stack>
+                        <br />
+                        <Stack spacing={1} direction="row" useFlexGap flexWrap="wrap">
+                            <Typography variant="h6" gutterBottom>
+                                ช่วงเวลา :
+                            </Typography>
+                            <TextField
+                                required
+                                id="outlined-required"
+                                size="small"
+                            />
+                            <Typography variant="h6" gutterBottom>
+                                รหัสทำงาน :
+                            </Typography>
+                            <TextField
+                                required
+                                id="outlined-required"
+                                size="small"
+                            />
+                        </Stack>
+
+
 
                     </Box>
 
                     <Box sx={{  //กล่องกลาง
                         width: '100%',
-                        height: '50%',
-                        border: '1px solid',
+                        height: 450,
+
                         borderRadius: '16px'
                     }}>
                         <TimeShiftMid />
