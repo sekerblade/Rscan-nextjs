@@ -96,8 +96,8 @@ export const Responsive = () => {
             }}>
                 <Box // เลือกแผนก
                     sx={{
-                        width: 225,
-                        height: 650,
+                        width: '20%',
+                        height: 800,
                         backgroundColor: 'white',
                         border: '1px dashed grey'
                     }}
@@ -145,21 +145,24 @@ export const Responsive = () => {
                 </Box>
                 <Box // เลือกคน 1
                     sx={{
-                        width: 400,
-                        height: 750,
+
+                        width: '40%',
+                        height: 800,
                         backgroundColor: 'white',
                         border: '1px dashed grey'
                     }}
                 >
                     <Typography>ตารางเลือกพนักงาน</Typography>
 
-                    <DataGridSelection onSelectedEmployeeIdsChange={handleSelectedEmployeeIdsChange} />
+                    <DataGridSelection
+                        onSelectedEmployeeIdsChange={handleSelectedEmployeeIdsChange}
+                    />
 
                 </Box>
                 <Box
                     sx={{
-                        width: 520,
-                        height: 750,
+                        width: '40%',
+                        height: 800,
                         backgroundColor: 'white',
                         border: '1px dashed grey',
                     }}

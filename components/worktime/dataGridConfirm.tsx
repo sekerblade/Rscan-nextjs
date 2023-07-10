@@ -76,12 +76,12 @@ const DataGridConfirm: React.FC<DataGridConfirmProps> = ({
     return (
         <>
             <Box>
-                <Box sx={{ marginLeft: 43.5, marginBottom: 1 }}>
+                <Box sx={{ marginLeft: 65, marginBottom: 1 }}>
                     <Button variant="contained" endIcon={<SearchIcon />} onClick={handleSearch}>
                         ค้นหา
                     </Button>
                 </Box>
-                <Box sx={{ height: 450, width: '100%' }}>
+                <Box sx={{ height: 600, width: '100%' }}>
                     <DataGrid rows={rows} columns={columns} pageSizeOptions={[10, 15, 25]} />
                 </Box>
             </Box>

@@ -54,10 +54,10 @@ export const DataGridSelection: React.FC<DataGridSelectionProps> = ({ onSelected
     return (
         <>
             <Box>
-                <Box sx={{ marginLeft: 30.5, marginBottom: 1 }}>
+                <Box sx={{ marginLeft: 62, marginBottom: 1 }}>
                     <Button variant="contained" onClick={handleConfirmSelection}>ยืนยันการเลือก</Button>
                 </Box>
-                <Box sx={{ height: 450, width: '100%' }}>
+                <Box sx={{ height: 600, width: '100%' }}>
                     <DataGrid
                         rows={employeeData}
                         columns={columns}
@@ -66,7 +66,7 @@ export const DataGridSelection: React.FC<DataGridSelectionProps> = ({ onSelected
                         onRowSelectionModelChange={handleSelectionModelChange}
                     />
                 </Box>
-            </Box>
+            </Box >
 
         </>
     )
