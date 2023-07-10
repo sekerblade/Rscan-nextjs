@@ -13,6 +13,7 @@ import EditNoteSharpIcon from '@mui/icons-material/EditNoteSharp';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { TimeShiftMid } from './timeShiftMid';
+import { TimeShiftBottom } from './timeShiftBottom';
 
 
 export const TimeShift = () => {
@@ -147,18 +148,18 @@ export const TimeShift = () => {
 
                     <Box sx={{  //กล่องกลาง
                         width: '100%',
-                        height: 450,
+                        height: 550,
 
                         borderRadius: '16px'
                     }}>
                         <TimeShiftMid />
                     </Box>
 
-                    <Box sx={{
+                    <Box sx={{ //กล่องล่าง
                         width: '100%',
                         height: '20%',
                     }}>
-
+                        <TimeShiftBottom />
                     </Box>
 
                 </Box>
