@@ -19,7 +19,7 @@ import { Employee } from "../../types/employee";
 export const AddUser = () => {
   const [age, setAge] = React.useState('');
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChangeAge = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
   };
 
@@ -126,7 +126,7 @@ export const AddUser = () => {
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <Select
                 value={age}
-                onChange={({ target }) => setPrefix(target?.value)}
+                onChange={({ target }) => setAge(target?.value)}
                 displayEmpty
                 inputProps={{ 'aria-label': 'Without label' }}
               >

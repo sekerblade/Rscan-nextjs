@@ -81,12 +81,34 @@ export const TimeShiftMid = () => {
     const [inNumThird, setInNumThird] = useState('0')//0 +1 -1
     const [outNumThird, setOutNumThird] = useState('0')
 
+    const [lateType, setLateType] = useState('')//สายแบบไหน? ไทย || ต่างชาติ
+
+    const [breakTime, setBreakTime] = useState(0)//เวลาพักเบรค
+
+    const [canLate, setCanLate] = useState(0)//สามารถเข้า Late ได้กี่นาที
+    const [leaveEarly, setLeaveEarly] = useState(0)//สามารถออก Early ได้กี่นาที
+
     const handleChangeInNumberThird = (event: SelectChangeEvent) => {
         setInNumThird(event.target.value as string)
     }
     const handleChangeOutNumberThird = (event: SelectChangeEvent) => {
         setOutNumThird(event.target.value as string)
     }
+
+    const handleChangeLateType = (event: SelectChangeEvent) => {
+        setLateType(event.target.value as string)
+    }
+
+    //Data กล่องฐาน
+    const [period, setPeriod] = useState('ช่วงเวลาทำงาน')
+
+    const [calDay, setCalDay] = useState(1.0)
+
+    const handleChangePeriod = (event: SelectChangeEvent) => {
+        setPeriod(event.target.value as string)
+    }
+
+
 
 
 
@@ -123,7 +145,7 @@ export const TimeShiftMid = () => {
 
                             <Stack spacing={1} direction="row" sx={{ marginLeft: 2, marginTop: 2 }}>
                                 <Checkbox defaultChecked size="medium" sx={{ marginBottom: 10 }} />
-                                <Typography variant="h6" gutterBottom sx={{ width: 250 }}>
+                                <Typography variant="h6" gutterBottom sx={{ width: 250, paddingTop: 0.5 }}>
                                     ต้องลงเวลาเข้า :
                                 </Typography>
                                 <FormControl fullWidth>
@@ -132,7 +154,7 @@ export const TimeShiftMid = () => {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={inNum}
-                                        label="0"
+                                        label=""
                                         onChange={handleChangeInNumber}
                                         size='small'
                                         sx={{ width: 150 }}
@@ -169,7 +191,7 @@ export const TimeShiftMid = () => {
 
                             <Stack spacing={1} direction="row" sx={{ marginLeft: 2, marginTop: 2 }}>
                                 <Checkbox defaultChecked size="medium" sx={{ marginBottom: 10 }} />
-                                <Typography variant="h6" gutterBottom sx={{ width: 250 }}>
+                                <Typography variant="h6" gutterBottom sx={{ width: 250, paddingTop: 0.5 }}>
                                     ต้องลงเวลาออก :
                                 </Typography>
                                 <FormControl fullWidth>
@@ -178,7 +200,7 @@ export const TimeShiftMid = () => {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={outNum}
-                                        label="0"
+                                        label=""
                                         onChange={handleChangeOutNumber}
                                         size='small'
                                         sx={{ width: 150 }}
@@ -209,7 +231,7 @@ export const TimeShiftMid = () => {
                             <Stack spacing={1} direction="row" >
                                 <Typography variant='h6' sx={{ marginRight: 8, marginLeft: 2 }} >ถือเป็นเวลาเข้างาน</Typography>
                                 <Checkbox defaultChecked size="medium" />
-                                <Typography variant='h6' >เก็บข้อมูลท้าย</Typography>
+                                <Typography variant='h6' sx={{ paddingTop: 0.5 }} >เก็บข้อมูลท้าย</Typography>
                             </Stack>
 
                             <Stack spacing={3.7} direction="row" sx={{ marginLeft: 2, marginTop: 0 }} >
@@ -246,7 +268,7 @@ export const TimeShiftMid = () => {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={inNumFirst}
-                                        label="0"
+                                        label=""
                                         onChange={handleChangeInNumberFirst}
                                         size='small'
                                         sx={{ width: 150 }}
@@ -263,7 +285,7 @@ export const TimeShiftMid = () => {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={outNumFirst}
-                                        label="0"
+                                        label=""
                                         onChange={handleChangeOutNumberFirst}
                                         size='small'
                                         sx={{ width: 150 }}
@@ -290,7 +312,7 @@ export const TimeShiftMid = () => {
                             <Stack spacing={1} direction="row" >
                                 <Typography variant='h6' sx={{ marginRight: 8, marginLeft: 2 }} >ถือเป็นเวลาออกงาน</Typography>
                                 <Checkbox defaultChecked size="medium" />
-                                <Typography variant='h6' >เก็บข้อมูลแรกสุด</Typography>
+                                <Typography variant='h6' sx={{ paddingTop: 0.5 }} >เก็บข้อมูลแรกสุด</Typography>
                             </Stack>
 
                             <Stack spacing={3.7} direction="row" sx={{ marginLeft: 2, marginTop: 0 }} >
@@ -327,7 +349,7 @@ export const TimeShiftMid = () => {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={inNumSecond}
-                                        label="0"
+                                        label=""
                                         onChange={handleChangeInNumberSecond}
                                         size='small'
                                         sx={{ width: 150 }}
@@ -344,7 +366,7 @@ export const TimeShiftMid = () => {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={outNumSecond}
-                                        label="0"
+                                        label=""
                                         onChange={handleChangeOutNumberSecond}
                                         size='small'
                                         sx={{ width: 150 }}
@@ -362,19 +384,21 @@ export const TimeShiftMid = () => {
                 </Box>
 
 
-                <Box>
+                <Box sx={{
+
+                }}>
                     <Stack spacing={1} direction="row" >
-                        <Box sx={{
+                        <Box sx={{ //ซ้าย
                             width: '50%',
                             border: '1px solid ',
-                            height: 150,
+                            height: 190,
                             display: 'flex',
                             flexDirection: 'column',
 
                         }}>
                             <Stack spacing={1} direction="row" >
                                 <Checkbox defaultChecked size="medium" />
-                                <Typography variant="h6" gutterBottom>
+                                <Typography variant="h6" gutterBottom sx={{ paddingTop: 0.5 }}>
                                     หยุดพักกลางวันและเย็น
                                 </Typography>
                             </Stack>
@@ -414,7 +438,7 @@ export const TimeShiftMid = () => {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={inNumThird}
-                                        label="0"
+                                        label=""
                                         onChange={handleChangeInNumberThird}
                                         size='small'
                                         sx={{ width: 150 }}
@@ -431,7 +455,7 @@ export const TimeShiftMid = () => {
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
                                         value={outNumThird}
-                                        label="0"
+                                        label=""
                                         onChange={handleChangeOutNumberThird}
                                         size='small'
                                         sx={{ width: 150 }}
@@ -443,20 +467,133 @@ export const TimeShiftMid = () => {
                                     </Select>
                                 </FormControl>
                             </Stack>
+                            <Stack spacing={7} direction="row" sx={{ marginLeft: 1, marginTop: 1 }}>
+                                <Stack spacing={1} direction="row">
+                                    <Checkbox defaultChecked size="medium" />
+                                    <Typography variant="h6" sx={{ paddingTop: 0.5 }} >มีช่วงเวลาพัก</Typography>
+                                </Stack>
+                                <Stack spacing={1} direction="row">
+                                    <TextField
+                                        id="outlined-basic"
+                                        label=""
+                                        variant="outlined"
+                                        value={breakTime}
+                                        size='small'
+                                        sx={{ width: 120, paddingRight: 1 }}
+                                    />
+                                    <Typography variant="h6">นาที</Typography>
+                                </Stack>
+
+                            </Stack>
 
 
 
                         </Box>
-                        <Box sx={{
+                        <Box sx={{//ขวา
                             width: '50%',
                             border: '1px solid ',
-                            height: 150,
-                        }}>
+                            height: 190,
 
+                        }}>
+                            <Stack direction="row" sx={{ marginLeft: 2 }}>
+                                <Typography variant="h6" >เงื่อนไข</Typography>
+                            </Stack>
+                            <Stack spacing={1} direction="row" sx={{ marginLeft: 3 }}>
+                                <Typography variant="h6" sx={{ width: 250 }} >ชนิดอนุโลมมาสาย</Typography>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label"></InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={lateType}
+                                        label=""
+                                        onChange={handleChangeLateType}
+                                        size='small'
+                                        sx={{ width: 150 }}
+                                    >
+                                        <MenuItem value={"แบบไทย"}>แบบไทย</MenuItem>
+                                        <MenuItem value={"แบบต่างชาติ"}>แบบต่างชาติ</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Stack>
+                            <Stack spacing={1} direction="row" sx={{ marginLeft: 6 }}>
+                                <Stack spacing={1} direction="row" sx={{ marginTop: 1 }}>
+                                    <Typography variant='h6' sx={{ width: 150 }}>มาสายได้</Typography>
+                                    <TextField
+                                        id="outlined-basic"
+                                        label=""
+                                        variant="outlined"
+                                        value={canLate}
+                                        size='small'
+                                        sx={{ width: 120, paddingRight: 1 }}
+                                    />
+                                    <Typography variant='h6'> นาที</Typography>
+                                </Stack>
+                            </Stack>
+                            <Stack spacing={1} direction="row" sx={{ marginLeft: 6 }}>
+                                <Stack spacing={1} direction="row" sx={{ marginTop: 1 }}>
+                                    <Typography variant='h6' sx={{ width: 150 }}>ออกก่อนได้</Typography>
+                                    <TextField
+                                        id="outlined-basic"
+                                        label=""
+                                        variant="outlined"
+                                        value={leaveEarly}
+                                        size='small'
+                                        sx={{ width: 120, paddingRight: 1 }}
+                                    />
+                                    <Typography variant='h6'> นาที</Typography>
+                                </Stack>
+                            </Stack>
                         </Box>
                     </Stack>
                 </Box>
 
+
+                <Box sx={{
+                    width: '100%',
+                    height: 80,
+                    border: '1px solid ',
+
+                }}>
+                    <Typography variant="h6" sx={{ marginLeft: 2 }}>สถานะตารางเวลา</Typography>
+                    <Stack spacing={25} direction="row" >
+                        <Stack spacing={1} direction="row" sx={{ marginLeft: 3 }}>
+
+                            <FormControl>
+                                <InputLabel id="demo-simple-select-label"></InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={period}
+                                    label=""
+                                    onChange={handleChangePeriod}
+                                    size='small'
+                                    sx={{ width: 150 }}
+                                >
+                                    <MenuItem value={"ช่วงเวลาทำงาน"}>ช่วงเวลาทำงาน</MenuItem>
+
+                                </Select>
+                            </FormControl>
+                            <Checkbox size="medium" sx={{ paddingLeft: 4 }} />
+                            <Typography variant="h6" sx={{ paddingTop: 0.5 }}>โอทีไม่จำกัด</Typography>
+
+                        </Stack>
+                        <Stack spacing={2} direction="row">
+                            <Typography variant="h6" sx={{ paddingTop: 0.5 }} >ผลคำนวณนับเป็น</Typography>
+                            <TextField
+                                id="outlined-basic"
+                                label=""
+                                variant="outlined"
+                                value={calDay}
+                                size='small'
+                                sx={{ width: 100, paddingRight: 1 }}
+                            />
+                            <Typography variant="h6" sx={{ paddingTop: 0.5 }}>วัน</Typography>
+                        </Stack>
+                    </Stack>
+
+
+                </Box>
             </Box>
         </>
     )

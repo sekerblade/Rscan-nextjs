@@ -28,7 +28,7 @@ export const TimeShift = () => {
                 <Box sx={{//Boxซ้าย
                     border: 1,
                     width: '25%',
-                    height: 800,
+                    height: 900,
 
                 }}>
                     <p>รายการหัวข้อ</p>
@@ -54,16 +54,15 @@ export const TimeShift = () => {
                 <Box sx={{ //ฺBoxขวา
                     border: 1,
                     width: '70%',
-                    height: 800,
+                    height: 900,
                     display: 'flex',
                     flexDirection: 'column',
                 }}>
                     <Box sx={{ //ปุ่มบนสุด
                         width: '100%',
                         height: 60,
-                        border: '1px solid',
-                        borderRadius: '16px',
-                        flexDirection: 'row',
+
+
                         marginTop: 2,
                         marginLeft: 2,
                     }}>
@@ -90,7 +89,7 @@ export const TimeShift = () => {
 
                     <Box sx={{ //กล่องบน
                         width: '100%',
-                        height: 175,
+                        height: 145,
                         marginLeft: 3,
 
                     }}>
@@ -158,10 +157,8 @@ export const TimeShift = () => {
                     <Box sx={{
                         width: '100%',
                         height: '20%',
-                        border: '1px solid',
-                        borderRadius: '16px'
                     }}>
-                        <p>ผลการคำนวณ</p>
+
                     </Box>
 
                 </Box>
