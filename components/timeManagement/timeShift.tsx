@@ -93,6 +93,7 @@ export const TimeShift = () => {
                         height: 145,
                         marginLeft: 3,
 
+
                     }}>
                         <p>ตั้งค่าทั่วไป</p>
 
@@ -149,8 +150,7 @@ export const TimeShift = () => {
                     <Box sx={{  //กล่องกลาง
                         width: '100%',
                         height: 550,
-
-                        borderRadius: '16px'
+                        marginTop: 2
                     }}>
                         <TimeShiftMid />
                     </Box>

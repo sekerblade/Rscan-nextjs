@@ -102,14 +102,11 @@ export const TimeShiftMid = () => {
     //Data กล่องฐาน
     const [period, setPeriod] = useState('ช่วงเวลาทำงาน')
 
-    const [calDay, setCalDay] = useState(1.0)
+    const [calDay, setCalDay] = useState("1.0")
 
     const handleChangePeriod = (event: SelectChangeEvent) => {
         setPeriod(event.target.value as string)
     }
-
-
-
 
 
     return (
@@ -585,6 +582,7 @@ export const TimeShiftMid = () => {
                                 label=""
                                 variant="outlined"
                                 value={calDay}
+                                onChange={({ target }) => setCalDay(target?.value)}
                                 size='small'
                                 sx={{ width: 100, paddingRight: 1 }}
                             />
