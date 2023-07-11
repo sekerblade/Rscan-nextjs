@@ -8,6 +8,7 @@ import {
     Box,
 } from '@mui/material';
 import { TimeShift } from './timeShift';
+import { DayShift } from './dayShift';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -69,7 +70,7 @@ const TabTime = () => {
 
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    ตารางวัน
+                    <DayShift />
 
                 </TabPanel>
                 <TabPanel value={value} index={2}>
