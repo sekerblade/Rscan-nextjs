@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Box,
     Button,
@@ -17,6 +17,15 @@ import { TimeShiftBottom } from './timeShiftBottom';
 
 
 export const TimeShift = () => {
+
+    const [code, setCode] = useState('')
+    const [status, setStatus] = useState('')
+    const [scheduleType, setScheduleType] = useState('')
+    const [periodTop, setPeriodTop] = useState('')
+    const [workCode, setWorkCode] = useState('')
+
+
+
     return (
         <>
 
@@ -93,7 +102,6 @@ export const TimeShift = () => {
                         height: 145,
                         marginLeft: 3,
 
-
                     }}>
                         <p>ตั้งค่าทั่วไป</p>
 
@@ -105,6 +113,7 @@ export const TimeShift = () => {
                                 required
                                 id="outlined-required"
                                 size="small"
+                                value={code}
                             />
                             <Typography variant="h6" gutterBottom>
                                 สถานะ :
@@ -113,6 +122,7 @@ export const TimeShift = () => {
                                 required
                                 id="outlined-required"
                                 size="small"
+                                value={status}
                             />
                             <Typography variant="h6" gutterBottom>
                                 ชนิดตารางเวลา :
@@ -121,6 +131,7 @@ export const TimeShift = () => {
                                 required
                                 id="outlined-required"
                                 size="small"
+                                value={scheduleType}
                             />
                         </Stack>
                         <br />
@@ -132,6 +143,7 @@ export const TimeShift = () => {
                                 required
                                 id="outlined-required"
                                 size="small"
+                                value={periodTop}
                             />
                             <Typography variant="h6" gutterBottom>
                                 รหัสทำงาน :
@@ -140,6 +152,7 @@ export const TimeShift = () => {
                                 required
                                 id="outlined-required"
                                 size="small"
+                                value={workCode}
                             />
                         </Stack>
 

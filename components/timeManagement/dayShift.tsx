@@ -16,6 +16,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { SketchPicker, BlockPicker } from 'react-color'
+
 
 export const DayShift = () => {
 
@@ -23,6 +25,8 @@ export const DayShift = () => {
     const [periodTwo, setPeriodTwo] = useState('')
     const [periodThree, setPeriodThree] = useState('')
     const [periodFour, setPeriodFour] = useState('')
+
+    const [blockPickerColor, setBlockPickerColor] = useState("#37d67a");
 
     return (
         <>
