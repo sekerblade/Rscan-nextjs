@@ -45,11 +45,11 @@ export const AddUser = () => {
 
   const [firstname, setFirstName] = useState("")
   const [lastname, setLastname] = useState("")
-  const [enrollnum, setEnrollnum] = useState("")
-  const [status, setStatus] = useState("")
-  const [dept, setDept] = useState("")
+  const [enrollnum, setEnrollnum] = useState<any>("")
+  const [status, setStatus] = useState<any>("")
+  const [dept, setDept] = useState<any>("")
   const [empcode, setEmpCode] = useState("3333")
-  const [prefix, setPrefix] = useState(age)
+  const [prefix, setPrefix] = useState('')
 
   const formAddEmployee = {
     Prefix: prefix,
@@ -70,8 +70,8 @@ export const AddUser = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formAddEmployee),
-      });
 
+      });
       if (response.ok) {
         console.log('Data submitted successfully');
         // Reset form data
@@ -125,8 +125,8 @@ export const AddUser = () => {
           >
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <Select
-                value={age}
-                onChange={({ target }) => setAge(target?.value)}
+                value={prefix}
+                onChange={({ target }) => setPrefix(target?.value)}
                 displayEmpty
                 inputProps={{ 'aria-label': 'Without label' }}
               >

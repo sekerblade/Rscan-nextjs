@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
     Box,
     Grid,
@@ -21,16 +21,12 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
+import { DataContext } from './timeShift';
 
 export const TimeShiftMid = () => {
+
+    const data = useContext(DataContext)
+
     // Data กล่องบนสุด
     const [valueAttendance, setValueAttendance] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
     const [valueWorkOut, setValueWorkOut] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
@@ -108,6 +104,29 @@ export const TimeShiftMid = () => {
         setPeriod(event.target.value as string)
     }
 
+    const exNum = [
+        {
+            num: "+1"
+        },
+        {
+            num: "0"
+        },
+        {
+            num: "-1"
+        },
+    ]
+
+    const late = [
+        {
+            name: "แบบไทย",
+            id: 0
+        },
+        {
+            name: "แบบต่างชาติ",
+            id: 1
+        }
+    ]
+
 
     return (
         <>
@@ -156,9 +175,9 @@ export const TimeShiftMid = () => {
                                         size='small'
                                         sx={{ width: 150 }}
                                     >
-                                        <MenuItem value={-1}>-1</MenuItem>
-                                        <MenuItem value={0}>0</MenuItem>
-                                        <MenuItem value={+1}>+1</MenuItem>
+                                        {exNum.map((id) => {
+                                            return <MenuItem key={id.num} value={id.num}>{id.num}</MenuItem>
+                                        })}
                                     </Select>
                                 </FormControl>
                             </Stack>
@@ -203,9 +222,13 @@ export const TimeShiftMid = () => {
                                         sx={{ width: 150 }}
 
                                     >
-                                        <MenuItem value={-1}>-1</MenuItem>
+                                        {exNum.map((id) => {
+                                            return <MenuItem key={id.num} value={id.num}>{id.num}</MenuItem>
+                                        })}
+
+                                        {/* <MenuItem value={-1}>-1</MenuItem>
                                         <MenuItem value={0}>0</MenuItem>
-                                        <MenuItem value={+1}>+1</MenuItem>
+                                        <MenuItem value={+1}>+1</MenuItem> */}
                                     </Select>
                                 </FormControl>
                             </Stack>
@@ -271,9 +294,9 @@ export const TimeShiftMid = () => {
                                         sx={{ width: 150 }}
 
                                     >
-                                        <MenuItem value={-1}>-1</MenuItem>
-                                        <MenuItem value={0}>0</MenuItem>
-                                        <MenuItem value={+1}>+1</MenuItem>
+                                        {exNum.map((id) => {
+                                            return <MenuItem key={id.num} value={id.num}>{id.num}</MenuItem>
+                                        })}
                                     </Select>
                                 </FormControl>
                                 <FormControl fullWidth>
@@ -288,9 +311,9 @@ export const TimeShiftMid = () => {
                                         sx={{ width: 150 }}
 
                                     >
-                                        <MenuItem value={-1}>-1</MenuItem>
-                                        <MenuItem value={0}>0</MenuItem>
-                                        <MenuItem value={+1}>+1</MenuItem>
+                                        {exNum.map((id) => {
+                                            return <MenuItem key={id.num} value={id.num}>{id.num}</MenuItem>
+                                        })}
                                     </Select>
                                 </FormControl>
                             </Stack>
@@ -352,9 +375,9 @@ export const TimeShiftMid = () => {
                                         sx={{ width: 150 }}
 
                                     >
-                                        <MenuItem value={-1}>-1</MenuItem>
-                                        <MenuItem value={0}>0</MenuItem>
-                                        <MenuItem value={+1}>+1</MenuItem>
+                                        {exNum.map((id) => {
+                                            return <MenuItem key={id.num} value={id.num}>{id.num}</MenuItem>
+                                        })}
                                     </Select>
                                 </FormControl>
                                 <FormControl fullWidth>
@@ -369,9 +392,9 @@ export const TimeShiftMid = () => {
                                         sx={{ width: 150 }}
 
                                     >
-                                        <MenuItem value={-1}>-1</MenuItem>
-                                        <MenuItem value={0}>0</MenuItem>
-                                        <MenuItem value={+1}>+1</MenuItem>
+                                        {exNum.map((id) => {
+                                            return <MenuItem key={id.num} value={id.num}>{id.num}</MenuItem>
+                                        })}
                                     </Select>
                                 </FormControl>
                             </Stack>
@@ -441,9 +464,9 @@ export const TimeShiftMid = () => {
                                         sx={{ width: 150 }}
 
                                     >
-                                        <MenuItem value={-1}>-1</MenuItem>
-                                        <MenuItem value={0}>0</MenuItem>
-                                        <MenuItem value={+1}>+1</MenuItem>
+                                        {exNum.map((id) => {
+                                            return <MenuItem key={id.num} value={id.num}>{id.num}</MenuItem>
+                                        })}
                                     </Select>
                                 </FormControl>
                                 <FormControl fullWidth>
@@ -458,9 +481,9 @@ export const TimeShiftMid = () => {
                                         sx={{ width: 150 }}
 
                                     >
-                                        <MenuItem value={-1}>-1</MenuItem>
-                                        <MenuItem value={0}>0</MenuItem>
-                                        <MenuItem value={+1}>+1</MenuItem>
+                                        {exNum.map((id) => {
+                                            return <MenuItem key={id.num} value={id.num}>{id.num}</MenuItem>
+                                        })}
                                     </Select>
                                 </FormControl>
                             </Stack>
@@ -508,8 +531,12 @@ export const TimeShiftMid = () => {
                                         size='small'
                                         sx={{ width: 150 }}
                                     >
-                                        <MenuItem value={"แบบไทย"}>แบบไทย</MenuItem>
-                                        <MenuItem value={"แบบต่างชาติ"}>แบบต่างชาติ</MenuItem>
+                                        {late.map((late) => {
+                                            return <MenuItem key={late.id} value={late.name}>{late.name}</MenuItem>
+                                        })}
+
+                                        {/* <MenuItem value={"แบบไทย"}>แบบไทย</MenuItem>
+                                        <MenuItem value={"แบบต่างชาติ"}>แบบต่างชาติ</MenuItem> */}
                                     </Select>
                                 </FormControl>
                             </Stack>
@@ -596,3 +623,33 @@ export const TimeShiftMid = () => {
         </>
     )
 }
+    // const context = useContext(DataContext);
+    // const {
+    //     code,
+    //     status,
+    //     scheduleType,
+    //     periodTop,
+    //     workCode,
+    //     valueAttendance,
+    //     valueWorkOut,
+    //     inNum,
+    //     outNum,
+    //     startTimeShift1,
+    //     endTimeShift1,
+    //     startTimeShift2,
+    //     endTimeShift2,
+    //     inNumFirst,
+    //     outNumFirst,
+    //     inNumSecond,
+    //     outNumSecond,
+    //     startTimeShift3,
+    //     endTimeShift3,
+    //     inNumThird,
+    //     outNumThird,
+    //     lateType,
+    //     breakTime,
+    //     canLate,
+    //     leaveEarly,
+    //     period,
+    //     calDay,
+    // } = context;

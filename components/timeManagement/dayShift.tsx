@@ -16,7 +16,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { SketchPicker, BlockPicker } from 'react-color'
+import { CirclePicker, Color, ColorChangeHandler, ColorResult } from 'react-color'
+
+
 
 
 export const DayShift = () => {
@@ -26,7 +28,8 @@ export const DayShift = () => {
     const [periodThree, setPeriodThree] = useState('')
     const [periodFour, setPeriodFour] = useState('')
 
-    const [blockPickerColor, setBlockPickerColor] = useState("#37d67a");
+    const [color, setColor] = useState<Color>();
+    const [showColorPicker, setShowColorPicker] = useState(false)
 
     return (
         <>
@@ -202,6 +205,17 @@ export const DayShift = () => {
 
                             <Stack spacing={7} direction='row' sx={{ marginTop: 2 }}>
                                 <Typography variant='h6'>สีพื้นหลัง</Typography>
+                                <Button
+                                    onClick={() => setShowColorPicker(showColorPicker => !showColorPicker)}
+                                >
+                                    {showColorPicker ? ' Close color picker' : 'Pick a color'}
+                                </Button>
+                                {showColorPicker && (
+                                    <CirclePicker
+                                        color={color}
+
+                                    />)
+                                }
 
                             </Stack>
 

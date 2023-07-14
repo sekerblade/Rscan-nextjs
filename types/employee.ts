@@ -1,5 +1,5 @@
 export type Employee = {
-    ID: number;
+    ID: number | any;
     Prefix: string;
     Name: string;
     SureName: string;

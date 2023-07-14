@@ -28,7 +28,7 @@ export const Branch = () => {
                 const data = await response.json();
                 const branchWithId = data.map((branches: branchesHaveDeqartments, index: number) => ({
                     ...branches,
-                    id: index + 1,
+                    id: index,
                 }));
                 setBranches(branchWithId);
             } catch (error) {
@@ -69,7 +69,8 @@ export const Branch = () => {
                                 </Accordion>
                             </AccordionDetails>
                         </Accordion>
-                    </Grid>)}
+                    </Grid>
+                )}
 
             </Grid>
         </>

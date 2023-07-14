@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             
             const {EnrollNumber,Prefix,Name,SureName,EmployeeCode,Status,DeptID } = req.body;
-
+            console.log(req.body);
             // Perform the INSERT query
             const result = await query(
                 'INSERT INTO Emp_Info (EnrollNumber, Prefix, Name, SureName, EmployeeCode, Status, DeptID) VALUES (?, ?, ?, ?, ?, ?, ?)',
