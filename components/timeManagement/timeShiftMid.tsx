@@ -11,9 +11,6 @@ import {
 
 } from '@mui/material'
 import dayjs, { Dayjs } from 'dayjs';
-import { styled } from '@mui/material/styles';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimeField } from '@mui/x-date-pickers';
@@ -21,11 +18,12 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { DataContext } from './timeShift';
+import { topReducer, timeTableData } from './formReducer';
+
 
 export const TimeShiftMid = () => {
 
-    const data = useContext(DataContext)
+
 
     // Data กล่องบนสุด
     const [valueAttendance, setValueAttendance] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
@@ -126,6 +124,37 @@ export const TimeShiftMid = () => {
             id: 1
         }
     ]
+
+    const midData = {
+        valueAttendance: valueAttendance,
+        valueWorkOut: valueWorkOut,
+        inNum: inNum,
+        outNum: outNum,
+        startTimeShift1: startTimeShift1,
+        endTimeShift1: endTimeShift1,
+        startTimeShift2: startTimeShift2,
+        endTimeShift2: endTimeShift2,
+        inNumFirst: inNumFirst,
+        outNumFirst: outNumFirst,
+        inNumSecond: inNumSecond,
+        outNumSecond: outNumSecond,
+        startTimeShift3: startTimeShift3,
+        endTimeShift3: endTimeShift3,
+        inNumThird: inNumThird,
+        outNumThird: outNumThird,
+        lateType: lateType,
+        breakTime: breakTime,
+        canLate: canLate,
+        leaveEarly: leaveEarly,
+        period: period,
+        calDay: calDay,
+    }
+
+
+
+
+
+
 
 
     return (
