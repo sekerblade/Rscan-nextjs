@@ -1,4 +1,6 @@
-export const timeTableData : any = { //initial
+import {TimeTableData} from "../../types/timeTableDataType"
+
+export const timeTableData : TimeTableData= { //initial
     code: '',
     status: '',
     scheduleType: '',
@@ -37,9 +39,10 @@ export const topReducer =(state: any, action: any) =>{
             }
         case 'changeMid':
             return {
-
+                ...state,
+                [action.payload.name]: action.payload.value
             }    
 
     }
-    return state
+   
 }

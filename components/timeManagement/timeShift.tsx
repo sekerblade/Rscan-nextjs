@@ -14,8 +14,9 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { TimeShiftMid } from './timeShiftMid';
 import { TimeShiftBottom } from './timeShiftBottom';
 import { topReducer, timeTableData } from './formReducer';
+import { TimeTableData } from '../../types/timeTableDataType';
 
-const DataContext = createContext(timeTableData);
+export const DataContext = createContext<{ state: TimeTableData, dispatch: React.Dispatch<any> }>({ state: timeTableData, dispatch: () => { } });
 
 export const TimeShift = () => {
 
@@ -27,10 +28,6 @@ export const TimeShift = () => {
             payload: { name: e.target.name, value: e.target.value }
         })
     }
-
-    console.log(state)
-
-
 
     return (
 
@@ -196,15 +193,9 @@ export const TimeShift = () => {
 
                 </Box>
             </Box>
-
-
         </>
-
-
-
     )
 }
-export { DataContext }
 /*{
                 code: state.code,
                 status: state.status,
