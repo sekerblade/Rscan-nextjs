@@ -30,7 +30,7 @@ export default function SignIn() {
         <Container component="main" maxWidth="sm">
             <Box
                 sx={{
-                    boxShadow: 3,
+                    boxShadow: 20,
                     borderRadius: 2,
                     px: 4,
                     py: 6,
@@ -80,11 +80,6 @@ export default function SignIn() {
                         <Grid item xs>
                             <Link href="#" variant="body2">
                                 Forgot password?
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
                     </Grid>
