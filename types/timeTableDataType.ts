@@ -28,4 +28,7 @@ export type TimeTableData = {
     leaveEarly: number|string;
     period: string;
     calDay: string;
+    textOne: string;
+    textTwo: string;
+    textThree: string;
 }

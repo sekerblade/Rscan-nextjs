@@ -9,7 +9,7 @@ import {
   GridRenderCellParams,
   GridRowModel,
 } from "@mui/x-data-grid";
-import { Box, CircularProgress, Snackbar, Alert, Grid } from "@mui/material";
+import { Box, Snackbar, Alert, Grid } from "@mui/material";
 import { RoomsActions } from "./RoomsActions";
 import { Employee } from "../../types/employee";
 import { BasicSelect } from "../filterBar/filterSelect";

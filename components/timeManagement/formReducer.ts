@@ -1,3 +1,4 @@
+import dayjs from "dayjs"
 import {TimeTableData} from "../../types/timeTableDataType"
 
 export const timeTableData : TimeTableData= { //initial
@@ -6,20 +7,20 @@ export const timeTableData : TimeTableData= { //initial
     scheduleType: '',
     periodTop: '',
     workCode: '',
-    valueAttendance: '',
-    valueWorkOut: '',
+    valueAttendance: '00:00',
+    valueWorkOut: '00:00',
     inNum: '',
     outNum: '',
-    startTimeShift1: '',
-    endTimeShift1: '',
-    startTimeShift2: '',
-    endTimeShift2: '',
+    startTimeShift1: '00:00',
+    endTimeShift1: '00:00',
+    startTimeShift2: '00:00',
+    endTimeShift2: '00:00',
     inNumFirst: '',
     outNumFirst: '',
     inNumSecond: '',
     outNumSecond: '',
-    startTimeShift3: '',
-    endTimeShift3: '',
+    startTimeShift3: '00:00',
+    endTimeShift3: '00:00',
     inNumThird: '',
     outNumThird: '',
     lateType: '',
@@ -28,6 +29,9 @@ export const timeTableData : TimeTableData= { //initial
     leaveEarly: '',
     period: '',
     calDay: '',
+    textOne: '',
+    textTwo: '',
+    textThree: '',
 }
 
 export const topReducer =(state: any, action: any) =>{
@@ -41,8 +45,16 @@ export const topReducer =(state: any, action: any) =>{
             return {
                 ...state,
                 [action.payload.name]: action.payload.value
-            }    
-
-    }
-   
+            }   
+        case 'changeBottom':
+            return {
+                ...state,
+                [action.payload.name]: action.payload.value
+            } 
+        case 'changetime':
+            return {
+                ...state,
+                [action.payload.id]: action.payload.value
+            }
+        }
 }

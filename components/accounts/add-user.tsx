@@ -194,7 +194,7 @@ export const AddUser = () => {
                 value={dept}
                 onChange={({ target }) => setDept(target?.value)} />
             </Flex >
-            <Button variant="contained" onClick={handleSubmit}>Sumit</Button>
+            <Button variant="contained" onClick={handleSubmit}>Submit</Button>
           </Flex >
         </Box>
       </Modal>

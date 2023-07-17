@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
     Box,
     Grid,
@@ -21,85 +21,89 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { DataContext } from './timeShift';
 
 export const TimeShiftBottom = () => {
 
-    const [textOne, setTextOne] = useState("เวลาทำงาน")
-    const [textTwo, setTextTwo] = useState("โอที 1.5")
-    const [textThree, setTextThree] = useState("โอที 1.5")
+    const { dispatch } = useContext(DataContext);
 
-    const handleChangeOne = (event: SelectChangeEvent) => {
-        setTextOne(event.target.value as string)
-    }
-
-    const handleChangeTwo = (event: SelectChangeEvent) => {
-        setTextTwo(event.target.value as string)
-    }
-
-    const handleChangeThree = (event: SelectChangeEvent) => {
-        setTextThree(event.target.value as string)
+    const handleChangeBottom = (e: any) => {
+        dispatch({
+            type: 'changeBottom',
+            payload: { name: e.target.name, value: e.target.value }
+        })
     }
 
 
     return (
         <>
-            <Box sx={{
-                width: '100%',
+            <DataContext.Consumer>
+                {midState => (
+                    <Box sx={{
+                        width: '100%',
+                    }}>
+                        <Typography variant='h6' sx={{ marginLeft: 2 }}>ผลการคำนวณ</Typography>
+                        <Box sx={{
+                            marginLeft: 3
+                        }}>
+                            <Stack spacing={3.2} direction="row">
+                                <Typography variant='h6' >ถ้าช่วงเวลานี้เป็นวันทำงานปกติ เก็บผลการคำนวณใน =</Typography>
+                                <FormControl>
+                                    <Select
+                                        name='textOne'
+                                        value={midState.state.textOne}
+                                        label=""
+                                        onChange={handleChangeBottom}
+                                        size='small'
+                                        sx={{ width: 150 }}
+                                    >
+                                        <MenuItem value={"เวลาทำงาน"}>เวลาทำงาน</MenuItem>
 
-            }}>
-                <Typography variant='h6' sx={{ marginLeft: 2 }}>ผลการคำนวณ</Typography>
-                <Box sx={{
-                    marginLeft: 3
-                }}>
-                    <Stack spacing={3.2} direction="row">
-                        <Typography variant='h6' >ถ้าช่วงเวลานี้เป็นวันทำงานปกติ เก็บผลการคำนวณใน =</Typography>
-                        <FormControl>
-                            <Select
-                                value={textOne}
-                                label=""
-                                onChange={handleChangeOne}
-                                size='small'
-                                sx={{ width: 150 }}
-                            >
-                                <MenuItem value={"เวลาทำงาน"}>เวลาทำงาน</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Stack>
 
-                            </Select>
-                        </FormControl>
-                    </Stack>
+                            <Stack spacing={11} direction="row">
+                                <Typography variant='h6' >ถ้าช่วงเวลานี้เป็นวันหยุดเก็บผลการคำนวณใน =</Typography>
+                                <FormControl>
+                                    <Select
+                                        name='textTwo'
+                                        value={midState.state.textTwo}
+                                        label=""
+                                        onChange={handleChangeBottom}
+                                        size='small'
+                                        sx={{ width: 150 }}
+                                    >
+                                        <MenuItem value={"โอที 1.5"}>โอที 1.5</MenuItem>
 
-                    <Stack spacing={11} direction="row">
-                        <Typography variant='h6' >ถ้าช่วงเวลานี้เป็นวันหยุดเก็บผลการคำนวณใน =</Typography>
-                        <FormControl>
-                            <Select
-                                value={textTwo}
-                                label=""
-                                onChange={handleChangeTwo}
-                                size='small'
-                                sx={{ width: 150 }}
-                            >
-                                <MenuItem value={"โอที 1.5"}>โอที 1.5</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Stack>
 
-                            </Select>
-                        </FormControl>
-                    </Stack>
+                            <Stack spacing={2.2} direction="row">
+                                <Typography variant='h6' >ถ้าช่วงเวลานี้เป็นวันหยุดประจำปี เก็บผลการคำนวณใน =</Typography>
+                                <FormControl>
+                                    <Select
+                                        name='textThree'
+                                        value={midState.state.textThree}
+                                        label=""
+                                        onChange={handleChangeBottom}
+                                        size='small'
+                                        sx={{ width: 150 }}
+                                    >
+                                        <MenuItem value={"โอที 1.5"}>โอที 1.5</MenuItem>
 
-                    <Stack spacing={2.2} direction="row">
-                        <Typography variant='h6' >ถ้าช่วงเวลานี้เป็นวันหยุดประจำปี เก็บผลการคำนวณใน =</Typography>
-                        <FormControl>
-                            <Select
-                                value={textThree}
-                                label=""
-                                onChange={handleChangeThree}
-                                size='small'
-                                sx={{ width: 150 }}
-                            >
-                                <MenuItem value={"โอที 1.5"}>โอที 1.5</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Stack>
+                        </Box>
 
-                            </Select>
-                        </FormControl>
-                    </Stack>
-                </Box>
-            </Box>
+
+
+                    </Box>
+                )}
+            </DataContext.Consumer>
+
         </>
     )
 }

@@ -1,134 +1,23 @@
 import React, { useContext, useState } from 'react'
 import {
     Box,
-    Grid,
-    Paper,
-    Button,
     Stack,
     TextField,
     Typography,
     Checkbox,
+    Autocomplete,
 
 } from '@mui/material'
-import dayjs, { Dayjs } from 'dayjs';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { TimeField } from '@mui/x-date-pickers';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { topReducer, timeTableData } from './formReducer';
+import Select from '@mui/material/Select';
 import { DataContext } from './timeShift';
-import { TimeTableData } from '../../types/timeTableDataType';
 
-// const midData = {
-//     valueAttendance: valueAttendance,
-//     valueWorkOut: valueWorkOut,
-//     inNum: inNum,
-//     outNum: outNum,
-//     startTimeShift1: startTimeShift1,
-//     endTimeShift1: endTimeShift1,
-//     startTimeShift2: startTimeShift2,
-//     endTimeShift2: endTimeShift2,
-//     inNumFirst: inNumFirst,
-//     outNumFirst: outNumFirst,
-//     inNumSecond: inNumSecond,
-//     outNumSecond: outNumSecond,
-//     startTimeShift3: startTimeShift3,
-//     endTimeShift3: endTimeShift3,
-//     inNumThird: inNumThird,
-//     outNumThird: outNumThird,
-//     lateType: lateType,
-//     breakTime: breakTime,
-//     canLate: canLate,
-//     leaveEarly: leaveEarly,
-//     period: period,
-//     calDay: calDay,
-// }
-
-// // Data กล่องบนสุด
-// const [valueAttendance, setValueAttendance] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
-// const [valueWorkOut, setValueWorkOut] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
-
-
-// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-// const [inNum, setInNum] = useState('0');
-// const [outNum, setOutNum] = useState('0');
-
-// const handleChangeInNumber = (event: SelectChangeEvent) => {
-//     setInNum(event.target.value as string);
-
-// }
-// const handleChangeOutNumber = (event: SelectChangeEvent) => {
-//     setOutNum(event.target.value as string);
-// }
-
-// //Data กล่องกลาง
-// const [startTimeShift1, setStartTimeShift1] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
-// const [endTimeShift1, setEndTimeShift1] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
-
-// const [startTimeShift2, setStartTimeShift2] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
-// const [endTimeShift2, setEndTimeShift2] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
-
-// const [inNumFirst, setInNumFirst] = useState('0')//0 +1 -1
-// const [outNumFirst, setOutNumFirst] = useState('0')
-
-// const [inNumSecond, setInNumSecond] = useState('0')
-// const [outNumSecond, setOutNumSecond] = useState('0')
-
-// const handleChangeInNumberFirst = (event: SelectChangeEvent) => {
-//     setInNumFirst(event.target.value as string)
-// }
-// const handleChangeOutNumberFirst = (event: SelectChangeEvent) => {
-//     setOutNumFirst(event.target.value as string)
-// }
-// const handleChangeInNumberSecond = (event: SelectChangeEvent) => {
-//     setInNumSecond(event.target.value as string)
-// }
-// const handleChangeOutNumberSecond = (event: SelectChangeEvent) => {
-//     setOutNumSecond(event.target.value as string)
-// }
-
-// //Data กล่องล่าง
-// const [startTimeShift3, setStartTimeShift3] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
-// const [endTimeShift3, setEndTimeShift3] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
-
-// const [inNumThird, setInNumThird] = useState('0')//0 +1 -1
-// const [outNumThird, setOutNumThird] = useState('0')
-
-// const [lateType, setLateType] = useState('')//สายแบบไหน? ไทย || ต่างชาติ
-
-// const [breakTime, setBreakTime] = useState(0)//เวลาพักเบรค
-
-// const [canLate, setCanLate] = useState(0)//สามารถเข้า Late ได้กี่นาที
-// const [leaveEarly, setLeaveEarly] = useState(0)//สามารถออก Early ได้กี่นาที
-
-// const handleChangeInNumberThird = (event: SelectChangeEvent) => {
-//     setInNumThird(event.target.value as string)
-// }
-// const handleChangeOutNumberThird = (event: SelectChangeEvent) => {
-//     setOutNumThird(event.target.value as string)
-// }
-
-// const handleChangeLateType = (event: SelectChangeEvent) => {
-//     setLateType(event.target.value as string)
-// }
-
-// //Data กล่องฐาน
-// const [period, setPeriod] = useState('ช่วงเวลาทำงาน')
-
-// const [calDay, setCalDay] = useState("1.0")
-
-// const handleChangePeriod = (event: SelectChangeEvent) => {
-//     setPeriod(event.target.value as string)
-// }
 
 export const TimeShiftMid = () => {
 
     const { dispatch } = useContext(DataContext);
-
-    // console.log(midState)
 
     const handleChangeMid = (e: any) => {
         dispatch({
@@ -136,10 +25,6 @@ export const TimeShiftMid = () => {
             payload: { name: e.target.name, value: e.target.value },
         })
     }
-
-
-
-
 
     const exNum = [
         { num: "+1" },
@@ -152,6 +37,12 @@ export const TimeShiftMid = () => {
         { name: "แบบต่างชาติ", id: 1 }
     ]
 
+    const timeSlots = Array.from(new Array(24 * 2)).map(
+        (_, index) =>
+            `${index < 20 ? '0' : ''}${Math.floor(index / 2)}:${index % 2 === 0 ? '00' : '30'}`,
+
+    );
+
 
     return (
         <>
@@ -159,7 +50,6 @@ export const TimeShiftMid = () => {
                 {midState => (
                     <Box sx={{
                         width: '100%',
-
                     }}>
                         <Box>
                             <Stack spacing={1} direction="row" >
@@ -230,6 +120,7 @@ export const TimeShiftMid = () => {
 
                                         />
 
+
                                     </Stack>
 
                                     <Stack spacing={1} direction="row" sx={{ marginLeft: 2, marginTop: 2 }}>
@@ -288,7 +179,7 @@ export const TimeShiftMid = () => {
                                         </Typography>
 
                                         <TextField
-                                            name='startTimeShift'
+                                            name='startTimeShift1'
                                             value={midState.state.startTimeShift1}
                                             onChange={handleChangeMid}
                                             size='small'
@@ -300,7 +191,7 @@ export const TimeShiftMid = () => {
                                         </Typography>
 
                                         <TextField
-                                            name='endTimeShift'
+                                            name='endTimeShift1'
                                             value={midState.state.endTimeShift1}
                                             onChange={handleChangeMid}
                                             size='small'
@@ -576,8 +467,6 @@ export const TimeShiftMid = () => {
                                                     return <MenuItem key={late.id} value={late.name}>{late.name}</MenuItem>
                                                 })}
 
-                                                {/* <MenuItem value={"แบบไทย"}>แบบไทย</MenuItem>
-                                        <MenuItem value={"แบบต่างชาติ"}>แบบต่างชาติ</MenuItem> */}
                                             </Select>
                                         </FormControl>
                                     </Stack>
@@ -703,3 +592,105 @@ export const TimeShiftMid = () => {
     //     period,
     //     calDay,
     // } = context;
+
+    // const midData = {
+//     valueAttendance: valueAttendance,
+//     valueWorkOut: valueWorkOut,
+//     inNum: inNum,
+//     outNum: outNum,
+//     startTimeShift1: startTimeShift1,
+//     endTimeShift1: endTimeShift1,
+//     startTimeShift2: startTimeShift2,
+//     endTimeShift2: endTimeShift2,
+//     inNumFirst: inNumFirst,
+//     outNumFirst: outNumFirst,
+//     inNumSecond: inNumSecond,
+//     outNumSecond: outNumSecond,
+//     startTimeShift3: startTimeShift3,
+//     endTimeShift3: endTimeShift3,
+//     inNumThird: inNumThird,
+//     outNumThird: outNumThird,
+//     lateType: lateType,
+//     breakTime: breakTime,
+//     canLate: canLate,
+//     leaveEarly: leaveEarly,
+//     period: period,
+//     calDay: calDay,
+// }
+
+// // Data กล่องบนสุด
+// const [valueAttendance, setValueAttendance] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
+// const [valueWorkOut, setValueWorkOut] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
+
+
+// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+// const [inNum, setInNum] = useState('0');
+// const [outNum, setOutNum] = useState('0');
+
+// const handleChangeInNumber = (event: SelectChangeEvent) => {
+//     setInNum(event.target.value as string);
+
+// }
+// const handleChangeOutNumber = (event: SelectChangeEvent) => {
+//     setOutNum(event.target.value as string);
+// }
+
+// //Data กล่องกลาง
+// const [startTimeShift1, setStartTimeShift1] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
+// const [endTimeShift1, setEndTimeShift1] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
+
+// const [startTimeShift2, setStartTimeShift2] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
+// const [endTimeShift2, setEndTimeShift2] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
+
+// const [inNumFirst, setInNumFirst] = useState('0')//0 +1 -1
+// const [outNumFirst, setOutNumFirst] = useState('0')
+
+// const [inNumSecond, setInNumSecond] = useState('0')
+// const [outNumSecond, setOutNumSecond] = useState('0')
+
+// const handleChangeInNumberFirst = (event: SelectChangeEvent) => {
+//     setInNumFirst(event.target.value as string)
+// }
+// const handleChangeOutNumberFirst = (event: SelectChangeEvent) => {
+//     setOutNumFirst(event.target.value as string)
+// }
+// const handleChangeInNumberSecond = (event: SelectChangeEvent) => {
+//     setInNumSecond(event.target.value as string)
+// }
+// const handleChangeOutNumberSecond = (event: SelectChangeEvent) => {
+//     setOutNumSecond(event.target.value as string)
+// }
+
+// //Data กล่องล่าง
+// const [startTimeShift3, setStartTimeShift3] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
+// const [endTimeShift3, setEndTimeShift3] = useState<Dayjs | null>(dayjs('2022-04-17T00:00'));
+
+// const [inNumThird, setInNumThird] = useState('0')//0 +1 -1
+// const [outNumThird, setOutNumThird] = useState('0')
+
+// const [lateType, setLateType] = useState('')//สายแบบไหน? ไทย || ต่างชาติ
+
+// const [breakTime, setBreakTime] = useState(0)//เวลาพักเบรค
+
+// const [canLate, setCanLate] = useState(0)//สามารถเข้า Late ได้กี่นาที
+// const [leaveEarly, setLeaveEarly] = useState(0)//สามารถออก Early ได้กี่นาที
+
+// const handleChangeInNumberThird = (event: SelectChangeEvent) => {
+//     setInNumThird(event.target.value as string)
+// }
+// const handleChangeOutNumberThird = (event: SelectChangeEvent) => {
+//     setOutNumThird(event.target.value as string)
+// }
+
+// const handleChangeLateType = (event: SelectChangeEvent) => {
+//     setLateType(event.target.value as string)
+// }
+
+// //Data กล่องฐาน
+// const [period, setPeriod] = useState('ช่วงเวลาทำงาน')
+
+// const [calDay, setCalDay] = useState("1.0")
+
+// const handleChangePeriod = (event: SelectChangeEvent) => {
+//     setPeriod(event.target.value as string)
+// }

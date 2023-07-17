@@ -15,12 +15,37 @@ import { TimeShiftMid } from './timeShiftMid';
 import { TimeShiftBottom } from './timeShiftBottom';
 import { topReducer, timeTableData } from './formReducer';
 import { TimeTableData } from '../../types/timeTableDataType';
+import { TimeShiftDataGrid } from './timeShiftDataGrid';
 
 export const DataContext = createContext<{ state: TimeTableData, dispatch: React.Dispatch<any> }>({ state: timeTableData, dispatch: () => { } });
 
 export const TimeShift = () => {
 
     const [state, dispatch] = useReducer(topReducer, timeTableData)
+
+    const handleSubmit = async () => {
+
+        try {
+            const response = await fetch('/api/timeShift/POST_timeShift', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(state),
+
+            });
+            if (response.ok) {
+                console.log('Data submitted successfully');
+                // Reset form data
+
+                window.location.reload();
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
     const handleChangeInput = (e: any) => {
         dispatch({
@@ -46,8 +71,8 @@ export const TimeShift = () => {
 
                 }}>
                     <p>รายการหัวข้อ</p>
-
-                    <table border={1}>
+                    <TimeShiftDataGrid />
+                    {/* <table border={1}>
                         <tr>
                             <th>รหัสตารางเวลา</th>
                             <th>ชื่อตารางเวลา</th>
@@ -60,7 +85,7 @@ export const TimeShift = () => {
                             <td>B</td>
                             <td>9.30-16.30</td>
                         </tr>
-                    </table>
+                    </table> */}
 
 
                 </Box>
@@ -87,7 +112,7 @@ export const TimeShift = () => {
                             <Button variant="outlined" size="medium" startIcon={<EditNoteSharpIcon />}>
                                 Edit
                             </Button>
-                            <Button variant="outlined" size="medium" startIcon={<SaveIcon />}>
+                            <Button variant="outlined" size="medium" onClick={handleSubmit} startIcon={<SaveIcon />}>
                                 Save
                             </Button>
                             <Button variant="outlined" size="medium" startIcon={<DeleteIcon />}>
@@ -169,27 +194,24 @@ export const TimeShift = () => {
                                 onChange={handleChangeInput}
                             />
                         </Stack>
-
-
-
                     </Box>
 
-                    <Box sx={{  //กล่องกลาง
-                        width: '100%',
-                        height: 550,
-                        marginTop: 2
-                    }}>
-                        <DataContext.Provider value={{ state, dispatch }}>
+                    <DataContext.Provider value={{ state, dispatch }}>
+                        <Box sx={{  //กล่องกลาง
+                            width: '100%',
+                            height: 550,
+                            marginTop: 2
+                        }}>
                             <TimeShiftMid />
-                        </DataContext.Provider>
-                    </Box>
+                        </Box>
 
-                    <Box sx={{ //กล่องล่าง
-                        width: '100%',
-                        height: '20%',
-                    }}>
-                        <TimeShiftBottom />
-                    </Box>
+                        <Box sx={{ //กล่องล่าง
+                            width: '100%',
+                            height: '20%',
+                        }}>
+                            <TimeShiftBottom />
+                        </Box>
+                    </DataContext.Provider>
 
                 </Box>
             </Box>
