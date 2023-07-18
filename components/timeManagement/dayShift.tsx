@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Box,
     Button,
@@ -17,9 +17,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { CirclePicker, Color, ColorChangeHandler, ColorResult } from 'react-color'
-
-
-
+import { TimeTableData } from '../../types/timeTableDataType';
 
 export const DayShift = () => {
 
@@ -30,6 +28,28 @@ export const DayShift = () => {
 
     const [color, setColor] = useState<Color>();
     const [showColorPicker, setShowColorPicker] = useState(false)
+
+    const [TimeShiftData, setTimeShiftData] = useState<TimeTableData[]>([])
+
+    useEffect(() => {
+        const fetchTimeShiftData = async () => {
+            try {
+                const respone = await fetch("/api/timeShift/timeShift")
+                const data = await respone.json()
+                const timeShiftAllData = data.map(
+                    (timeShift: TimeTableData, index: number) => ({
+                        ...timeShift,
+                        id: index + 0,
+                    })
+                )
+                console.log(timeShiftAllData)
+                setTimeShiftData(timeShiftAllData)
+            } catch (error) {
+                console.error('Failed to fetch Data', error)
+            }
+        }
+        fetchTimeShiftData();
+    }, []);
 
     return (
         <>
@@ -136,9 +156,13 @@ export const DayShift = () => {
                                         size='small'
                                         sx={{ width: 250 }}
                                     >
-                                        <MenuItem value={0}>0</MenuItem>
+                                        {TimeShiftData.map((timeShift, index) => {
+                                            return <MenuItem key={index} value={timeShift.periodTop}> {timeShift.periodTop} </MenuItem>
+                                        })}
+
+                                        {/* <MenuItem value={0}>0</MenuItem>
                                         <MenuItem value={1}>1</MenuItem>
-                                        <MenuItem value={2}>2</MenuItem>
+                                        <MenuItem value={2}>2</MenuItem> */}
                                     </Select>
                                 </FormControl>
                             </Stack>

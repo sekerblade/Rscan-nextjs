@@ -172,7 +172,7 @@ export const TimeShift = () => {
                         <br />
                         <Stack spacing={1} direction="row" useFlexGap flexWrap="wrap">
                             <Typography variant="h6" gutterBottom>
-                                ช่วงเวลา :
+                                ชื่อตารางเวลา :
                             </Typography>
                             <TextField
                                 name='periodTop'

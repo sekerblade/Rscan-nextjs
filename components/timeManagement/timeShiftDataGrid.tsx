@@ -20,9 +20,10 @@ export const TimeShiftDataGrid = () => {
     const [TimeShiftData, setTimeShiftData] = useState<TimeTableData[]>([])
 
     const columns: GridColDef[] = [
-        { field: 'code', headerName: 'code', width: 75 },
-        { field: 'valueattendance', headerName: 'valueAttendance', width: 150 },
-        { field: 'valueworkout', headerName: 'valueworkout', width: 150 },
+        { field: 'code', headerName: 'รหัส', width: 75 },
+        { field: 'periodtop', headerName: 'ชื่อตารางเวลา', width: 150 },
+        { field: 'valueattendance', headerName: 'เวลาเข้างาน', width: 150 },
+        { field: 'valueworkout', headerName: 'เวลาออกงาน', width: 150 },
     ];
 
     useEffect(() => {
@@ -53,6 +54,7 @@ export const TimeShiftDataGrid = () => {
                     rows={TimeShiftData}
                     columns={columns}
                 />
+
             </Box>
 
         </>
